@@ -11,12 +11,16 @@ public class Camp
     private String nameOfStaff;
     private ArrayList<Student> campList;
 
-    public Camp(String name, String school, int totSlots, int commSlots, String nameOfStaff)
+    public Camp(String name, String openDate, String closeDate, String regClose, String school, int totSlots, int commSlots, String desc, String nameOfStaff)
     {
         this.name = name;
+        this.openDate = openDate;
+        this.closeDate = closeDate;
+        this.regClose = regClose;
         this.school = school;
         this.totSlots = totalSlots;
         this.commSlots = commSlots;
+        this.desc = desc;
         this.nameOfStaff = nameOfStaff;
         campList = new ArrayList<Student>();
     }
@@ -34,6 +38,21 @@ public class Camp
     private void setRegDate(String regClose)
     {
         this.regClose = regClose;
+    }
+
+    private void setSchool(String school)
+    {
+        this.school = school;
+    }
+
+    private void setTotSlots(int totSlots)
+    {
+        this.totSlots = totSlots;
+    }
+
+    private void setCommSlots(int commSlots)
+    {
+        this.commSlots = commSlots;
     }
 
     private void setDesc(String desc)
