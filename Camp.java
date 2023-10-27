@@ -21,22 +21,22 @@ public class Camp
         campList = new ArrayList<Student>();
     }
 
-    private setOpenDate(String openDate)
+    private void setOpenDate(String openDate)
     {
         this.openDate = openDate;
     }
 
-    private setCloseDate(String closeDate)
+    private void setCloseDate(String closeDate)
     {
         this.closeDate = closeDate;
     }
 
-    private setRegDate(String regClose)
+    private void setRegDate(String regClose)
     {
         this.regClose = regClose;
     }
 
-    private setDesc(String desc)
+    private void setDesc(String desc)
     {
         this.desc = desc;
     }
