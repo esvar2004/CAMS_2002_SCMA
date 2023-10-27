@@ -40,4 +40,49 @@ public class Camp
     {
         this.desc = desc;
     }
+
+    private string getName()
+    {
+        return this.name;
+    }
+    
+    private String getOpenDate()
+    {
+        return this.openDate;
+    }
+    
+    private String getCloseDate()
+    {
+        return this.closeDate;
+    }
+    
+    private String getRegDate()
+    {
+        return this.regClose;
+    }
+
+    private String getSchool()
+    {
+        return this.school;
+    }
+
+    private int getTotSlots()
+    {
+        return this.totSlots;
+    }
+
+    private int getCommSlots()
+    {
+        return this.commSlots;
+    }
+
+    private String getStaffName()
+    {
+        return this.nameOfStaff;
+    }
+    
+    private String getDesc()
+    {
+        return this.desc;
+    }
 }
