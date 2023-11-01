@@ -6,16 +6,18 @@ import java.util.Scanner;
 public class Login {
     static Scanner sc = new Scanner(System.in);
     static String username = "";
-    public static void main(String[] args) {
-        
-        while (!search(username)){
+
+    public static String login(){
+        while (!searchStudent(username) && !searchStaff(username)){
             username = "*";
             while (contains_special(username)){
                 input_username();
             }
         }
-        System.out.println("Success! " + username);
-        
+        if (searchStudent(username)) return "student " + username;
+        else{
+            return "staff " + username;
+        }
     }
 
     public static boolean contains_special(String s){
@@ -38,17 +40,10 @@ public class Login {
         }
     }
 
-    public static boolean search(String s) {
-      try (BufferedReader reader1 = new BufferedReader(new FileReader("staff.txt"));
-           BufferedReader reader2 = new BufferedReader(new FileReader("student.txt"))) {
+    public static boolean searchStudent(String s) {
+      try (BufferedReader reader2 = new BufferedReader(new FileReader("student.txt"))) {
   
           String line;
-          reader1.readLine(); // Skip the first line
-          while ((line = reader1.readLine()) != null) {
-              if (s.equalsIgnoreCase(getusername(line).trim())) {
-                  return true;
-              }
-          }
   
           reader2.readLine(); // Skip the first line
           while ((line = reader2.readLine()) != null) {
@@ -62,7 +57,25 @@ public class Login {
       }
   
       return false;
-  }
+ }
+
+public static boolean searchStaff(String s) {
+      try (BufferedReader reader1 = new BufferedReader(new FileReader("staff.txt"))) {
+  
+          String line;
+          reader1.readLine(); // Skip the first line
+          while ((line = reader1.readLine()) != null) {
+              if (s.equalsIgnoreCase(getusername(line).trim())) {
+                  return true;
+              }
+          }
+  
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+  
+      return false;
+ }
 
     public static String getusername(String s) {
       String[] parts = s.split("\t");
