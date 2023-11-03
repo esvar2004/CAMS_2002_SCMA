@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Student 
 {
 	private String userId;
-    private String password;
+    private String password = "password";
     private String faculty;
     private String role;
     private boolean committeeMember;
@@ -14,10 +14,9 @@ public class Student
 
 
 
-	public Student(String userId, String password, String faculty) 
+	public Student(String userId, String faculty) 
 	{
 		this.userId = userId;
-		this.password = password;
 		this.faculty = faculty;
 		this.role = "Attendee"; // Default role is "Attendee"
 		this.committeeMember = false; // Default is false

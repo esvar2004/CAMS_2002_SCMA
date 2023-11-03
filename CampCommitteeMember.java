@@ -9,8 +9,8 @@ public class CampCommitteeMember extends Student {
     private List<String> suggestions;
     private int points; // Points for replying to enquiries and suggestions
     
-    public CampCommitteeMember(String userId, String password, String faculty) {
-        super(userId, password, faculty); // Assuming these are fields from the Student class
+    public CampCommitteeMember(String userId, String faculty) {
+        super(userId, faculty); // Assuming these are fields from the Student class
         this.suggestions = new ArrayList<>();
         this.points = 0;
     }

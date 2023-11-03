@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 public class Camp
 {
+    public static ArrayList<Camp> campList;
     private String name;
     private Date openDate;
     private Date closeDate;
@@ -16,7 +17,7 @@ public class Camp
     private String desc;
     private String nameOfStaff;
     private boolean visibility;
-    private ArrayList<Student> campList;
+    private ArrayList<Student> studentList;
     private int currentSlots;
     private Date now = new Date();
     private HashMap<Student, String> rolesMap = new HashMap<>();
@@ -34,7 +35,7 @@ public class Camp
         this.desc = desc;
         this.nameOfStaff = nameOfStaff;
         this.visibility = true;
-        campList = new ArrayList<Student>();
+        studentList = new ArrayList<Student>();
         this.currentSlots = 0;
         this.numCommitteeMembers = 0;
     }
@@ -131,7 +132,7 @@ public class Camp
 
     public ArrayList<Student> getList()
     {
-        return this.campList;
+        return this.studentList;
     }
     public int getCurrentSlots()
     {
@@ -140,7 +141,7 @@ public class Camp
     public void addAttendee(Student student) 
 	{
         if (this.hasAvailableSlots()) { // Only add if there's an available slot.
-            this.campList.add(student);
+            this.studentList.add(student);
             this.currentSlots++;
             // If attendee is a committee member, you might increase the numCommitteeMembers here depending on your logic.
         }
@@ -148,9 +149,9 @@ public class Camp
     }
     public void removeAttendee(Student student) 
 	{
-		campList.remove(student);
+		studentList.remove(student);
 		this.currentSlots -= 1;
-		campList.add(student);
+		studentList.add(student);
 	}
 
 	public boolean isPastRegistrationDeadline() 
@@ -186,7 +187,7 @@ public class Camp
     // Method to add a committee member to the camp, assuming they occupy a regular slot.
     public void addCommitteeMember(Student committeeMember) {
         if (this.hasAvailableSlots()) { // Only add if there's an available slot.
-            this.campList.add(committeeMember);
+            this.studentList.add(committeeMember);
             this.currentSlots++;
             this.numCommitteeMembers++; // Increase the number of committee members.
         } else {
@@ -197,7 +198,7 @@ public class Camp
 
     // If the committee member is removed, you should also update the count.
     public void removeCommitteeMember(Student committeeMember) {
-        if (this.campList.remove(committeeMember)) { // Only remove if the member is in the list.
+        if (this.studentList.remove(committeeMember)) { // Only remove if the member is in the list.
             this.currentSlots--;
             this.numCommitteeMembers--; // Decrease the number of committee members.
         }else {

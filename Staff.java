@@ -45,6 +45,7 @@ public class Staff
         campList.add(camp);
     }
     public Date convertStringToDate(String s){
+        // DD/MM/YYYY
         LocalDate ldate = LocalDate.parse(s, DateTimeFormatter.BASIC_ISO_DATE);
         Date date = Date.from(ldate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         return date;
@@ -135,7 +136,7 @@ public class Staff
         
     }
 
-    public void viewAllCamps(ArrayList<Camp> campList)
+    public static void viewAllCamps(ArrayList<Camp> campList)
     {
         for(int i = 0; i < campList.size(); i++)
         {
