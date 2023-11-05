@@ -22,7 +22,7 @@ public class Student
 		this.committeeMember = false; // Default is false
 		this.registeredCamps = new ArrayList<Camp>();
 		this.enquires = new ArrayList<String>();
-
+        // Whoever is coding this, please prompt to change password when contructor is called
 	}
 
     public String getUserID() 
