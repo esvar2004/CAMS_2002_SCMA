@@ -4,18 +4,13 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class Staff 
+public class Staff extends User
 {
-    private String name;
-    private String email;
-    private String faculty;
     Scanner sc = new Scanner(System.in);
 
     public Staff(String name, String email, String faculty)
     {
-        this.name = name;
-        this.email = email;
-        this.faculty = faculty;
+        super(name, email, faculty);
     }
 
     public void createCamp(ArrayList<Camp> campList)
@@ -41,7 +36,7 @@ public class Staff
         Date closeDate = convertStringToDate(s_closeDate);
         Date regClose = convertStringToDate(s_regClose);
 
-        Camp camp = new Camp(campName, openDate, closeDate, regClose, facName, totSlots, commSlots, desc, this.name);
+        Camp camp = new Camp(campName, openDate, closeDate, regClose, facName, totSlots, commSlots, desc, this.getName());
         campList.add(camp);
     }
     public Date convertStringToDate(String s){
@@ -53,7 +48,7 @@ public class Staff
 
     public void editCamp(Camp camp)
     {
-        if(camp.getStaffName() != this.name)
+        if(camp.getStaffName() != this.getName())
         {
             System.out.println("This camp is not under your jurisdiction.");
             return;
@@ -136,33 +131,61 @@ public class Staff
         
     }
 
-    public static void viewAllCamps(ArrayList<Camp> campList)
+    //Staff can view all of the camps they were responsible for creating.
+    public void viewYourCamps(ArrayList<Camp> campList) 
     {
         for(int i = 0; i < campList.size(); i++)
         {
-            System.out.println(campList.get(i));
-        }
-    }
-
-    public void viewYourCamps(ArrayList<Camp> campList)
-    {
-        for(int i = 0; i < campList.size(); i++)
-        {
-            if(campList.get(i).getStaffName().equals(name))
+            if(campList.get(i).getStaffName().equals(this.getName()))
                 System.out.println(campList.get(i));
         }
     }
 
+    //Staff can toggle the visibility of any of their camps.
     public void toggleVis(Camp camp, boolean vis)
     {
         camp.setVisibility(vis);
     }
 
+    //Staff can generate a list of all of the camps that currently exist within the system.
     public void campList(Camp camp)
     {
         for(int i = 0; i < camp.getList().size(); i++)
         {
             System.out.println(camp.getList().get(i));
         }
+    }
+
+    //Staff can view enquiries from the user.
+    public void viewEnquiries(Student s, ArrayList<Camp> campList)
+    {
+        for(int i = 0; i < campList.size(); i++)
+        {
+            if(campList.get(i).getStaffName() == getName()) //Checks if camp is created by that staff member.
+            {
+                for(int j = 0; j < s.showEnquiries().size(); j++)
+                {
+                    if(s.showEnquiries().get(j).getCampName() == campList.get(i).getName()) //Checks if that enquiry is for a camp made by the staff member.
+                    {
+                        System.out.println(s.showEnquiries().get(j).getQuestion());
+                    }
+                }
+            }
+            else
+                continue;
+        }
+    }
+
+    public String genResponse(Enquiry e) //replyToEnquiry functionality is the same in both Staff and CommitteeMember
+    {
+        System.out.println("What response would you like to provide to the given enquiry?");
+        String response = sc.nextLine();
+        e.setResponse(response);
+        return response;
+    }
+
+    public List<String> viewSuggestion(CampCommitteeMember c)
+    {
+        return c.getSuggestions();
     }
 }
