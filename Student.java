@@ -2,11 +2,8 @@
 import java.util.ArrayList;
 
 
-public class Student 
+public class Student extends User
 {
-	private String userId;
-    private String password = "password";
-    private String faculty;
     private String role;
     private boolean committeeMember;
     protected ArrayList<Camp> registeredCamps;
@@ -14,47 +11,15 @@ public class Student
 
 
 
-	public Student(String userId, String faculty) 
+	public Student(String name, String email, String faculty) 
 	{
-		this.userId = userId;
-		this.faculty = faculty;
+		super(name, email, faculty);
 		this.role = "Attendee"; // Default role is "Attendee"
 		this.committeeMember = false; // Default is false
 		this.registeredCamps = new ArrayList<Camp>();
-		this.enquires = new ArrayList<String>();
-        // Whoever is coding this, please prompt to change password when contructor is called
+		this.enquiries = new ArrayList<Enquiry>();
+
 	}
-
-    public String getUserID() 
-    {
-        return this.userId;
-    }
-
-    public void setUserID(String userId) 
-    {
-        this.userId = userId;
-    }
-    
-    public String getPassword()
-    {
-    	return this.password;
-    }
-    
-    public void setPassword(String password)
-    {
-    	this.password = password;
-    }
-
-    public String getFaculty() 
-    {
-        return this.faculty;
-    }
-
-    public void setFaculty(String faculty) 
-    {
-        this.faculty = faculty;
-    }
-
     public String getRole() 
     {
         return this.role;
@@ -65,45 +30,44 @@ public class Student
         this.role = role;
     }
     
-    
+    //Overriding User Method
 	public void viewCamps(ArrayList<Camp> campList)// view the list of camps open to the student and the remaining slots available
 	{
 		for (int i = 0; i < campList.size(); i++) 
 		{
+			if(campList.get(i).getVisibility() //show visible camps
+					&&(campList.get(i).getSchool().equals(this.getFaculty()) //check for matching school
+					|| campList.get(i).getSchool().equals("NTU"))) // check if camp is open to whole school
 			{
 				System.out.print(campList.get(i));
-				System.out.println("   Remaining Slots: " + viewRemainingSlots(campList.get(i)));
+				System.out.println("   Remaining Slots: " + campList.get(i).viewRemainingSlots());
 			}
 		}
 	}
 	
-	public int viewRemainingSlots(Camp camp) //view remaining slots of camp
-	{
-		return camp.getTotSlots() - camp.getCurrentSlots();
-	}
 
 	// Method to manage inquiries related to a camp
-    public void showEnquiry() 
+    public ArrayList<Enquiry> showEnquiries()
     {
-    	System.out.println(this.enquires);
+    	return enquiries;
     }
     
-    public void addEnquiry(Camp camp, String enquiry)
+    public void addEnquiry(Camp camp, String question)
     {
-    	this.enquires.add(camp.getName() + "  :" + enquiry);
+		Enquiry e = new Enquiry(question, this, camp.getName());
+    	this.enquiries.add(e);
     }
     
     public void delEnquiry(Camp camp, String enquiry)
     {
-    	for (int i = 0; i < this.enquires.size(); i++)//find the enquiry to delete
+    	for (int i = 0; i < this.enquiries.size(); i++)//find the enquiry to delete
     	{
-    		if (this.enquires.get(i).equals(camp.getName() + "  :" + enquiry))
+    		if (showEnquiries().get(i).getQuestion().equals(enquiry))
     		{
-    			this.enquires.remove(i);
+    			showEnquiries().remove(i);
     		}
     	}
     }
-	
 	
     // Method to register for a camp
     public void registerForCamp(Camp camp, String role) 
@@ -195,7 +159,7 @@ public class Student
         System.out.println("Registered Camps:");
         for (Camp camp : registeredCamps) 
         {
-            System.out.println(userId + ": " + camp.getName() + " (" + camp.getRoleOfStudent(student) + ")");
+            System.out.println(this.getName() + ": " + camp.getName() + " (" + camp.getRoleOfStudent(student) + ")");
         }
     }
 
