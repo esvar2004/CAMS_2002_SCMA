@@ -9,8 +9,8 @@ public class Student
     private String faculty;
     private String role;
     private boolean committeeMember;
-    private ArrayList<Camp> registeredCamps;
-    private ArrayList <String> enquires;
+    protected ArrayList<Camp> registeredCamps;
+    protected ArrayList <String> enquires;
 
 
 

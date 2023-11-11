@@ -19,7 +19,7 @@ public class Initialize {
 
 public static void InitializeData(String file, final ArrayList<String[]> arrayDetails) {
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-  
+    
           String line;
   
           reader.readLine(); // Skip the first line

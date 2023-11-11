@@ -9,10 +9,12 @@ public class CampCommitteeMember extends Student {
     private List<String> suggestions;
     private int points; // Points for replying to enquiries and suggestions
     
-    public CampCommitteeMember(String userId, String faculty) {
+    public CampCommitteeMember(String userId, String faculty, ArrayList<Camp> registeredCamps, ArrayList<String> enquires) {
         super(userId, faculty); // Assuming these are fields from the Student class
         this.suggestions = new ArrayList<>();
         this.points = 0;
+        this.registeredCamps = registeredCamps;
+        this.enquires = enquires;
     }
 
     // Allows a committee member to view details of the camp they registered for
