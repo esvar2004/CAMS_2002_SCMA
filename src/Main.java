@@ -6,7 +6,7 @@ public class Main extends Login{
 
         createAllData();
         login();
-        while (!Login.inputPassword()){
+        while (!Password.inputPassword()){
             login();
         }
         User user;
