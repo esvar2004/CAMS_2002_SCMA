@@ -4,8 +4,8 @@ public class CampCommitteeMember extends Student {
     private ArrayList<Camp> committeeCamps;
     private PointsManager pointsManager;
 
-    public CampCommitteeMember(String userId, String faculty) {
-        super(userId, faculty);
+    public CampCommitteeMember(String name, String email, String faculty) {
+        super(name, email, faculty);
         this.committeeCamps = new ArrayList<>();
         this.pointsManager = new PointsManager();
         
@@ -29,7 +29,9 @@ public class CampCommitteeMember extends Student {
         }
     }
     // Assuming getUserID is inherited from Student
-    //public String getUserID() { return super.getUserID(); }
+    public String getUserID() { 
+        return Getter.getusername(super.getEmail());
+    }
 
     public int getPoints() {
         return this.pointsManager.getPoints();

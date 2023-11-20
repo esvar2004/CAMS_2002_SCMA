@@ -3,19 +3,22 @@ import java.util.Scanner;
 public class Login extends Initialize{
     static Scanner sc = new Scanner(System.in);
     static String username = "";
+    static String type;
 
-    public static String login(){
+    public static void login(){
         System.out.println("Input Username: ");
         while (true){
             username = sc.next();
             if (contains_special(username)){
                 System.out.println("Please Input a valid username!");
             }else{
-                if (searchStudent(username)) {
-                    return "student " + username;
+                if (Search.searchStudent(username) != null) {
+                    type = "student";
+                    return;
                 }
-                else if (searchStaff(username)){
-                    return "staff " + username;
+                else if (Search.searchStaff(username) != null){
+                    type = "staff";
+                    return;
                 }
                 else{
                     System.out.println("User not found, please try again: ");
@@ -33,8 +36,7 @@ public class Login extends Initialize{
             char[] passwordChars = System.console().readPassword(); // Masked input
             // Convert char array to a string
             String password = new String(passwordChars);
-            if (password.equals(getPasswordOfUser())) {
-                LoginSuccess();
+            if (password.equals("password")) {
                 return true;
             }
             System.out.println("Wrong Password!");
@@ -43,26 +45,14 @@ public class Login extends Initialize{
         return false;
         
     }
-    private static void LoginSuccess(){
-        String[] user = getUserDetails();
-        if(user[4].equals("n")){
-            // For now, need to change it later...
-
-            for (String[] list : studentDetails){
-                if (list[1].equalsIgnoreCase(user[1])) {
-                    list[4] = "y";
-                    Student student = new Student(user[1], user[2]);
-                    System.out.println(user[0] + " has logged in");
-                }
-            }
-            for (String[] list : staffDetails){
-                if (list[1].equalsIgnoreCase(username)) {
-                    list[4] = "y";
-                    Staff staff = new Staff(user[0], user[1]+"NTU.EDU.SG", user[2]);
-                    System.out.println(user[0] + "has logged in!");
-                }
-            }
+    public static User LoginSuccess(){
+        User user = null;
+        if (type == "staff"){
+            user= (Staff)Search.searchStaff(username);
+        }else if (type == "student"){
+            user = (Student)Search.searchStudent(username);
         }
+        return user;
     }
 
     public static boolean contains_special(String s){
@@ -75,34 +65,10 @@ public class Login extends Initialize{
         return false;
     }
 
-    public static String[] getUserDetails(){
-        for (String[] list : studentDetails){
-            if (list[1].equalsIgnoreCase(username)) return list;
-        }
-        for (String[] list : staffDetails){
-            if (list[1].equalsIgnoreCase(username)) return list;
-        }
-        System.out.println("Something wrong here... getUserDetails");
-        return new String[]{};
+    public static String getType(){
+        return type;
     }
 
-    public static String getPasswordOfUser(){
-        
-        return getUserDetails()[3];
-    }
-
-    public static boolean searchStudent(String s) {
-        for (String[] list : studentDetails){
-            if (list[1].equalsIgnoreCase(s)) return true;
-        }
-        return false;
-    }
-
-    public static boolean searchStaff(String s) {
-        for (String[] list : staffDetails){
-                if (list[1].equalsIgnoreCase(s)) return true;
-            }
-            return false;
-    }
+    
 
 }

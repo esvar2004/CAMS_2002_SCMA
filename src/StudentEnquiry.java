@@ -28,7 +28,7 @@ public class StudentEnquiry {
         if (this.enquiries.contains(enquiry)) {
             this.enquiries.remove(enquiry);
             // Assuming Camp has a method to remove enquiries
-            enquiry.getCamp().removeEnquiry(enquiry);
+            // enquiry.getCamp().removeEnquiry(enquiry);
         }
     }
 

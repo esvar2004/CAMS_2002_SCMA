@@ -184,8 +184,8 @@ public class Staff extends User
         return response;
     }
 
-    public List<String> viewSuggestion(CampCommitteeMember c)
-    {
-        return c.getSuggestions();
-    }
+    // public List<String> viewSuggestion(CampCommitteeMember c)
+    // {
+    //     return c.getSuggestions();
+    // }
 }

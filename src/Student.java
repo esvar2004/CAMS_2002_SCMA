@@ -46,7 +46,7 @@ public class Student extends User
 					|| campList.get(i).getSchool().equals("NTU"))) // check if camp is open to whole school
 			{
 				System.out.print(campList.get(i));
-				System.out.println("   Remaining Slots: " + campList.get(i).viewRemainingSlots());
+				// System.out.println("   Remaining Slots: " + campList.get(i).viewRemainingSlots());
 			}
 		}
 	}
