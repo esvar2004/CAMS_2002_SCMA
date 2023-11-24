@@ -32,6 +32,7 @@ public class CampManager implements CampManagerInterface
         System.out.println("What are the total number of committee slots available?");
         int commSlots = sc.nextInt();
         System.out.println("What's the camp description?");
+        sc.nextLine();
         String desc = sc.nextLine();
 
         Date openDate = Staff.convertStringToDate(s_openDate);
@@ -66,12 +67,14 @@ public class CampManager implements CampManagerInterface
                 System.out.println("(7) Number of Committee Slots");
                 System.out.println("(8) Camp Description");
                 System.out.println("(9) Camp Visibility");
+                System.out.println("(10) Exit");
                 choice = sc.nextInt();
 
                 switch(choice)
                 {
                     case 1:
                     System.out.println("What should the new name of the camp be?");
+                    sc.next();
                     String campName = sc.nextLine();
                     camp.setName(campName);
                     break;
@@ -128,8 +131,7 @@ public class CampManager implements CampManagerInterface
                     break;
 
                     default:
-                    System.out.println("Please select a valid option.");
-                    choice = sc.nextInt();
+                    System.out.println("Please select a valid option next time.");
                 }
             }
         }

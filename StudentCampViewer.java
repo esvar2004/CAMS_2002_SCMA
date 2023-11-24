@@ -22,7 +22,7 @@ public class StudentCampViewer implements CampViewer{
         for(Camp camp: Camp.campList)
         {
             //If the student is under that particular school and visibility is on.
-            if((camp.getSchool() == student.getFaculty() || camp.getSchool().equals("NTU")) && camp.getVisibility() == true)
+            if((camp.getSchool().equals(student.getFaculty()) || camp.getSchool().equals("NTU")) && camp.getVisibility() == true)
             {
                 System.out.println("Camp Name: " + camp.getName());
                 System.out.println("Remaining Slots: " + camp.getAvailableSlots());
@@ -35,7 +35,7 @@ public class StudentCampViewer implements CampViewer{
         ArrayList<Camp> schoolCamps = new ArrayList<Camp>();
         for(Camp camp: Camp.campList)
         {
-            if(camp.getSchool() == school || camp.getSchool() == "NTU")
+            if(camp.getSchool().equals(school) || camp.getSchool().equals("NTU"))
                 schoolCamps.add(camp);
         }
         return schoolCamps;

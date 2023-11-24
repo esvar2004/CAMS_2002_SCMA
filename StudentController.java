@@ -104,12 +104,61 @@ public class StudentController
 
     public void viewProfile()
     {
-
+        System.out.println("Profile:");
+		System.out.println("Name: " + student.getName());
+		System.out.println("Faculty: " + student.getFaculty());
+		System.out.println("Registered Camps: " + student.getRegisteredCamps());
+		System.out.println("End of Profile");
     }
 
     public void manageRegistration()
     {
-        
+        Scanner sc = new Scanner(System.in);
+        StudentCampViewer viewer = new StudentCampViewer(student);
+        CampRegistrationManager registrationManager = new CampRegistrationManager(student);
+        int campChoice = 0;
+        int roleChoice = 0;
+        String role = "";
+        int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
+        do
+        {
+            System.out.println("Select from the given list of options.");
+            System.out.println("1. View Registered Camps");
+            System.out.println("2. Register for Camp");
+            System.out.println("3. Withdraw from Camp");
+            System.out.println("4. Exit");
+            choice = sc.nextInt();
+
+            switch(choice)
+            {
+                case 1: 
+                registrationManager.viewRegisteredCamps();
+                break;
+
+                case 2:
+                System.out.println("Which camp would you like to register for? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
+                viewer.viewAllCamps();
+                campChoice = sc.nextInt();
+                System.out.println("What role do you want to register for?");
+                System.out.println("(1) Attendee");
+                System.out.println("(2) Committee Member");
+                if(sc.nextInt() == 1) role = "Attendee";
+                else if(sc.nextInt() == 2) role = "committee";
+                registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
+                break;
+
+                case 3:
+                System.out.println("Which camp would you like to Withdraw from? (1 - " + student.getRegisteredCamps().size() + ")");
+                viewer.viewYourCamps();
+                campChoice = sc.nextInt();
+                registrationManager.withdrawFromCamp(student.getRegisteredCamps().get(campChoice - 1), this.student);
+                break;
+
+                default:
+                System.out.println("Please select an appropriate option next time.");
+            }
+
+        } while(choice >= 1 && choice <= 3);
     }
 }
 

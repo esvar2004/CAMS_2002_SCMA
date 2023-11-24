@@ -26,6 +26,16 @@ public class Student extends User
     {
         this.role = role;
     }
+
+	public void setCommMember(boolean committeeMember)
+	{
+		this.committeeMember = committeeMember;
+	}
+
+	public boolean getCommMember()
+	{
+		return committeeMember;
+	}
     
     public ArrayList<Camp> getRegisteredCamps()
     {

@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 public class CampRegistrationManager {
@@ -6,12 +5,19 @@ public class CampRegistrationManager {
 	private Student student;
 	private ArrayList<Camp> registeredCamps;
 	
-	public CampRegistrationManager(Student student, ArrayList<Camp> registeredCamps) {
+	public CampRegistrationManager(Student student) {
 		this.student = student;
-		this.registeredCamps = registeredCamps;
+		this.registeredCamps = student.getRegisteredCamps();
 	}
 	
-	public void registerForCamp(Camp camp, Student student) {
+    public void viewRegisteredCamps(){
+        for(Camp camp: registeredCamps)
+        {
+            System.out.println("Camp Name: " + camp.getName());
+        }
+    }
+
+	public void registerForCamp(Camp camp, Student student, String role) {
 		if (camp == null)//check for non-existant camp
     	{
     		System.out.println("Camp do not exist");
@@ -50,15 +56,41 @@ public class CampRegistrationManager {
             }
         }
     	
-        registeredCamps.add(camp);
+        if (role.equals("Attendee")) 
+    	{
+    		registeredCamps.add(camp);
+    		camp.assignRole(student, role);
+    	}
+    	else if (role.equals("committee"))
+    	{
+    		if (!student.getCommMember())
+    		{
+    			registeredCamps.add(camp);
+    			student.setCommMember(true);
+    			camp.assignRole(student, role);
+    			//insert function for committee member
+    		}
+    		else
+    		{
+    			System.out.println("Every Student can only be a committee member of one camp");
+    			return;
+    		}
+    	}
+    	else // check for invalid roles
+    	{
+    		System.out.println("Enter a valid role");
+    		return;
+    	}
+
+        student.getRegisteredCamps().add(camp);
 		camp.addAttendee(student);
         System.out.println("Successfully registered for the '" + camp.getName() + "' camp.");
 	}
 	
-	public void withdrawFromCamp(Camp camp) {
-		if (registeredCamps.contains(camp)) 
+	public void withdrawFromCamp(Camp camp, Student student) {
+		if (student.getRegisteredCamps().contains(camp)) 
         {
-            registeredCamps.remove(camp);
+            student.getRegisteredCamps().remove(camp);
             camp.removeAttendee(student);
             System.out.println("Withdrew from the '" + camp.getName() + "' camp.");
         } else 

@@ -14,6 +14,7 @@ public class Initialize {
     public static void createAllData() {
         InitializeStudentData("src/student.txt");
         InitializeStaffData("src/staff.txt");
+        Camp.campList = new ArrayList<Camp>();
         System.out.println("Data Arrays Initialized!");
     }
 
