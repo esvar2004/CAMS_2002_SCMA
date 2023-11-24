@@ -94,7 +94,7 @@ public class StaffController
         StaffEnquiryManager enquiryManager = new StaffEnquiryManager(staff);
         int campChoice = 0;
         int enquiryChoice = 0;
-        int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
+        int choice = 3; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
             System.out.println("Select from the given list of options.");
@@ -113,16 +113,64 @@ public class StaffController
                 System.out.println("To which camp would you like to submit an enquiry response? (1 - " + staff.getCreatedCamps().size() + ")");
                 viewer.viewYourCamps();
                 campChoice = sc.nextInt();
-                System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice).getEnquiries().size() + ")");
+                System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size() + ")");
                 enquiryChoice = sc.nextInt();
                 System.out.println("What is your response?");
                 String response = sc.nextLine();
-                enquiryManager.editEnquiry(staff.getCreatedCamps().get(campChoice).getEnquiries().get(enquiryChoice), response);
+                enquiryManager.editEnquiry(staff.getCreatedCamps().get(campChoice - 1).getEnquiries().get(enquiryChoice - 1), response);
                 break;
 
                 default:
                 System.out.println("Please select an appropriate option next time.");
             }
         } while(choice >= 1 && choice <= 2);
+    }
+
+    public void manageSuggestions()
+    {
+        Scanner sc = new Scanner(System.in);
+        StaffCampViewer viewer = new StaffCampViewer(staff);
+        StaffSuggestionManager suggestionManager = new StaffSuggestionManager(staff);
+        int campChoice = 0;
+        int suggestionChoice = 0;
+        int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
+        do
+        {
+            System.out.println("Select from the given list of options.");
+            System.out.println("1. View All Suggestions");
+            System.out.println("2. Approve Suggestions");
+            System.out.println("3. View Approved Suggestions");
+            //Possible Delete Suggestion Mechanism to be Implemented if they have approved and proceeded with the suggestion.
+            System.out.println("4. Exit");
+            choice = sc.nextInt();
+
+            switch(choice)
+            {
+                case 1: 
+                suggestionManager.viewSuggestions();
+                break;
+
+                case 2: 
+                System.out.println("Which camp's suggestions would you like to look at? (1 - " + staff.getCreatedCamps().size() + ")");
+                viewer.viewYourCamps();
+                campChoice = sc.nextInt();
+                System.out.println("Which suggestion would you like to approve? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getSuggestions().size() + ")");
+                suggestionChoice = sc.nextInt();
+                suggestionManager.approveSuggestion(staff.getCreatedCamps().get(campChoice - 1).getSuggestions().get(suggestionChoice - 1));
+                break;
+
+                case 3:
+                suggestionManager.viewApprovedSuggestions();
+                break;
+
+                default:
+                System.out.println("Please select an appropriate option next time.");
+            }
+        } while(choice >= 1 && choice <= 3);
+    }
+
+    public void reportGeneration()
+    {
+        //Still needs to be coded.
     }
 }

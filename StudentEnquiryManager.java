@@ -16,7 +16,7 @@ public class StudentEnquiryManager implements EnquiryManager {
             {
                 System.out.println("Question: " + e.getQuestion());
                 System.out.println("Response: " + e.getResponse());
-                System.out.println("Student: " + e.getPostedBy() + "/n");
+                System.out.println("Student: " + e.getPostedBy().getName() + "/n");
             }
         }
     }

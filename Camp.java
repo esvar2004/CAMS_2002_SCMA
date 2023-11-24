@@ -27,6 +27,7 @@ public class Camp
     private HashMap<Student, String> rolesMap = new HashMap<>();
     private int numCommitteeMembers; //NEW
     private ArrayList<Enquiry> enquiries;
+    private ArrayList<Suggestion> suggestions;
 
     public Camp(String name, Date openDate, Date closeDate, Date regClose, String school, String location, int totSlots, int commSlots, String desc, String nameOfStaff)
     {
@@ -45,6 +46,7 @@ public class Camp
         this.currentSlots = 0;
         this.numCommitteeMembers = 0;
         this.enquiries = new ArrayList<>();
+        this.suggestions = new ArrayList<>();
     }
 
     public void setName(String name)
@@ -226,6 +228,7 @@ public class Camp
         }
     }
 
+    /*
     // If the committee member is removed, you should also update the count.
     public void removeCommitteeMember(Student committeeMember) {
         if (this.studentList.remove(committeeMember)) { // Only remove if the member is in the list.
@@ -235,7 +238,7 @@ public class Camp
             // Handle the case when the committee member isn't found.
             System.out.println("Committee member not found in the list."); // Simple message for the situation.
         }
-    }
+    } */
     
     // Method to get the number of slots available for committee members.
     public int getAvailableCommitteeSlots() {
@@ -267,6 +270,11 @@ public class Camp
     // Method to get all enquiries
     public List<Enquiry> getEnquiries() {
         return this.enquiries;
+    }
+
+    public ArrayList<Suggestion> getSuggestions()
+    {
+        return this.suggestions;
     }
 
 	public boolean getVisibility() {

@@ -1,15 +1,14 @@
 import java.util.ArrayList;
 
 public class CampCommitteeMember extends Student {
-    //private ArrayList<Camp> committeeCamps;
-    private ArrayList<String> suggestions;
+    private Camp camp;
+    private ArrayList<Suggestion> suggestions;
     private PointsManager pointsManager;
 
-    public CampCommitteeMember(String name, String email, String faculty) {
+    public CampCommitteeMember(String name, String email, String faculty, Camp camp) {
         super(name, email, faculty);
-        //this.committeeCamps = new ArrayList<>();
         this.pointsManager = new PointsManager();
-        
+        this.camp = camp;
     }
 
     //Shouldn't this function be in Student?
@@ -31,6 +30,7 @@ public class CampCommitteeMember extends Student {
             System.out.println("You are not a member of the committee for " + camp.getName());
         }
     }*/
+
     // Assuming getUserID is inherited from Student
     public String getUserID() { 
         return Getter.getusername(super.getEmail());
@@ -40,7 +40,13 @@ public class CampCommitteeMember extends Student {
         return this.pointsManager.getPoints();
     }
 
-    /*public ArrayList<Camp> getCommitteeCamps() {
-        return this.committeeCamps;
-    }*/
+    public ArrayList<Suggestion> getSuggestions()
+    {
+        return this.suggestions;
+    }
+
+    public Camp getCamp()
+    {
+        return this.camp;
+    }
 }

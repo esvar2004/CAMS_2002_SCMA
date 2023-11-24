@@ -5,34 +5,28 @@ public class CampCommSuggestionManager implements SuggestionManager {
         this.commMember = commMember;
     }
 
+    public void submitSuggestion(String suggestion)
+    {
+        Suggestion s = new Suggestion(suggestion, commMember, commMember.getCamp());
+        commMember.getSuggestions().add(s);
+        commMember.getCamp().getSuggestions().add(s);
+    }
+
     public void viewSuggestions()
     {
-        for(Camp camp: commMember.getRegisteredCamps())
+        for(Suggestion suggestion: commMember.getSuggestions())
         {
-            for(Enquiry e: camp.getEnquiries())
-            {
-                System.out.println("Question: " + e.getQuestion());
-                System.out.println("Response: " + e.getResponse());
-                System.out.println("Student: " + e.getPostedBy() + "/n");
-            }
+            System.out.println(suggestion.getSuggestion());
         }
     }
 
-    public void submitEnquiry(Camp camp, String question)
+    public void editSuggestion(Suggestion suggestion, String s)
     {
-        Enquiry e = new Enquiry(question, student, camp);
-    	student.getEnquiries().add(e);
-        camp.getEnquiries().add(e);
+        suggestion.setSuggestion(s);
     }
-
-    public void editEnquiry(Enquiry enquiry, String question)
+    
+    public void deleteSuggestion(Suggestion suggestion)
     {
-        enquiry.setQuestion(question);
+        commMember.getSuggestions().remove(suggestion);
     }
-
-    public void deleteEnquiry(Enquiry enquiry)
-    {
-        student.getEnquiries().remove(enquiry);
-    }
-
 }

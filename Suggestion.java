@@ -6,7 +6,7 @@ public class Suggestion
     private Camp camp;
     private boolean isApproved;
 
-    public Suggestion(String question, CampCommitteeMember postedBy, Camp camp)
+    public Suggestion(String suggestion, CampCommitteeMember postedBy, Camp camp)
     {
         this.suggestion = suggestion;
         this.postedBy = postedBy;
