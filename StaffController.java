@@ -187,13 +187,11 @@ public class StaffController
                     }
                     System.out.println("To which camp would you like to submit an enquiry response? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
-                    while(true){
-                        campChoice = sc.nextInt();
-                        if (!enquiryManager.hasEnquires(staff.getCreatedCamps().get(campChoice - 1))){
-                            System.out.println("This camp does not have any enquiries!");
-                        }else{
-                            break;
-                        }
+                    campChoice = sc.nextInt();
+                    if (!enquiryManager.hasEnquires(staff.getCreatedCamps().get(campChoice - 1))){
+                        System.out.println("This camp does not have any enquiries!");
+                        break;
+                        
                     }
                     
                     System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size() + ")");

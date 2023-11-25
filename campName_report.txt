@@ -1,0 +1,4 @@
+Camp Report for: campName
+Total Slots: 100
+Committee Slots: 10
+Description: Desc

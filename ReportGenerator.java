@@ -9,7 +9,7 @@ public class ReportGenerator {
             writer.write("Total Slots: " + camp.getTotSlots() + "\n");
             writer.write("Committee Slots: " + camp.getCommSlots() + "\n");
             writer.write("Description: " + camp.getDesc() + "\n");
-            // More details can be included
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -20,7 +20,7 @@ public class ReportGenerator {
             writer.write("Performance Report for: " + member.getUserID() + "\n");
             writer.write("Points: " + member.getPoints() + "\n");
             writer.write("Committee Camps: " + member.getCommitteeCamps().size() + "\n");
-            // Additional details can be added
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

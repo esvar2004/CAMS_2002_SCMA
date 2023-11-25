@@ -98,7 +98,19 @@ public class StudentController
             System.out.println("3. Edit Enquiries");
             System.out.println("4. Delete Enquiries");
             System.out.println("5. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -147,11 +159,16 @@ public class StudentController
                     enquiryChoice = sc.nextInt();
                     enquiryManager.deleteEnquiry(student.getEnquiries().get(enquiryChoice - 1));
                     break;
+                
+                case 5:
+                    System.out.println("Exiting to menu...");
+                    Time.pause(1);
+                    break;
 
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please select an appropriate option");
             }
-        } while(choice >= 1 && choice <= 4);
+        } while(choice != 5);
     }
 
     public void viewProfile()
@@ -197,7 +214,7 @@ public class StudentController
                         System.out.println("Not valid");
                         break;
                     }
-                    if(!registrationManager.isInCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice-1))){
+                    if(registrationManager.isInCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice-1))){
                         System.out.println("You have already registered for this camp!");
                         break;
                     }

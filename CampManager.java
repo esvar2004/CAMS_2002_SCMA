@@ -132,7 +132,19 @@ public class CampManager implements CampManagerInterface, CheckQuit
                 System.out.println("(8) Camp Description");
                 System.out.println("(9) Camp Visibility");
                 System.out.println("(10) Exit");
-                choice = sc.nextInt();
+                while (true){
+                    try {
+                    choice = sc.nextInt();
+                    if (choice <= 0) {
+                        System.out.println("Error: Please enter a positive integer.");
+                    } else {
+                        break; 
+                    }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error: Please enter a valid integer.");
+                        sc.nextLine(); // clear buffer
+                    }
+                }
                 sc.nextLine();
                 switch(choice)
                 {

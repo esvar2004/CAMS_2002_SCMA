@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Scanner;
 public class StudentProfile {
 
@@ -46,12 +47,18 @@ public class StudentProfile {
 		}
 				
 			
-	
+	ArrayList<String> getNameFromCamps(ArrayList<Camp> registeredCamps){
+		ArrayList<String> stringCampList = new ArrayList<String>();
+		for (int i = 0; i < registeredCamps.size(); i++){
+			stringCampList.add(registeredCamps.get(i).getName());
+		}
+		return stringCampList;
+	}
 	void viewProfile() {
 		System.out.println("\nProfile:");
 		System.out.println("Name: " + student.getName());
 		System.out.println("Faculty: " + student.getFaculty());
-		System.out.println("Registered Camps: " + student.getRegisteredCamps());
+		System.out.println("Registered Camps: " + getNameFromCamps(student.getRegisteredCamps()));
 		System.out.println("End of Profile");
 	}
 }
