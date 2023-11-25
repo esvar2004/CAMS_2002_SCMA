@@ -30,7 +30,7 @@ public class ReportGenerator {
             writer.write("Performance Report for: " + member.getUserID() + "\n");
             writer.write("Points: " + member.getPoints() + "\n");
             writer.write("Committee Camps: " + member.getCommitteeCamps().size() + "\n");
-            
+            // Additional details can be added
         } catch (IOException e) {
             e.printStackTrace();
         }
