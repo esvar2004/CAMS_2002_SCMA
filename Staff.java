@@ -57,13 +57,6 @@ public class Staff extends User
         return approvedSuggestions;
     }
 
-    public static Date convertStringToDate(String s){
-        // DD/MM/YYYY
-        LocalDate ldate = LocalDate.parse(s, DateTimeFormatter.BASIC_ISO_DATE);
-        Date date = Date.from(ldate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        return date;
-    }
-
     /*public void editCamp(Camp camp)
     {
         if(camp.getStaffName() != this.getName())

@@ -55,10 +55,15 @@ public class StaffController
                     manager.editCamp(staff.getCreatedCamps().get(campChoice - 1));
                     break;
                 
+                case 4:
+                    System.out.println("Returning to Menu");
+                    Time.pause(2);
+                    break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 3);
+        } while(choice != 4);
     }
 
     public void viewCamps()
@@ -74,7 +79,19 @@ public class StaffController
             System.out.println("2. View All Camps");
             System.out.println("3. View Your Created Camps");
             System.out.println("4. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -93,10 +110,15 @@ public class StaffController
                     viewer.viewYourCamps();
                     break;
 
+                case 4:
+                    System.out.println("Returning to Menu");
+                    Time.pause(2);
+                    break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 3);
+        } while(choice != 4);
     }
 
     public void manageEnquiries()
@@ -113,7 +135,19 @@ public class StaffController
             System.out.println("1. View Enquiries");
             System.out.println("2. Submit Response/Edit Response");
             System.out.println("3. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -132,10 +166,15 @@ public class StaffController
                     enquiryManager.editEnquiry(staff.getCreatedCamps().get(campChoice - 1).getEnquiries().get(enquiryChoice - 1), response);
                     break;
 
+                case 3:
+                    System.out.println("Returning to Menu");
+                    Time.pause(2);
+                    break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 2);
+        } while(choice != 3);
     }
 
     public void manageSuggestions()
@@ -154,7 +193,19 @@ public class StaffController
             System.out.println("3. View Approved Suggestions");
             //Possible Delete Suggestion Mechanism to be Implemented if they have approved and proceeded with the suggestion.
             System.out.println("4. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -175,10 +226,16 @@ public class StaffController
                     suggestionManager.viewApprovedSuggestions();
                     break;
 
+                case 4:
+                    System.out.println("Returning to Menu...");
+                    Time.pause(2);
+                    break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
+
             }
-        } while(choice >= 1 && choice <= 3);
+        } while(choice != 4);
     }
 
     public void reportGeneration() {
@@ -191,7 +248,19 @@ public class StaffController
             System.out.println("1. Generate Camp Report");
             System.out.println("2. Generate Performance Report for Committee Member");
             System.out.println("3. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
     
             switch (choice) {
                 case 1:
@@ -258,6 +327,6 @@ public class StaffController
                 default:
                     System.out.println("Invalid option, please try again.");
             }
-        } while (choice >= 1 && choice <= 2);
+        } while (choice != 3);
     }
 }

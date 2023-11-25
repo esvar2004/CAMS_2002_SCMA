@@ -176,7 +176,7 @@ public class Camp
         }
         else {
             // Handle the case when there are no available slots.
-            System.out.println("Cannot add member: no available slots."); // Again, this is a simple message.
+            System.out.println("Cannot add member: no available slots."); // simple message.
         }
     }
 

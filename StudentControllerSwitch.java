@@ -53,6 +53,8 @@ public class StudentControllerSwitch
                 
                 case 5:
                 System.out.println("You have exited the Student Interface");
+                Time.pause(1);
+                break;
 
                 default:
                 System.out.println("Please enter a valid input");

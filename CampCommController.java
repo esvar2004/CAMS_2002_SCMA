@@ -54,10 +54,15 @@ public class CampCommController extends StudentController
                     enquiryManager.editEnquiry(commMember.getCamp().getEnquiries().get(enquiryChoice - 1), response);
                     break;
 
+                case 3:
+                System.out.println("Returning to Menu...");
+                Time.pause(2);
+                break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 2);
+        } while(choice != 3);
     }
 
     public void manageSuggestions()
@@ -76,7 +81,19 @@ public class CampCommController extends StudentController
             System.out.println("3. Edit Suggestion");
             System.out.println("4. Delete Suggestion");
             System.out.println("5. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -106,10 +123,15 @@ public class CampCommController extends StudentController
                     suggestionManager.deleteSuggestion(commMember.getSuggestions().get(suggestionChoice - 1));
                     break;
 
+                case 5:
+                System.out.println("Returning to Menu...");
+                Time.pause(1);
+                break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 3);
+        } while(choice != 5);
     }
 
     public void reportGeneration() {
@@ -118,7 +140,20 @@ public class CampCommController extends StudentController
         System.out.println("Generate performance report for the committee member?");
         System.out.println("1. Yes");
         System.out.println("2. No");
-        int choice = sc.nextInt();
+        int choice = -1;
+        while (true){
+            try {
+            choice = sc.nextInt();
+            if (choice <= 0) {
+                System.out.println("Error: Please enter a positive integer.");
+            } else {
+                break; 
+            }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please enter a valid integer.");
+                sc.nextLine(); // clear buffer
+            }
+        }
 
         switch (choice) {
             case 1:
@@ -130,6 +165,7 @@ public class CampCommController extends StudentController
             case 2:
                 // Exit without generating the report
                 System.out.println("Exiting report generation module.");
+                Time.pause(1);
                 break;
 
             default:

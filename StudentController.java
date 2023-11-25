@@ -46,6 +46,7 @@ public class StudentController
                         System.out.println("You can only view one camp:");
                         Time.pause(1);
                         viewer.viewCampDetails(viewer.viewAvailableCamps(student.getFaculty()).get(0));
+                        break;
                     }
                     System.out.println("Which camp's details would you like to view? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
                     viewer.viewAllCamps();

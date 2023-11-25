@@ -50,12 +50,16 @@ public class StaffControllerSwitch
 
                 case 4:
                 control.manageSuggestions();
+                break;
 
                 case 5:
                 control.reportGeneration();
+                break;
                 
                 case 6:
                 System.out.println("You have exited the Staff Interface");
+                Time.pause(1);
+                break;
 
                 default:
                 System.out.println("Please enter a valid input");
