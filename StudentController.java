@@ -2,7 +2,6 @@ import java.util.*;
 public class StudentController 
 {
     private Student student;
-    public static Scanner sc = new Scanner(System.in);
 
     public StudentController(Student student)
     {
@@ -11,12 +10,13 @@ public class StudentController
 
     public void viewCamps()
     {
+        Scanner sc = new Scanner(System.in);
         StudentCampViewer viewer = new StudentCampViewer(student);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Specific Details of a Camp");
             System.out.println("2. View All Camps");
             System.out.println("3. View Your Registered Camps");
@@ -75,20 +75,15 @@ public class StudentController
                     viewer.viewYourCamps();
                     break;
 
-                case 4:
-                    System.out.println("Returning to Menu...");
-                    Time.pause(1);
-                    break;
-
                 default:
-                    System.out.println("Please enter a valid input");
+                    System.out.println("Please select an appropriate option next time.");
             }
-        } while(choice != 4);
+        } while(choice >= 1 && choice <= 3);
     }
 
     public void manageEnquiries()
     {
-
+        Scanner sc = new Scanner(System.in);
         StudentCampViewer viewer = new StudentCampViewer(student);
         StudentEnquiryManager enquiryManager = new StudentEnquiryManager(student);
         int campChoice = 0;
@@ -97,25 +92,13 @@ public class StudentController
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Enquiries");
             System.out.println("2. Submit Enquiries");
             System.out.println("3. Edit Enquiries");
             System.out.println("4. Delete Enquiries");
             System.out.println("5. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = sc.nextInt();
 
             switch(choice)
             {
@@ -150,7 +133,7 @@ public class StudentController
                     System.out.println("What is your updated question?");
                     sc.nextLine();
                     question = sc.nextLine();
-                    enquiryManager.editEnquiry(student.getEnquiries().get(enquiryChoice), question);
+                    enquiryManager.editEnquiry(student.getEnquiries().get(enquiryChoice - 1), question);
                     break;
 
                 case 4:
@@ -162,23 +145,18 @@ public class StudentController
                     System.out.println("Which of your enquiries would you like to delete?");
                     enquiryManager.viewEnquiries();
                     enquiryChoice = sc.nextInt();
-                    enquiryManager.deleteEnquiry(student.getEnquiries().get(enquiryChoice));
-                    break;
-
-                case 5:
-                    System.out.println("Returning to Menu...");
-                    Time.pause(1);
+                    enquiryManager.deleteEnquiry(student.getEnquiries().get(enquiryChoice - 1));
                     break;
 
                 default:
-                    System.out.println("Please enter a valid input");
+                    System.out.println("Please select an appropriate option next time.");
             }
-        } while(choice != 5);
+        } while(choice >= 1 && choice <= 4);
     }
 
     public void viewProfile()
     {
-        System.out.println("Profile:");
+        System.out.println("\nProfile:");
 		System.out.println("Name: " + student.getName());
 		System.out.println("Faculty: " + student.getFaculty());
 		System.out.println("Registered Camps: " + student.getRegisteredCamps());
@@ -187,7 +165,7 @@ public class StudentController
 
     public void manageRegistration()
     {
-
+        Scanner sc = new Scanner(System.in);
         StudentCampViewer viewer = new StudentCampViewer(student);
         CampRegistrationManager registrationManager = new CampRegistrationManager(student);
         int campChoice = 0;
@@ -195,24 +173,12 @@ public class StudentController
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Registered Camps");
             System.out.println("2. Register for Camp");
             System.out.println("3. Withdraw from Camp");
             System.out.println("4. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = sc.nextInt();
 
             switch(choice)
             {
@@ -224,15 +190,35 @@ public class StudentController
                     System.out.println("Which camp would you like to register for? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
                     viewer.viewAllCamps();
                     campChoice = sc.nextInt();
+                    if (campChoice <= 0) {
+                        System.out.println("Not valid");
+                        break;
+                    }else if (campChoice > viewer.viewAvailableCamps(student.getFaculty()).size()){
+                        System.out.println("Not valid");
+                        break;
+                    }
+                    if(!registrationManager.isInCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice-1))){
+                        System.out.println("You have already registered for this camp!");
+                        break;
+                    }
                     System.out.println("What role do you want to register for?");
                     System.out.println("(1) Attendee");
                     System.out.println("(2) Committee Member");
-                    if(sc.nextInt() == 1) role = "Attendee";
-                    else if(sc.nextInt() == 2) role = "committee";
+                    int roleNum = sc.nextInt();
+                    if(roleNum == 1) role = "Attendee";
+                    else if(roleNum == 2) role = "committee";
+                    else {
+                        System.out.println("Invalid input");
+                        break;
+                    }
                     registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
                     break;
 
                 case 3:
+                    if (student.getRegisteredCamps().size() == 0){
+                        System.out.println("You have not registered in any camps!");
+                        break;
+                    }
                     System.out.println("Which camp would you like to Withdraw from? (1 - " + student.getRegisteredCamps().size() + ")");
                     viewer.viewYourCamps();
                     campChoice = sc.nextInt();
@@ -240,10 +226,9 @@ public class StudentController
                     break;
 
                 case 4:
-                    System.out.println("Returning to Menu...");
-                    Time.pause(1);
+                    System.out.println("Exiting to Menu");
                     break;
-
+                
                 default:
                     System.out.println("Please enter a valid input");
             }

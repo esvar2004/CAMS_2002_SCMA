@@ -14,7 +14,7 @@ public class StaffControllerSwitch
         StaffController control = new StaffController(staff);
         int choice = 6; //Initializing Choice to Exit to Enter the do-while loop
         do{
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. Manage Camps");
             System.out.println("2. View Camps");
             System.out.println("3. Manage Enquiries");

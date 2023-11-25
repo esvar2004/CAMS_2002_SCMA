@@ -16,7 +16,7 @@ public class StaffController
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
         do{
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. Create Camp");
             System.out.println("2. Edit Camp");
             System.out.println("3. Delete Camp");
@@ -52,7 +52,11 @@ public class StaffController
                     System.out.println("Which camp's details would you like to delete? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
                     campChoice = sc.nextInt();
-                    manager.editCamp(staff.getCreatedCamps().get(campChoice - 1));
+                    if (campChoice > staff.getCreatedCamps().size()) {
+                        System.out.println("Error input");
+                        break;
+                    }
+                    manager.deleteCamp(staff.getCreatedCamps().get(campChoice - 1));
                     break;
                 
                 case 4:
@@ -74,7 +78,7 @@ public class StaffController
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Specific Details of a Camp");
             System.out.println("2. View All Camps");
             System.out.println("3. View Your Created Camps");
@@ -96,9 +100,25 @@ public class StaffController
             switch(choice)
             {
                 case 1: 
+                if (staff.getCreatedCamps().size() <= 0) {
+                    System.out.println("You haven't created any camps yet");
+                    break;
+                }
                     System.out.println("Which camp's details would you like to view? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
-                    campChoice = sc.nextInt();
+                    while (true){
+                        try {
+                        campChoice = sc.nextInt();
+                        if (campChoice <= 0) {
+                            System.out.println("Error: Please enter a positive integer.");
+                        } else {
+                            break; 
+                        }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error: Please enter a valid integer.");
+                            sc.nextLine(); // clear buffer
+                        }
+                    }
                     viewer.viewCampDetails(staff.getCreatedCamps().get(campChoice - 1));
                     break;
 
@@ -131,7 +151,7 @@ public class StaffController
         int choice = 3; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Enquiries");
             System.out.println("2. Submit Response/Edit Response");
             System.out.println("3. Exit");
@@ -161,9 +181,21 @@ public class StaffController
                         System.out.println("There aren't any camps under your purview.");
                         break;
                     }
+                    if (!enquiryManager.hasEnquires()){
+                        System.out.println("None of your camps have any enquiries!");
+                        break;
+                    }
                     System.out.println("To which camp would you like to submit an enquiry response? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
-                    campChoice = sc.nextInt();
+                    while(true){
+                        campChoice = sc.nextInt();
+                        if (!enquiryManager.hasEnquires(staff.getCreatedCamps().get(campChoice - 1))){
+                            System.out.println("This camp does not have any enquiries!");
+                        }else{
+                            break;
+                        }
+                    }
+                    
                     System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size() + ")");
                     enquiryManager.viewEnquiries(staff.getCreatedCamps().get(campChoice - 1));
                     enquiryChoice = sc.nextInt();
@@ -194,7 +226,7 @@ public class StaffController
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View All Suggestions");
             System.out.println("2. Approve Suggestions");
             System.out.println("3. View Approved Suggestions");
@@ -257,7 +289,7 @@ public class StaffController
         ReportGenerator reportGenerator = new ReportGenerator(); // Assuming this is how you instantiate ReportGenerator
         int choice = 3;
         do {
-            System.out.println("Select the report you want to generate:");
+            System.out.println("\nSelect the report you want to generate:");
             System.out.println("1. Generate Camp Report");
             System.out.println("2. Generate Performance Report for Committee Member");
             System.out.println("3. Exit");

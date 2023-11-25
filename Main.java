@@ -16,20 +16,24 @@ public class Main extends Login{
 
             if(getType() == "student")
             {
+                
                 Student student = (Student) LoginSuccess();
                 StudentControllerSwitch control = new StudentControllerSwitch(student);
+                System.out.println("Welcome "+ student.getName()+ "!");
                 control.main();
             }
             else if(getType() == "staff")
             {
                 Staff staff = (Staff) LoginSuccess();
                 StaffControllerSwitch control = new StaffControllerSwitch(staff);
+                System.out.println("Welcome "+ staff.getName()+ "!");
                 control.main();
             }
             else
             {
                 CampCommitteeMember commMember = (CampCommitteeMember) LoginSuccess();
                 CampCommControllerSwitch control = new CampCommControllerSwitch(commMember);
+                System.out.println("Welcome "+ commMember.getName()+ "!");
                 control.main();
             }
             

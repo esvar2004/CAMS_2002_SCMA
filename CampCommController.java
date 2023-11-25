@@ -22,7 +22,7 @@ public class CampCommController extends StudentController
         int choice = 3; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Enquiries");
             System.out.println("2. Submit Response/Edit Response");
             System.out.println("3. Exit");
@@ -74,7 +74,7 @@ public class CampCommController extends StudentController
         int choice = 5; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Your Suggestions");
             System.out.println("2. Submit Suggestion");
             System.out.println("3. Edit Suggestion");

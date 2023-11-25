@@ -12,9 +12,9 @@ public class StaffEnquiryManager implements EnquiryManager {
         {
             for(Enquiry e: camp.getEnquiries())
             {
-                System.out.println("Question: " + e.getQuestion());
+                System.out.println("\nQuestion: " + e.getQuestion());
                 System.out.println("Response: " + e.getResponse());
-                System.out.println("Student: " + e.getPostedBy() + "/n");
+                System.out.println("Student: " + e.getPostedBy().getName());
             }
         }
     }
@@ -23,10 +23,28 @@ public class StaffEnquiryManager implements EnquiryManager {
     {
         for(Enquiry e: camp.getEnquiries())
         {
-            System.out.println("Question: " + e.getQuestion());
+            System.out.println("\nQuestion: " + e.getQuestion());
             System.out.println("Response: " + e.getResponse());
-            System.out.println("Student: " + e.getPostedBy() + "/n");
+            System.out.println("Student: " + e.getPostedBy().getName());
         }
+    }
+
+    public boolean hasEnquires(){
+
+        for (int i = 0; i < staff.getCreatedCamps().size(); i++){
+            if (staff.getCreatedCamps().get(i).getEnquiries().size() > 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasEnquires(Camp camp){
+
+        if (camp.getEnquiries().size() > 0){
+                return true;
+            }
+        return false;
     }
 
     public void editEnquiry(Enquiry enquiry, String response)

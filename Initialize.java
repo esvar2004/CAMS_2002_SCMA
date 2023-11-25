@@ -16,7 +16,6 @@ public class Initialize {
         InitializeStaffData("staff.txt");
         Camp.campList = new ArrayList<Camp>();
         System.out.println("Data Arrays Initialized!");
-        
     }
 
     public static void InitializeStudentData(final String studentFile) {

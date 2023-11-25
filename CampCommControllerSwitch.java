@@ -13,7 +13,7 @@ public class CampCommControllerSwitch
         CampCommController control = new CampCommController(commMember);
         int choice = 5; //Initializing Choice to Exit to Enter the do-while loop
         do{
-            System.out.println("Select from the given list of options.");
+            System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Camps");
             System.out.println("2. Manage Enquiries");
             System.out.println("3. Manage Suggestions");

@@ -10,7 +10,7 @@ public class StudentProfile {
 	}
 	
 	void updateProfile() {
-		System.out.println("Update Profile:");
+		System.out.println("\nUpdate Profile:");
 		System.out.println("(1) Update Name");
 		System.out.println("(2) Update Faculty");
 		System.out.println("(3) Update Registered Camps");
@@ -48,7 +48,7 @@ public class StudentProfile {
 			
 	
 	void viewProfile() {
-		System.out.println("Profile:");
+		System.out.println("\nProfile:");
 		System.out.println("Name: " + student.getName());
 		System.out.println("Faculty: " + student.getFaculty());
 		System.out.println("Registered Camps: " + student.getRegisteredCamps());

@@ -11,8 +11,10 @@ public class GetDatesForCamp implements CheckQuit{
     public void setDates(){
         System.out.println("What's the opening date of the camp? (DD/MM/YYYY)");
         setOpenDate();
+        if (openDate == null) return;
         System.out.println("What's the closing date of the camp? (DD/MM/YYYY)");
         setCloseDate();
+        if (closeDate == null) return;
         System.out.println("When does registration for this camp close? (DD/MM/YYYY)");
         setRegCloseDate();
     }

@@ -11,8 +11,8 @@ public class StaffSuggestionManager implements SuggestionManager {
         {
             for(Suggestion s: camp.getSuggestions())
             {
-                System.out.println("Suggestion: " + s.getSuggestion());
-                System.out.println("Camp Committee Member: " + s.getPostedBy().getName() + "/n");
+                System.out.println("\nSuggestion: " + s.getSuggestion());
+                System.out.println("Camp Committee Member: " + s.getPostedBy().getName());
             }
         }
     }
@@ -22,7 +22,7 @@ public class StaffSuggestionManager implements SuggestionManager {
         for(Suggestion s: camp.getSuggestions())
         {
             System.out.println("\nSuggestion: " + s.getSuggestion());
-            System.out.println("Camp Committee Member: " + s.getPostedBy().getName() + "/n");
+            System.out.println("Camp Committee Member: " + s.getPostedBy().getName());
         }
     }
 
@@ -36,8 +36,8 @@ public class StaffSuggestionManager implements SuggestionManager {
     {
         for(Suggestion s: staff.getApprovedSuggestions())
         {
-            System.out.println("Suggestion: " + s.getSuggestion());
-            System.out.println("Camp Committee Member: " + s.getPostedBy().getName() + "/n");
+            System.out.println("\nSuggestion: " + s.getSuggestion());
+            System.out.println("Camp Committee Member: " + s.getPostedBy().getName());
         }
     }
 }

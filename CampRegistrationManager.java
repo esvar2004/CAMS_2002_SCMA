@@ -2,15 +2,17 @@ import java.util.ArrayList;
 
 public class CampRegistrationManager {
 	
-	private ArrayList<Camp> registeredCamps;
+	private Student student;
+	//private ArrayList<Camp> registeredCamps;
 	
 	public CampRegistrationManager(Student student) {
-		this.registeredCamps = student.getRegisteredCamps();
+		this.student = student;
+		//this.registeredCamps = student.getRegisteredCamps();
 	}
 	
     public void viewRegisteredCamps(){
-		if (registeredCamps.size() > 0)
-			for(Camp camp : registeredCamps)
+		if (student.getRegisteredCamps().size() > 0)
+			for(Camp camp : student.getRegisteredCamps())
 			{
 				System.out.println("Camp Name: " + camp.getName());
 			}
@@ -32,7 +34,7 @@ public class CampRegistrationManager {
             return;
     	}
     	
-    	if ((camp.getList()).contains(student)) //check for previous registration
+    	if ((camp.getList()).contains(this)) //check for previous registration
     	{
     		System.out.println("Unable to register for a camp you have withdrawn");
     		return;
@@ -44,7 +46,7 @@ public class CampRegistrationManager {
             return;
         }
         
-        for (Camp registeredCamp : registeredCamps)
+        for (Camp registeredCamp : student.getRegisteredCamps())
         {
             if (camp.hasDateClash(registeredCamp)) //check for date clashes with other camps
             {
@@ -60,14 +62,14 @@ public class CampRegistrationManager {
     	
         if (role.equals("Attendee")) 
     	{
-    		registeredCamps.add(camp);
+    		student.getRegisteredCamps().add(camp);
     		camp.assignRole(student, role);
     	}
     	else if (role.equals("committee"))
     	{
     		if (!student.getCommMember())
     		{
-    			registeredCamps.add(camp);
+    			student.getRegisteredCamps().add(camp);
     			student.setCommMember(true);
     			camp.assignRole(student, role);
     			//insert function for committee member
@@ -84,7 +86,7 @@ public class CampRegistrationManager {
     		return;
     	}
 
-        student.getRegisteredCamps().add(camp);
+        //student.getRegisteredCamps().add(camp);
 		camp.addAttendee(student);
         System.out.println("Successfully registered for the '" + camp.getName() + "' camp.");
 	}
@@ -100,5 +102,13 @@ public class CampRegistrationManager {
             System.out.println("You are not registered for the '" + camp.getName() + "' camp.");
         }
 	}
-	
+
+	public boolean isInCamp(Camp camp){
+		for (int i = 0; i < student.getRegisteredCamps().size(); i++){
+			if (student.getRegisteredCamps().get(i).equals(camp)){
+				return true;
+			}
+		}
+		return false;
+	}
 }

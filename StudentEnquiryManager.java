@@ -8,16 +8,14 @@ public class StudentEnquiryManager implements EnquiryManager {
 
     public void viewEnquiries()
     {
-        for(Camp camp: student.getRegisteredCamps())
+        for(Enquiry e: student.getEnquiries())
         {
-            for(Enquiry e: camp.getEnquiries())
-            {
-                System.out.println("Question: " + e.getQuestion());
-                System.out.println("Response: " + e.getResponse());
-                System.out.println("Student: " + e.getPostedBy().getName() + "/n");
-                System.out.println("Camp: " + e.getCampName());
-            }
+            System.out.println("\nQuestion: " + e.getQuestion());
+            System.out.println("Response: " + e.getResponse());
+            System.out.println("Student: " + e.getPostedBy().getName());
+            System.out.println("Camp: " + e.getCampName());
         }
+        
     }
 
     public void submitEnquiry(Camp camp, String question)
