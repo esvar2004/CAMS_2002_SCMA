@@ -4,11 +4,16 @@ public class CampCommitteeMember extends Student {
     private Camp camp;
     private ArrayList<Suggestion> suggestions;
     private PointsManager pointsManager;
+    private ArrayList<Camp> registeredCamps;
+    private ArrayList<Enquiry> enquiries;
 
     public CampCommitteeMember(String name, String email, String faculty, Camp camp) {
         super(name, email, faculty);
         this.pointsManager = new PointsManager();
         this.camp = camp;
+        this.registeredCamps = super.getRegisteredCamps();
+        this.enquiries = super.getEnquiries();
+        
     }
 
     //Shouldn't this function be in Student?

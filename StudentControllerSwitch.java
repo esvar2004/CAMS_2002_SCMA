@@ -14,6 +14,7 @@ public class StudentControllerSwitch
         StudentController control = new StudentController(student);
         int choice = 5; //Initializing Choice to Exit to Enter the do-while loop
         do{
+            if (StudentController.justMadeComm) break;
             System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Camps");
             System.out.println("2. Submit Enquiries");

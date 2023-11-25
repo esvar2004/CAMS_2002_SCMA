@@ -7,6 +7,7 @@ public class Student extends User
     private boolean committeeMember;
     private ArrayList<Camp> registeredCamps;
     private ArrayList<Enquiry> enquiries;
+	private Camp campCommMemberOf = null;
 
 	public Student(String name, String email, String faculty) 
 	{
@@ -15,6 +16,7 @@ public class Student extends User
 		this.committeeMember = false; // Default is false
 		this.registeredCamps = new ArrayList<Camp>();
 		this.enquiries = new ArrayList<Enquiry>();
+
 
 	}
     public String getRole() 
@@ -41,6 +43,12 @@ public class Student extends User
     {
     	return this.registeredCamps;
     }
+	public Camp getCampCommMemberOf() {
+		return campCommMemberOf;
+	}
+	public void setCampCommMemberOf(Camp camp){
+		this.campCommMemberOf = camp;
+	}
     
     //Overriding User Method
 	/*public void viewCamps(ArrayList<Camp> campList)// view the list of camps open to the student and the remaining slots available

@@ -66,18 +66,11 @@ public class CampRegistrationManager {
     	}
     	else if (role.equals("committee"))
     	{
-    		if (!student.getCommMember())
-    		{
-    			student.getRegisteredCamps().add(camp);
-    			student.setCommMember(true);
-    			camp.assignRole(student, role);
-    			//insert function for committee member
-    		}
-    		else
-    		{
-    			System.out.println("Every Student can only be a committee member of one camp");
-    			return;
-    		}
+    		
+			student.getRegisteredCamps().add(camp);
+			student.setCommMember(true);
+			camp.assignRole(student, role);
+
     	}
     	else // check for invalid roles
     	{

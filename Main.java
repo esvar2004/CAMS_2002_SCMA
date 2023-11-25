@@ -9,18 +9,32 @@ public class Main extends Login{
 
         while(systemRunning)
         {
-            login();
-            while (!Password.inputPassword()){
+            if (!StudentController.justMadeComm){
                 login();
-            }
+                while (!Password.inputPassword()){
+                    login();
+                }
+            }else{
+                System.out.println("You have been promoted to a Camp Committee Member!");
+                StudentController.justMadeComm = false;
+            }         
 
             if(getType() == "student")
             {
                 
                 Student student = (Student) LoginSuccess();
-                StudentControllerSwitch control = new StudentControllerSwitch(student);
-                System.out.println("Welcome "+ student.getName()+ "!");
-                control.main();
+                if (!student.getCommMember()){
+                    StudentControllerSwitch control = new StudentControllerSwitch(student);
+                    System.out.println("Welcome "+ student.getName()+ "!");
+                    control.main();
+                }else{
+                    CampCommitteeMember commMember = new CampCommitteeMember(student.getName(), student.getEmail(),
+                        student.getFaculty(), student.getCampCommMemberOf());
+                    CampCommControllerSwitch control = new CampCommControllerSwitch(commMember);
+                    System.out.println("Welcome "+ commMember.getName()+ "!");
+                    control.main();
+                }
+                
             }
             else if(getType() == "staff")
             {
@@ -29,18 +43,13 @@ public class Main extends Login{
                 System.out.println("Welcome "+ staff.getName()+ "!");
                 control.main();
             }
-            else
-            {
-                CampCommitteeMember commMember = (CampCommitteeMember) LoginSuccess();
-                CampCommControllerSwitch control = new CampCommControllerSwitch(commMember);
-                System.out.println("Welcome "+ commMember.getName()+ "!");
-                control.main();
+            if (!StudentController.justMadeComm){
+                System.out.println("Do you want the system to continue running? (Y/N)");
+                char choice = sc.next().toUpperCase().charAt(0);
+                if(choice == 'N')
+                    systemRunning = false;
             }
             
-            System.out.println("Do you want the system to continue running? (Y/N)");
-            char choice = sc.next().toUpperCase().charAt(0);
-            if(choice == 'N')
-                systemRunning = false;
         }
     }
 }

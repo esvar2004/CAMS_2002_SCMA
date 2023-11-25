@@ -7,6 +7,7 @@ public class StudentController
     {
         this.student = student;
     }
+    public static boolean justMadeComm = false;
 
     public void viewCamps()
     {
@@ -223,7 +224,18 @@ public class StudentController
                     System.out.println("(2) Committee Member");
                     int roleNum = sc.nextInt();
                     if(roleNum == 1) role = "Attendee";
-                    else if(roleNum == 2) role = "committee";
+                    else if(roleNum == 2) {
+                        if (student.getCommMember()) {
+                            System.out.println("You are already a Committee member of another Camp!");
+                            break;
+                        }else{
+                            role = "committee";
+                            registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
+                            justMadeComm = true;
+                            student.setCampCommMemberOf(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1));
+                            return;
+                        }
+                    }
                     else {
                         System.out.println("Invalid input");
                         break;
