@@ -1,6 +1,7 @@
 import java.util.*;
 public class StaffControllerSwitch
 {
+    public static Scanner sc = new Scanner(System.in);
     private Staff staff;
     public StaffControllerSwitch(Staff staff)
     {
@@ -9,7 +10,7 @@ public class StaffControllerSwitch
 
     public void main()
     {
-        Scanner sc = new Scanner(System.in);
+
         StaffController control = new StaffController(staff);
         int choice = 6; //Initializing Choice to Exit to Enter the do-while loop
         do{

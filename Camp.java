@@ -1,9 +1,7 @@
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Date;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -25,7 +23,7 @@ public class Camp
     private int currentSlots;
     private Date now = new Date();
     private HashMap<Student, String> rolesMap = new HashMap<>();
-    private int numCommitteeMembers; //NEW
+    private int numCommitteeMembers; 
     private ArrayList<Enquiry> enquiries;
     private ArrayList<Suggestion> suggestions;
 
@@ -172,11 +170,10 @@ public class Camp
         if (this.hasAvailableSlots()) { // Only add if there's an available slot.
             this.getList().add(student);
             this.currentSlots++;
-            // If attendee is a committee member, you might increase the numCommitteeMembers here depending on your logic.
         }
         else {
             // Handle the case when there are no available slots.
-            System.out.println("Cannot add member: no available slots."); // simple message.
+            System.out.println("Cannot add member: no available slots."); 
         }
     }
 
@@ -209,14 +206,13 @@ public class Camp
     {
         return rolesMap.get(student);
     }
-    
-    // NEW method to check if there are available slots for new attendees.
+
     public boolean hasAvailableSlots() {
         // Check if the current slots filled (including committee members) are less than the total available slots.
         return this.getCurrentSlots() + this.getCommMembers() < this.getTotSlots();
     }
     
-    // Method to add a committee member to the camp, assuming they occupy a regular slot.
+    // Method to add a committee member to the camp
     public void addCommitteeMember(Student committeeMember) {
         if (this.hasAvailableSlots()) { // Only add if there's an available slot.
             this.studentList.add(committeeMember);
@@ -224,41 +220,24 @@ public class Camp
             this.numCommitteeMembers++; // Increase the number of committee members.
         } else {
             // Handle the case when there are no available slots.
-            System.out.println("Cannot add committee member: no available slots."); // Again, this is a simple message.
+            System.out.println("Cannot add committee member: no available slots."); // 
         }
     }
-
-    /*
-    // If the committee member is removed, you should also update the count.
-    public void removeCommitteeMember(Student committeeMember) {
-        if (this.studentList.remove(committeeMember)) { // Only remove if the member is in the list.
-            this.currentSlots--;
-            this.numCommitteeMembers--; // Decrease the number of committee members.
-        }else {
-            // Handle the case when the committee member isn't found.
-            System.out.println("Committee member not found in the list."); // Simple message for the situation.
-        }
-    } */
     
     // Method to get the number of slots available for committee members.
     public int getAvailableCommitteeSlots() {
-        // Assuming committee members are included in the total slots, the available slots for them would be:
         return this.commSlots - this.numCommitteeMembers;
     }
 
-    // Example (you should adjust according to your exact logic):
     public int getTotalSlots() {
-        // If committee members are counted in total slots, just return the original total slots.
         return this.totSlots;
     }
 
     public int getAvailableSlots() {
-        // If committee members are counted in total slots, just return the original total slots.
         return this.totSlots - (this.currentSlots + this.numCommitteeMembers);
     }
 
     public int getOccupiedSlots() {
-        // This would be the sum of regular occupants and committee members.
         return this.currentSlots + this.numCommitteeMembers;
     }
 
@@ -278,11 +257,10 @@ public class Camp
     }
 
 	public boolean getVisibility() {
-		// TODO Auto-generated method stub
 		return visibility;
 	}
 
-    // Static method to get all committee members from all camps
+    // Method to get all committee members from all camps
     public static List<CampCommitteeMember> getAllCommitteeMembers() {
         List<CampCommitteeMember> committeeMembers = new ArrayList<>();
 

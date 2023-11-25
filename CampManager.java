@@ -2,6 +2,7 @@ import java.util.*;
 
 public class CampManager implements CampManagerInterface, CheckQuit
 {
+    public static Scanner sc = new Scanner(System.in);
     private Staff staff;
     GetDatesForCamp dateList = new GetDatesForCamp();
     public CampManager(Staff staff)
@@ -26,7 +27,6 @@ public class CampManager implements CampManagerInterface, CheckQuit
     }
     public void createCamp()
     {
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("What is the name of the camp? (Press x to quit and return to menu)");
         String campName;
@@ -120,7 +120,6 @@ public class CampManager implements CampManagerInterface, CheckQuit
 
     public void editCamp(Camp camp)
     {
-        Scanner sc = new Scanner(System.in);
         if(camp.getStaffName() != staff.getName())
         {
             System.out.println("This camp is not under your jurisdiction.");

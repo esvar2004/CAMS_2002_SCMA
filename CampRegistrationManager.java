@@ -2,11 +2,9 @@ import java.util.ArrayList;
 
 public class CampRegistrationManager {
 	
-	private Student student;
 	private ArrayList<Camp> registeredCamps;
 	
 	public CampRegistrationManager(Student student) {
-		this.student = student;
 		this.registeredCamps = student.getRegisteredCamps();
 	}
 	
@@ -34,7 +32,7 @@ public class CampRegistrationManager {
             return;
     	}
     	
-    	if ((camp.getList()).contains(this)) //check for previous registration
+    	if ((camp.getList()).contains(student)) //check for previous registration
     	{
     		System.out.println("Unable to register for a camp you have withdrawn");
     		return;

@@ -2,6 +2,7 @@ import java.util.*;
 public class StudentController 
 {
     private Student student;
+    public static Scanner sc = new Scanner(System.in);
 
     public StudentController(Student student)
     {
@@ -10,7 +11,6 @@ public class StudentController
 
     public void viewCamps()
     {
-        Scanner sc = new Scanner(System.in);
         StudentCampViewer viewer = new StudentCampViewer(student);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
@@ -88,7 +88,7 @@ public class StudentController
 
     public void manageEnquiries()
     {
-        Scanner sc = new Scanner(System.in);
+
         StudentCampViewer viewer = new StudentCampViewer(student);
         StudentEnquiryManager enquiryManager = new StudentEnquiryManager(student);
         int campChoice = 0;
@@ -187,11 +187,10 @@ public class StudentController
 
     public void manageRegistration()
     {
-        Scanner sc = new Scanner(System.in);
+
         StudentCampViewer viewer = new StudentCampViewer(student);
         CampRegistrationManager registrationManager = new CampRegistrationManager(student);
         int campChoice = 0;
-        int roleChoice = 0;
         String role = "";
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
         do

@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 public class Main extends Login{
+    public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+
         createAllData(); //Uses the function in Initialize.java to invoke everything within the function
         boolean systemRunning = true;
 

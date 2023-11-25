@@ -1,7 +1,9 @@
 import java.util.*;
 public class StudentControllerSwitch
 {
+    public static Scanner sc = new Scanner(System.in);
     private Student student;
+    
     public StudentControllerSwitch(Student student)
     {
         this.student = student;
@@ -9,7 +11,6 @@ public class StudentControllerSwitch
 
     public void main()
     {
-        Scanner sc = new Scanner(System.in);
         StudentController control = new StudentController(student);
         int choice = 5; //Initializing Choice to Exit to Enter the do-while loop
         do{

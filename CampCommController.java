@@ -2,6 +2,7 @@ import java.util.*;
 public class CampCommController extends StudentController
 {
     private CampCommitteeMember commMember;
+    public static Scanner sc = new Scanner(System.in);
 
     public CampCommController(CampCommitteeMember commMember)
     {
@@ -16,7 +17,6 @@ public class CampCommController extends StudentController
 
     public void manageEnquiries()
     {
-        Scanner sc = new Scanner(System.in);
         CampCommEnquiryManager enquiryManager = new CampCommEnquiryManager(commMember);
         int enquiryChoice = 0;
         int choice = 3; //Initializing Choice to Exit to Enter the do-while loop
@@ -67,7 +67,6 @@ public class CampCommController extends StudentController
 
     public void manageSuggestions()
     {
-        Scanner sc = new Scanner(System.in);
         //StaffCampViewer viewer = new StaffCampViewer(staff);
         CampCommSuggestionManager suggestionManager = new CampCommSuggestionManager(commMember);
         int suggestionChoice = 0;
@@ -136,7 +135,6 @@ public class CampCommController extends StudentController
     }
 
     public void reportGeneration() {
-        Scanner sc = new Scanner(System.in);
         ReportGenerator reportGenerator = new ReportGenerator();
         System.out.println("Generate performance report for the committee member?");
         System.out.println("1. Yes");

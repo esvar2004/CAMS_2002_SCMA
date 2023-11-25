@@ -2,6 +2,7 @@ import java.util.*;
 public class StaffController 
 {
     private Staff staff;
+    public static Scanner sc = new Scanner(System.in);
 
     public StaffController(Staff staff)
     {
@@ -10,7 +11,6 @@ public class StaffController
 
     public void manageCamps()
     {
-        Scanner sc = new Scanner(System.in);
         CampManager manager = new CampManager(staff);
         StaffCampViewer viewer = new StaffCampViewer(staff);
         int campChoice = 0;
@@ -68,7 +68,7 @@ public class StaffController
 
     public void viewCamps()
     {
-        Scanner sc = new Scanner(System.in);
+
         StaffCampViewer viewer = new StaffCampViewer(staff);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
@@ -123,7 +123,7 @@ public class StaffController
 
     public void manageEnquiries()
     {
-        Scanner sc = new Scanner(System.in);
+
         StaffCampViewer viewer = new StaffCampViewer(staff);
         StaffEnquiryManager enquiryManager = new StaffEnquiryManager(staff);
         int campChoice = 0;
@@ -186,7 +186,7 @@ public class StaffController
 
     public void manageSuggestions()
     {
-        Scanner sc = new Scanner(System.in);
+
         StaffCampViewer viewer = new StaffCampViewer(staff);
         StaffSuggestionManager suggestionManager = new StaffSuggestionManager(staff);
         int campChoice = 0;
@@ -252,7 +252,7 @@ public class StaffController
     }
 
     public void reportGeneration() {
-        Scanner sc = new Scanner(System.in);
+
         StaffCampViewer viewer = new StaffCampViewer(staff); // Assuming 'staff' is the current Staff object
         ReportGenerator reportGenerator = new ReportGenerator(); // Assuming this is how you instantiate ReportGenerator
         int choice = 3;

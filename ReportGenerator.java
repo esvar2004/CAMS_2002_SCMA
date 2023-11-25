@@ -1,4 +1,3 @@
-//package a2002Assignment;
 
 import java.io.FileWriter;
 import java.io.IOException;

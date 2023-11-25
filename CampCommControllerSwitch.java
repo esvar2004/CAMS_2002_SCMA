@@ -1,6 +1,7 @@
 import java.util.*;
 public class CampCommControllerSwitch
 {
+    public static Scanner sc = new Scanner(System.in);
     private CampCommitteeMember commMember;
     public CampCommControllerSwitch(CampCommitteeMember commMember)
     {
@@ -9,7 +10,6 @@ public class CampCommControllerSwitch
 
     public void main()
     {
-        Scanner sc = new Scanner(System.in);
         CampCommController control = new CampCommController(commMember);
         int choice = 5; //Initializing Choice to Exit to Enter the do-while loop
         do{
