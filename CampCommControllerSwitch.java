@@ -1,14 +1,16 @@
 import java.util.*;
-public class CampCommControllerSwitch extends CampCommController
+public class CampCommControllerSwitch
 {
+    private CampCommitteeMember commMember;
     public CampCommControllerSwitch(CampCommitteeMember commMember)
     {
-        super(commMember);
+        this.commMember = commMember;
     }
 
     public void main()
     {
         Scanner sc = new Scanner(System.in);
+        CampCommController control = new CampCommController(commMember);
         int choice = 5; //Initializing Choice to Exit to Enter the do-while loop
         do{
             System.out.println("Select from the given list of options.");
@@ -22,19 +24,19 @@ public class CampCommControllerSwitch extends CampCommController
             switch(choice)
             {
                 case 1: 
-                viewCamps();
+                control.viewCamps();
                 break;
 
                 case 2:
-                manageEnquiries();
+                control.manageEnquiries();
                 break;
 
                 case 3:
-                manageSuggestions();
+                control.manageSuggestions();
                 break;
 
                 case 4:
-                reportGeneration();
+                control.reportGeneration();
                 break;
 
                 default:

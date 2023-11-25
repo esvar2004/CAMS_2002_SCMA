@@ -1,14 +1,16 @@
 import java.util.*;
-public class StaffControllerSwitch extends StaffController
+public class StaffControllerSwitch
 {
+    private Staff staff;
     public StaffControllerSwitch(Staff staff)
     {
-        super(staff);
+        this.staff = staff;
     }
 
     public void main()
     {
         Scanner sc = new Scanner(System.in);
+        StaffController control = new StaffController(staff);
         int choice = 6; //Initializing Choice to Exit to Enter the do-while loop
         do{
             System.out.println("Select from the given list of options.");
@@ -23,22 +25,22 @@ public class StaffControllerSwitch extends StaffController
             switch(choice)
             {
                 case 1: 
-                manageCamps();
+                control.manageCamps();
                 break;
 
                 case 2: 
-                viewCamps();
+                control.viewCamps();
                 break;
 
                 case 3:
-                manageEnquiries();
+                control.manageEnquiries();
                 break;
 
                 case 4:
-                manageSuggestions();
+                control.manageSuggestions();
 
                 case 5:
-                reportGeneration();
+                control.reportGeneration();
                 
                 default:
                 System.out.println("You have exited the staff interface.");
