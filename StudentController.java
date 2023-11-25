@@ -75,10 +75,15 @@ public class StudentController
                     viewer.viewYourCamps();
                     break;
 
+                case 4:
+                System.out.println("Returning to Menu...");
+                Time.pause(1);
+                break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 3);
+        } while(choice != 4);
     }
 
     public void manageEnquiries()
@@ -98,7 +103,19 @@ public class StudentController
             System.out.println("3. Edit Enquiries");
             System.out.println("4. Delete Enquiries");
             System.out.println("5. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -131,10 +148,15 @@ public class StudentController
                     enquiryManager.deleteEnquiry(student.getEnquiries().get(enquiryChoice));
                     break;
 
+                case 5:
+                System.out.println("Returning to Menu...");
+                Time.pause(1);
+                break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 4);
+        } while(choice != 5);
     }
 
     public void viewProfile()
@@ -162,7 +184,19 @@ public class StudentController
             System.out.println("2. Register for Camp");
             System.out.println("3. Withdraw from Camp");
             System.out.println("4. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -189,11 +223,16 @@ public class StudentController
                     registrationManager.withdrawFromCamp(student.getRegisteredCamps().get(campChoice - 1), this.student);
                     break;
 
+                case 4:
+                System.out.println("Returning to Menu...");
+                Time.pause(1);
+                break;
+
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please enter a valid input");
             }
 
-        } while(choice >= 1 && choice <= 3);
+        } while(choice != 4);
     }
 }
 
