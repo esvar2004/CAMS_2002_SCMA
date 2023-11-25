@@ -28,9 +28,9 @@ public class ReportGenerator {
     public void generatePerformanceReport(CampCommitteeMember member) {
         try (FileWriter writer = new FileWriter(member.getUserID() + "_performance_report.txt")) {
             writer.write("Performance Report for: " + member.getUserID() + "\n");
+            writer.write("Committee Member of camp: " + member.getCamp().getName() + "\n");
             writer.write("Points: " + member.getPoints() + "\n");
-            writer.write("Committee Camps: " + member.getCommitteeCamps().size() + "\n");
-            // Additional details can be added
+
         } catch (IOException e) {
             e.printStackTrace();
         }
