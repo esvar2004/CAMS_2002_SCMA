@@ -14,8 +14,12 @@ public class ReportGenerator {
             writer.write("Total Slots: " + camp.getTotSlots() + "\n");
             writer.write("Remaining Slots: " + camp.getAvailableSlots() + "\n");
             writer.write("Committee Slots: " + camp.getCommSlots() + "\n");
-            writer.write("Description: " + camp.getDesc() + "\n");
-            // More details can be included
+            writer.write("Description: " + camp.getDesc() + "\n\n");
+            for(int i = 0; i < camp.getList().size(); i++)
+            {
+                writer.write("Student " + i + ": " + camp.getList().get(i).getName() + ", ");
+                writer.write("Role: " + camp.getList().get(i).getRole() + "\n");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
