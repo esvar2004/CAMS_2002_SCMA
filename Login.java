@@ -5,26 +5,25 @@ public class Login extends Initialize{
     static String username = "";
     static String type;
 
-    public static void login(){
+    public static User login() {
         System.out.println("Input Username: ");
-        while (true){
+        while (true) {
             username = sc.next();
-            if (contains_special(username)){
+            if (contains_special(username)) {
                 System.out.println("Please Input a valid username!");
-            }else{
+            } else {
                 if (Search.searchStudent(username) != null) {
                     type = "student";
-                    return;
-                }
-                else if (Search.searchStaff(username) != null){
+                    break;
+                } else if (Search.searchStaff(username) != null) {
                     type = "staff";
-                    return;
-                }
-                else{
+                    break;
+                } else {
                     System.out.println("User not found, please try again: ");
                 }
             }
         }
+        return LoginSuccess();
     }
 
     public static User LoginSuccess(){
