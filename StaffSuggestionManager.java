@@ -17,6 +17,15 @@ public class StaffSuggestionManager implements SuggestionManager {
         }
     }
 
+    public void viewSuggestions(Camp camp)
+    {
+        for(Suggestion s: camp.getSuggestions())
+        {
+            System.out.println("\nSuggestion: " + s.getSuggestion());
+            System.out.println("Camp Committee Member: " + s.getPostedBy().getName() + "/n");
+        }
+    }
+
     public void approveSuggestion(Suggestion s)
     {
         s.setApproval(1);

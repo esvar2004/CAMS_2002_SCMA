@@ -17,6 +17,7 @@ public class StudentEnquiryManager implements EnquiryManager {
                 System.out.println("Question: " + e.getQuestion());
                 System.out.println("Response: " + e.getResponse());
                 System.out.println("Student: " + e.getPostedBy().getName() + "/n");
+                System.out.println("Camp: " + e.getCampName());
             }
         }
     }
@@ -36,5 +37,6 @@ public class StudentEnquiryManager implements EnquiryManager {
     public void deleteEnquiry(Enquiry enquiry)
     {
         student.getEnquiries().remove(enquiry);
+        enquiry.getCamp().getEnquiries().remove(enquiry);
     }
 }

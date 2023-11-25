@@ -52,12 +52,12 @@ public class StudentControllerSwitch
                 break;
                 
                 case 5:
-                System.out.println("You have exited the Student Interface");
+                System.out.println("You have exited the Student Interface.");
                 Time.pause(1);
                 break;
 
                 default:
-                System.out.println("Please enter a valid input");
+                System.out.println("Please enter a valid input.");
             }
         } while(choice != 5);
     }

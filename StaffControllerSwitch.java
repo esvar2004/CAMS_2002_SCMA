@@ -57,12 +57,12 @@ public class StaffControllerSwitch
                 break;
                 
                 case 6:
-                System.out.println("You have exited the Staff Interface");
+                System.out.println("You have exited the Staff Interface.");
                 Time.pause(1);
                 break;
 
                 default:
-                System.out.println("Please enter a valid input");
+                System.out.println("Please enter a valid input.");
             }
         } while(choice != 6);
     }

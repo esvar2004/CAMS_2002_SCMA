@@ -156,12 +156,19 @@ public class StaffController
                     break;
 
                 case 2: 
+                    if(staff.getCreatedCamps().size() == 0)
+                    {
+                        System.out.println("There aren't any camps under your purview.");
+                        break;
+                    }
                     System.out.println("To which camp would you like to submit an enquiry response? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
                     campChoice = sc.nextInt();
                     System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size() + ")");
+                    enquiryManager.viewEnquiries(staff.getCreatedCamps().get(campChoice - 1));
                     enquiryChoice = sc.nextInt();
                     System.out.println("What is your response?");
+                    sc.nextLine();
                     String response = sc.nextLine();
                     enquiryManager.editEnquiry(staff.getCreatedCamps().get(campChoice - 1).getEnquiries().get(enquiryChoice - 1), response);
                     break;
@@ -214,10 +221,16 @@ public class StaffController
                     break;
 
                 case 2: 
+                    if(staff.getCreatedCamps().size() == 0)
+                    {
+                        System.out.println("There aren't any camps under your purview.");
+                        break;
+                    }
                     System.out.println("Which camp's suggestions would you like to look at? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
                     campChoice = sc.nextInt();
                     System.out.println("Which suggestion would you like to approve? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getSuggestions().size() + ")");
+                    suggestionManager.viewSuggestions(staff.getCreatedCamps().get(campChoice - 1));
                     suggestionChoice = sc.nextInt();
                     suggestionManager.approveSuggestion(staff.getCreatedCamps().get(campChoice - 1).getSuggestions().get(suggestionChoice - 1));
                     break;

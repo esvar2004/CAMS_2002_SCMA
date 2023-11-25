@@ -55,9 +55,9 @@ public class CampCommController extends StudentController
                     break;
 
                 case 3:
-                System.out.println("Returning to Menu...");
-                Time.pause(2);
-                break;
+                    System.out.println("Returning to Menu...");
+                    Time.pause(2);
+                    break;
 
                 default:
                     System.out.println("Please enter a valid input");
@@ -81,6 +81,7 @@ public class CampCommController extends StudentController
             System.out.println("3. Edit Suggestion");
             System.out.println("4. Delete Suggestion");
             System.out.println("5. Exit");
+            
             while (true){
                 try {
                 choice = sc.nextInt();
@@ -123,10 +124,10 @@ public class CampCommController extends StudentController
                     suggestionManager.deleteSuggestion(commMember.getSuggestions().get(suggestionChoice - 1));
                     break;
 
-                case 5:
-                System.out.println("Returning to Menu...");
-                Time.pause(1);
-                break;
+                    case 5:
+                    System.out.println("Returning to Menu...");
+                    Time.pause(1);
+                    break;
 
                 default:
                     System.out.println("Please enter a valid input");

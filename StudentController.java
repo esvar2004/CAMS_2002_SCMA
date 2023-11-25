@@ -76,9 +76,9 @@ public class StudentController
                     break;
 
                 case 4:
-                System.out.println("Returning to Menu...");
-                Time.pause(1);
-                break;
+                    System.out.println("Returning to Menu...");
+                    Time.pause(1);
+                    break;
 
                 default:
                     System.out.println("Please enter a valid input");
@@ -124,24 +124,41 @@ public class StudentController
                     break;
 
                 case 2: 
+                    if(viewer.viewAvailableCamps(student.getFaculty()).size() == 0)
+                    {
+                        System.out.println("There aren't any camps under your purview to enquire.");
+                        break;
+                    }
                     System.out.println("To which camp would you like to submit an enquiry? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
-                    viewer.viewYourCamps();
+                    viewer.viewAllCamps();
                     campChoice = sc.nextInt();
                     System.out.println("What is your question?");
+                    sc.nextLine();
                     question = sc.nextLine();
-                    enquiryManager.submitEnquiry(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice), question);
+                    enquiryManager.submitEnquiry(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), question);
                     break;
 
                 case 3: 
+                    if(student.getEnquiries().size() == 0)
+                    {
+                        System.out.println("There aren't any enquiries to edit.");
+                        break;
+                    }
                     System.out.println("Which of your enquiries would you like to edit? (1 - " + student.getEnquiries().size() + ")");
                     enquiryManager.viewEnquiries();
                     enquiryChoice = sc.nextInt();
                     System.out.println("What is your updated question?");
+                    sc.nextLine();
                     question = sc.nextLine();
                     enquiryManager.editEnquiry(student.getEnquiries().get(enquiryChoice), question);
                     break;
 
                 case 4:
+                    if(student.getEnquiries().size() == 0)
+                    {
+                        System.out.println("There aren't any enquiries to delete.");
+                        break;
+                    }
                     System.out.println("Which of your enquiries would you like to delete?");
                     enquiryManager.viewEnquiries();
                     enquiryChoice = sc.nextInt();
@@ -149,9 +166,9 @@ public class StudentController
                     break;
 
                 case 5:
-                System.out.println("Returning to Menu...");
-                Time.pause(1);
-                break;
+                    System.out.println("Returning to Menu...");
+                    Time.pause(1);
+                    break;
 
                 default:
                     System.out.println("Please enter a valid input");
@@ -224,9 +241,9 @@ public class StudentController
                     break;
 
                 case 4:
-                System.out.println("Returning to Menu...");
-                Time.pause(1);
-                break;
+                    System.out.println("Returning to Menu...");
+                    Time.pause(1);
+                    break;
 
                 default:
                     System.out.println("Please enter a valid input");
