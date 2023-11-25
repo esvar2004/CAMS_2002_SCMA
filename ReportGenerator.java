@@ -15,6 +15,12 @@ public class ReportGenerator {
             writer.write("Remaining Slots: " + camp.getAvailableSlots() + "\n");
             writer.write("Committee Slots: " + camp.getCommSlots() + "\n");
             writer.write("Description: " + camp.getDesc() + "\n");
+
+            for(int i = 0; i < camp.getList().size(); i++)
+            {
+                writer.write("Student " + i + ": " + camp.getList().get(i).getName() + ", ");
+                writer.write("Role: " + camp.getList().get(i).getRole() + "\n");
+            }
             // More details can be included
         } catch (IOException e) {
             e.printStackTrace();
@@ -26,7 +32,7 @@ public class ReportGenerator {
             writer.write("Performance Report for: " + member.getUserID() + "\n");
             writer.write("Points: " + member.getPoints() + "\n");
             writer.write("Committee Camps: " + member.getCommitteeCamps().size() + "\n");
-            
+            // Additional details can be added
         } catch (IOException e) {
             e.printStackTrace();
         }
