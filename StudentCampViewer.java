@@ -2,7 +2,7 @@
 
 import java.util.*;
 
-public class StudentCampViewer implements CampViewer{
+public class StudentCampViewer implements CampViewerInterface{
     private Student student;
 
     public StudentCampViewer(Student student) {

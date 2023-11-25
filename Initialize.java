@@ -12,10 +12,11 @@ public class Initialize {
     
 
     public static void createAllData() {
-        InitializeStudentData("src/student.txt");
-        InitializeStaffData("src/staff.txt");
+        InitializeStudentData("student.txt");
+        InitializeStaffData("staff.txt");
         Camp.campList = new ArrayList<Camp>();
         System.out.println("Data Arrays Initialized!");
+        
     }
 
     public static void InitializeStudentData(final String studentFile) {

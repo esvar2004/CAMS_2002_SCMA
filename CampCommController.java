@@ -26,7 +26,19 @@ public class CampCommController extends StudentController
             System.out.println("1. View Enquiries");
             System.out.println("2. Submit Response/Edit Response");
             System.out.println("3. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {

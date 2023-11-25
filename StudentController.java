@@ -21,14 +21,48 @@ public class StudentController
             System.out.println("2. View All Camps");
             System.out.println("3. View Your Registered Camps");
             System.out.println("4. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
+            
 
             switch(choice)
             {
                 case 1: 
+                    if (viewer.viewAvailableCamps(student.getFaculty()).size() == 0) {
+                        System.out.println("There are no camps you can view!");
+                        break;
+                    }else if(viewer.viewAvailableCamps(student.getFaculty()).size() == 1){
+                        System.out.println("You can only view one camp:");
+                        Time.pause(1);
+                        viewer.viewCampDetails(viewer.viewAvailableCamps(student.getFaculty()).get(0));
+                    }
                     System.out.println("Which camp's details would you like to view? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
                     viewer.viewAllCamps();
-                    campChoice = sc.nextInt();
+                    
+                    while (true) {
+                        try {
+                            campChoice = sc.nextInt();
+                            if (campChoice <= 0) {
+                                System.out.println("Error: Please enter a positive integer.");
+                            } else {
+                                break; 
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error: Please enter a valid integer.");
+                            sc.nextLine(); // clear buffer
+                        }
+                    }
                     viewer.viewCampDetails(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1));
                     break;
 

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class StaffCampViewer implements CampViewer
+public class StaffCampViewer implements CampViewerInterface
 {
     private Staff staff;
 

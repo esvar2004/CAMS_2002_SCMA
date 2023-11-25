@@ -21,7 +21,19 @@ public class StaffController
             System.out.println("2. Edit Camp");
             System.out.println("3. Delete Camp");
             System.out.println("4. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {

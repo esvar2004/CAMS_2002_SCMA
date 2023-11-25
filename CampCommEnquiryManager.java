@@ -10,6 +10,10 @@ public class CampCommEnquiryManager implements EnquiryManager {
 
     public void viewEnquiries()
     {
+        if (commMember.getCamp().getEnquiries().size() == 0){
+            System.out.println("No enquires!");
+            return;
+        }
         for(Enquiry e: commMember.getCamp().getEnquiries())
         {
             System.out.println("Question: " + e.getQuestion());

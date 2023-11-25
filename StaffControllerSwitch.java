@@ -20,7 +20,19 @@ public class StaffControllerSwitch
             System.out.println("4. Manage Suggestions");
             System.out.println("5. Report Generation");
             System.out.println("6. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -42,9 +54,12 @@ public class StaffControllerSwitch
                 case 5:
                 control.reportGeneration();
                 
+                case 6:
+                System.out.println("You have exited the Staff Interface");
+
                 default:
-                System.out.println("You have exited the staff interface.");
+                System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 5);
+        } while(choice != 6);
     }
 }

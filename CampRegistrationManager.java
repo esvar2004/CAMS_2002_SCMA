@@ -11,16 +11,20 @@ public class CampRegistrationManager {
 	}
 	
     public void viewRegisteredCamps(){
-        for(Camp camp: registeredCamps)
-        {
-            System.out.println("Camp Name: " + camp.getName());
-        }
+		if (registeredCamps.size() > 0)
+			for(Camp camp : registeredCamps)
+			{
+				System.out.println("Camp Name: " + camp.getName());
+			}
+		else{
+			System.out.println("You have not registered for any camps yet!");
+		}
     }
 
 	public void registerForCamp(Camp camp, Student student, String role) {
 		if (camp == null)//check for non-existant camp
     	{
-    		System.out.println("Camp do not exist");
+    		System.out.println("Camp does not exist");
     		return;
     	}
     	
@@ -32,7 +36,7 @@ public class CampRegistrationManager {
     	
     	if ((camp.getList()).contains(this)) //check for previous registration
     	{
-    		System.out.println("Unable to register for a camp you withdrawn");
+    		System.out.println("Unable to register for a camp you have withdrawn");
     		return;
     	}
     	
@@ -99,11 +103,4 @@ public class CampRegistrationManager {
         }
 	}
 	
-	public void listRegisteredCamps(Student student) {
-		System.out.println("Registered Camps:");
-        for (Camp camp : student.getRegisteredCamps()) 
-        {
-            System.out.println(camp.getName() + ": " + camp.getName() + " (" + camp.getRoleOfStudent(student) + ")");
-        }
-	}
 }

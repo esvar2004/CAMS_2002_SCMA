@@ -33,7 +33,7 @@ public class Main extends Login{
             }
             
             System.out.println("Do you want the system to continue running? (Y/N)");
-            char choice = sc.next().charAt(0);
+            char choice = sc.next().toUpperCase().charAt(0);
             if(choice == 'N')
                 systemRunning = false;
         }

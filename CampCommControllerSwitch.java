@@ -19,7 +19,19 @@ public class CampCommControllerSwitch
             System.out.println("3. Manage Suggestions");
             System.out.println("4. Report Generation");
             System.out.println("5. Exit");
-            choice = sc.nextInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -39,10 +51,14 @@ public class CampCommControllerSwitch
                 control.reportGeneration();
                 break;
 
-                default:
+                case 5:
                 System.out.println("You have exited the committee member interface.");
+                break;
+
+                default:
+                System.out.println("Please enter a valid input");
             }
-        } while(choice >= 1 && choice <= 4);
+        } while(choice != 5);
     }
 }
 

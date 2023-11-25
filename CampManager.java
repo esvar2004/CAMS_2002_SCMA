@@ -1,43 +1,117 @@
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class CampManager implements CampManagerInterface
+public class CampManager implements CampManagerInterface, CheckQuit
 {
     private Staff staff;
+    GetDatesForCamp dateList = new GetDatesForCamp();
     public CampManager(Staff staff)
     {
        this.staff = staff;
     }
-
+    public boolean checkIfQuit(String s){
+        if (Checker.quit(s)) {
+            System.out.println("Returning to Main Menu...");
+            Time.pause(2);
+            return true;
+        }
+        return false;
+    }
+    public boolean checkIfQuit(int i){
+        if (Checker.quit(i)) {
+            System.out.println("Returning to Menu...");
+            Time.pause(2);
+            return true;
+        }
+        return false;
+    }
     public void createCamp()
     {
         Scanner sc = new Scanner(System.in);
-        System.out.println("What's the name of the camp?");
-        String campName = sc.nextLine();
-        System.out.println("What's the opening date of the camp?");
-        String s_openDate = sc.nextLine();
-        System.out.println("What's the closing date of the camp?");
-        String s_closeDate = sc.nextLine();
-        System.out.println("When does registration for this camp close?");
-        String s_regClose = sc.nextLine();
-        System.out.println("What faculty is it associated with?");
-        String facName = sc.nextLine();
-        System.out.println("Where is the camp being held?");
-        String location = sc.nextLine();
-        System.out.println("What are the total number of slots available?");
-        int totSlots = sc.nextInt();
-        System.out.println("What are the total number of committee slots available?");
-        int commSlots = sc.nextInt();
+
+        System.out.println("What is the name of the camp? (Press x to quit and return to menu)");
+        String campName;
+        while (true){
+            campName = sc.nextLine();
+            if (checkIfQuit(campName)) return;
+            if (!Checker.numChecker(campName)) break;
+            System.out.println("Camp names cannot have numbers in them! Kindly input a valid camp name: ");
+        }
+
+        Date openDate, closeDate, regClose;
+        
+        dateList.setDates();
+        for (Date d : dateList.getDates()){
+            if (d == null) return;
+        }
+        openDate = dateList.getDates()[0];
+        closeDate = dateList.getDates()[1];
+        regClose = dateList.getDates()[2];
+        
+        System.out.println("What faculty is it associated with? (Press x to quit and return to menu)");
+        String facName;
+        while (true){
+            facName = sc.nextLine();
+            if (checkIfQuit(facName)) return;
+            if (!Checker.numChecker(facName) && !Checker.specialCharChecker(facName)) break;
+            System.out.println("Kindly input a valid faculty name: ");
+        }
+        
+        System.out.println("Where is the camp being held? (Press x to quit and return to menu)");
+        String location;
+        while (true){
+            location = sc.nextLine();
+            if (checkIfQuit(facName)) return;
+            if (!Checker.specialCharChecker(facName)) break;
+            System.out.println("Kindly input a valid location (No special characters)");
+        }
+        
+        
+        int totSlots;
+        while (true) {
+            try {
+                System.out.println("What are the total number of slots available? (Enter -1 to exit)");
+                while (true){
+                    totSlots = sc.nextInt();
+                    if (totSlots >= 1 || totSlots == -1){
+                        break;
+                    }
+                    System.out.println("Error: Please enter a positive number. Total number of slots available: ");
+                }
+                if (checkIfQuit(totSlots)) return;
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please enter a valid integer.");
+                sc.nextLine(); // Clear buffer
+            }
+        }
+        
+        int commSlots;
+        while (true) {
+            try {
+                System.out.println("What are the total number of committee slots available? (Enter -1 to exit)");
+                while (true){
+                    commSlots = sc.nextInt();
+                    if (commSlots <= totSlots && commSlots <= 10 && commSlots >= -1){
+                        break;
+                    }
+                    if (totSlots >= 10) {
+                        System.out.println("Error: Please enter a valid number (Between 0 and 10):");
+                    }else{
+                        System.out.println("Error: Please enter a valid number (Between 0 and " + totSlots + "):");
+                    }
+                    
+                }
+                if (checkIfQuit(commSlots)) return;
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please enter a valid integer.");
+                sc.nextLine(); // Clear buffer
+            }
+        }
+        
         System.out.println("What's the camp description?");
         sc.nextLine();
         String desc = sc.nextLine();
-
-        Date openDate = Staff.convertStringToDate(s_openDate);
-        Date closeDate = Staff.convertStringToDate(s_closeDate);
-        Date regClose = Staff.convertStringToDate(s_regClose);
 
         Camp camp = new Camp(campName, openDate, closeDate, regClose, facName, location, totSlots, commSlots, desc, staff.getName());
         Camp.campList.add(camp);
@@ -69,66 +143,143 @@ public class CampManager implements CampManagerInterface
                 System.out.println("(9) Camp Visibility");
                 System.out.println("(10) Exit");
                 choice = sc.nextInt();
-
+                sc.next();
                 switch(choice)
                 {
+                    
                     case 1:
-                    System.out.println("What should the new name of the camp be?");
-                    sc.next();
-                    String campName = sc.nextLine();
-                    camp.setName(campName);
+                    System.out.println("What should the new name of the camp be? (Press x to quit and return to menu)");
+                    String campName;
+                    while (true){
+                        campName = sc.nextLine();
+                        if (checkIfQuit(campName)) return;
+                        if (!Checker.numChecker(campName)) {
+                            camp.setName(campName);
+                            break;
+                        }
+                        System.out.println("Camp names cannot have numbers in them! Kindly input a valid camp name: ");
+                    }
                     break;
 
                     case 2:
-                    System.out.println("What should the new opening date of camp be?");
-                    String s_openDate = sc.nextLine();
-                    Date openDate = Staff.convertStringToDate(s_openDate);
+                    System.out.println("What should the new opening date of camp be? (Press x to quit and return to menu)");
+                    dateList.setOpenDate();
+                    Date openDate = dateList.getDates()[0];
                     camp.setOpenDate(openDate);
                     break;
 
                     case 3:
-                    System.out.println("What should the new closing date of camp be?");
-                    String s_closeDate = sc.nextLine();
-                    Date closeDate = Staff.convertStringToDate(s_closeDate);
+                    System.out.println("What should the new closing date of camp be? (Press x to quit and return to menu)");
+                    dateList.setOpenDate();
+                    Date closeDate = dateList.getDates()[0];
                     camp.setCloseDate(closeDate);
                     break;
 
                     case 4:
-                    System.out.println("What should the new closing date of registration be?");
-                    String s_regClose = sc.nextLine();
-                    Date regClose = Staff.convertStringToDate(s_regClose);
+                    System.out.println("What should the new closing date of registration be? (Press x to quit and return to menu)");
+                    dateList.setOpenDate();
+                    Date regClose = dateList.getDates()[0];
                     camp.setRegDate(regClose);
                     break;
 
                     case 5:
-                    System.out.println("What should the faculty of the camp be?");
-                    String school = sc.nextLine();
-                    camp.setSchool(school);
+                    System.out.println("What should the faculty of the camp be? (Press x to quit and return to menu)");
+                    String facName;
+                    while (true){
+                        facName = sc.nextLine();
+                        if (checkIfQuit(facName)) return;
+                        if (!Checker.numChecker(facName) && !Checker.specialCharChecker(facName)) {
+                            camp.setSchool(facName);
+                            break;
+                        }
+                        System.out.println("Kindly input a valid faculty name: ");
+                    }
                     break;
 
                     case 6:
-                    System.out.println("How many total slots should there be?");
-                    int totSlots = sc.nextInt();
-                    camp.setTotSlots(totSlots);
+                    
+                    int totSlots;
+                    while (true) {
+                        try {
+                            System.out.println("How many total slots should there be? (Press -1 to quit and return to menu)");
+                            while (true){
+                                totSlots = sc.nextInt();
+                                if ((totSlots >= 1 && totSlots >= camp.getCommSlots()) || totSlots == -1){
+                                    camp.setTotSlots(totSlots);
+                                    break;
+                                }
+                                System.out.println("Error: Please enter a positive number. Total number of slots available: ");
+                            }
+                            if (checkIfQuit(totSlots)) return;
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error: Please enter a valid integer.");
+                            sc.nextLine(); // Clear buffer
+                        }
+                    }
                     break;
 
                     case 7:
-                    System.out.println("How many total committee slots should there be?");
-                    int commSlots = sc.nextInt();
-                    camp.setCommSlots(commSlots);
-                    break;
+                    
+                    int commSlots;
+                    while (true) {
+                        try {
+                            System.out.println("How many total committee slots should there be? (Press -1 to quit and return to menu)");
+                            while (true){
+                                commSlots = sc.nextInt();
+                                if (commSlots <= camp.getAvailableSlots() && commSlots <= 10 && commSlots >= -1){
+                                    if (commSlots != -1)
+                                        camp.setCommSlots(commSlots);
+                                    break;
+                                }
+                                if (camp.getAvailableSlots() >= 10) {
+                                    System.out.println("Error: Please enter a valid number (Between 0 and 10):");
+                                }else{
+                                    System.out.println("Error: Please enter a valid number (Between 0 and " + camp.getAvailableSlots() + "):");
+                                }
+                                
+                            }
+                            if (checkIfQuit(commSlots)) return;
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error: Please enter a valid integer.");
+                            sc.nextLine(); // Clear buffer
+                        }
+                    }
 
                     case 8:
-                    System.out.println("What should the new camp description be?");
+                    System.out.println("What should the new camp description be? (Press x to quit and return to menu)");
                     String desc = sc.nextLine();
+                    if (checkIfQuit(desc)) return;
                     camp.setDesc(desc);
                     break;
 
                     case 9:
-                    System.out.println("What should the camp's visibility be? (0/1)");
-                    int visibility = sc.nextInt();
-                    camp.setVisibility(visibility);
-                    break;
+                    
+                    
+                    
+                    
+                    while (true) {
+                        try {
+                            System.out.println("What should the camp's visibility be? (0/1)");
+                            int visibility = sc.nextInt();
+                            if (visibility == 0 || visibility == 1){
+                                camp.setVisibility(visibility);
+                                break; 
+                            }else{
+                                System.out.println("You did not enter a valid visibility!");
+                            }
+                            
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error: Please enter a valid integer (0/1).");
+                            sc.nextLine(); // Clear buffer
+                        }
+                    }
+
+                    case 10:
+                        Time.pause(2);
+                        System.out.println("Returning to menu...");
+                        break;
 
                     default:
                     System.out.println("Please select a valid option next time.");

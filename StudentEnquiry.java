@@ -13,7 +13,7 @@ public class StudentEnquiry {
     }
 
     public void submitEnquiry(Camp camp, String enquiryText) {
-        Enquiry newEnquiry = new Enquiry(enquiryText, this.student, camp.getName());
+        Enquiry newEnquiry = new Enquiry(enquiryText, this.student, camp);
         camp.addEnquiry(newEnquiry); // Assuming Camp has a method to add enquiries
         this.enquiries.add(newEnquiry);
     }
