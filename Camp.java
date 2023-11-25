@@ -281,4 +281,20 @@ public class Camp
 		// TODO Auto-generated method stub
 		return visibility;
 	}
+
+    // Static method to get all committee members from all camps
+    public static List<CampCommitteeMember> getAllCommitteeMembers() {
+        List<CampCommitteeMember> committeeMembers = new ArrayList<>();
+
+        for (Camp camp : Camp.campList) {
+            for (Student student : camp.getList()) {
+                String role = camp.getRoleOfStudent(student);
+                if (role.equals("committee") && student instanceof CampCommitteeMember) {
+                    committeeMembers.add((CampCommitteeMember) student);
+                }
+            }
+        }
+
+        return committeeMembers;
+    }
 }

@@ -26,22 +26,22 @@ public class StudentController
             switch(choice)
             {
                 case 1: 
-                System.out.println("Which camp's details would you like to view? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
-                viewer.viewAllCamps();
-                campChoice = sc.nextInt();
-                viewer.viewCampDetails(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1));
-                break;
+                    System.out.println("Which camp's details would you like to view? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
+                    viewer.viewAllCamps();
+                    campChoice = sc.nextInt();
+                    viewer.viewCampDetails(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1));
+                    break;
 
                 case 2: 
-                viewer.viewAllCamps();
-                break;
+                    viewer.viewAllCamps();
+                    break;
 
                 case 3:
-                viewer.viewYourCamps();
-                break;
+                    viewer.viewYourCamps();
+                    break;
 
                 default:
-                System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please select an appropriate option next time.");
             }
         } while(choice >= 1 && choice <= 3);
     }
@@ -68,36 +68,36 @@ public class StudentController
             switch(choice)
             {
                 case 1: 
-                enquiryManager.viewEnquiries();
-                break;
+                    enquiryManager.viewEnquiries();
+                    break;
 
                 case 2: 
-                System.out.println("To which camp would you like to submit an enquiry? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
-                viewer.viewYourCamps();
-                campChoice = sc.nextInt();
-                System.out.println("What is your question?");
-                question = sc.nextLine();
-                enquiryManager.submitEnquiry(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice), question);
-                break;
+                    System.out.println("To which camp would you like to submit an enquiry? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
+                    viewer.viewYourCamps();
+                    campChoice = sc.nextInt();
+                    System.out.println("What is your question?");
+                    question = sc.nextLine();
+                    enquiryManager.submitEnquiry(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice), question);
+                    break;
 
                 case 3: 
-                System.out.println("Which of your enquiries would you like to edit? (1 - " + student.getEnquiries().size() + ")");
-                enquiryManager.viewEnquiries();
-                enquiryChoice = sc.nextInt();
-                System.out.println("What is your updated question?");
-                question = sc.nextLine();
-                enquiryManager.editEnquiry(student.getEnquiries().get(enquiryChoice), question);
-                break;
+                    System.out.println("Which of your enquiries would you like to edit? (1 - " + student.getEnquiries().size() + ")");
+                    enquiryManager.viewEnquiries();
+                    enquiryChoice = sc.nextInt();
+                    System.out.println("What is your updated question?");
+                    question = sc.nextLine();
+                    enquiryManager.editEnquiry(student.getEnquiries().get(enquiryChoice), question);
+                    break;
 
                 case 4:
-                System.out.println("Which of your enquiries would you like to delete?");
-                enquiryManager.viewEnquiries();
-                enquiryChoice = sc.nextInt();
-                enquiryManager.deleteEnquiry(student.getEnquiries().get(enquiryChoice));
-                break;
+                    System.out.println("Which of your enquiries would you like to delete?");
+                    enquiryManager.viewEnquiries();
+                    enquiryChoice = sc.nextInt();
+                    enquiryManager.deleteEnquiry(student.getEnquiries().get(enquiryChoice));
+                    break;
 
                 default:
-                System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please select an appropriate option next time.");
             }
         } while(choice >= 1 && choice <= 4);
     }
@@ -132,30 +132,30 @@ public class StudentController
             switch(choice)
             {
                 case 1: 
-                registrationManager.viewRegisteredCamps();
-                break;
+                    registrationManager.viewRegisteredCamps();
+                    break;
 
                 case 2:
-                System.out.println("Which camp would you like to register for? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
-                viewer.viewAllCamps();
-                campChoice = sc.nextInt();
-                System.out.println("What role do you want to register for?");
-                System.out.println("(1) Attendee");
-                System.out.println("(2) Committee Member");
-                if(sc.nextInt() == 1) role = "Attendee";
-                else if(sc.nextInt() == 2) role = "committee";
-                registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
-                break;
+                    System.out.println("Which camp would you like to register for? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
+                    viewer.viewAllCamps();
+                    campChoice = sc.nextInt();
+                    System.out.println("What role do you want to register for?");
+                    System.out.println("(1) Attendee");
+                    System.out.println("(2) Committee Member");
+                    if(sc.nextInt() == 1) role = "Attendee";
+                    else if(sc.nextInt() == 2) role = "committee";
+                    registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
+                    break;
 
                 case 3:
-                System.out.println("Which camp would you like to Withdraw from? (1 - " + student.getRegisteredCamps().size() + ")");
-                viewer.viewYourCamps();
-                campChoice = sc.nextInt();
-                registrationManager.withdrawFromCamp(student.getRegisteredCamps().get(campChoice - 1), this.student);
-                break;
+                    System.out.println("Which camp would you like to Withdraw from? (1 - " + student.getRegisteredCamps().size() + ")");
+                    viewer.viewYourCamps();
+                    campChoice = sc.nextInt();
+                    registrationManager.withdrawFromCamp(student.getRegisteredCamps().get(campChoice - 1), this.student);
+                    break;
 
                 default:
-                System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please select an appropriate option next time.");
             }
 
         } while(choice >= 1 && choice <= 3);

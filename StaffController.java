@@ -26,25 +26,25 @@ public class StaffController
             switch(choice)
             {
                 case 1: 
-                manager.createCamp();
-                break;
+                    manager.createCamp();
+                    break;
 
                 case 2: 
-                System.out.println("Which camp's details would you like to edit? (1 - " + staff.getCreatedCamps().size() + ")");
-                viewer.viewYourCamps();
-                campChoice = sc.nextInt();
-                manager.editCamp(staff.getCreatedCamps().get(campChoice - 1));
-                break;
+                    System.out.println("Which camp's details would you like to edit? (1 - " + staff.getCreatedCamps().size() + ")");
+                    viewer.viewYourCamps();
+                    campChoice = sc.nextInt();
+                    manager.editCamp(staff.getCreatedCamps().get(campChoice - 1));
+                    break;
 
                 case 3:
-                System.out.println("Which camp's details would you like to delete? (1 - " + staff.getCreatedCamps().size() + ")");
-                viewer.viewYourCamps();
-                campChoice = sc.nextInt();
-                manager.editCamp(staff.getCreatedCamps().get(campChoice - 1));
-                break;
+                    System.out.println("Which camp's details would you like to delete? (1 - " + staff.getCreatedCamps().size() + ")");
+                    viewer.viewYourCamps();
+                    campChoice = sc.nextInt();
+                    manager.editCamp(staff.getCreatedCamps().get(campChoice - 1));
+                    break;
                 
                 default:
-                System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please select an appropriate option next time.");
             }
         } while(choice >= 1 && choice <= 3);
     }
@@ -67,22 +67,22 @@ public class StaffController
             switch(choice)
             {
                 case 1: 
-                System.out.println("Which camp's details would you like to view? (1 - " + staff.getCreatedCamps().size() + ")");
-                viewer.viewYourCamps();
-                campChoice = sc.nextInt();
-                viewer.viewCampDetails(staff.getCreatedCamps().get(campChoice - 1));
-                break;
+                    System.out.println("Which camp's details would you like to view? (1 - " + staff.getCreatedCamps().size() + ")");
+                    viewer.viewYourCamps();
+                    campChoice = sc.nextInt();
+                    viewer.viewCampDetails(staff.getCreatedCamps().get(campChoice - 1));
+                    break;
 
                 case 2: 
-                viewer.viewAllCamps();
-                break;
+                    viewer.viewAllCamps();
+                    break;
 
                 case 3:
-                viewer.viewYourCamps();
-                break;
+                    viewer.viewYourCamps();
+                    break;
 
                 default:
-                System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please select an appropriate option next time.");
             }
         } while(choice >= 1 && choice <= 3);
     }
@@ -106,22 +106,22 @@ public class StaffController
             switch(choice)
             {
                 case 1: 
-                enquiryManager.viewEnquiries();
-                break;
+                    enquiryManager.viewEnquiries();
+                    break;
 
                 case 2: 
-                System.out.println("To which camp would you like to submit an enquiry response? (1 - " + staff.getCreatedCamps().size() + ")");
-                viewer.viewYourCamps();
-                campChoice = sc.nextInt();
-                System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size() + ")");
-                enquiryChoice = sc.nextInt();
-                System.out.println("What is your response?");
-                String response = sc.nextLine();
-                enquiryManager.editEnquiry(staff.getCreatedCamps().get(campChoice - 1).getEnquiries().get(enquiryChoice - 1), response);
-                break;
+                    System.out.println("To which camp would you like to submit an enquiry response? (1 - " + staff.getCreatedCamps().size() + ")");
+                    viewer.viewYourCamps();
+                    campChoice = sc.nextInt();
+                    System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size() + ")");
+                    enquiryChoice = sc.nextInt();
+                    System.out.println("What is your response?");
+                    String response = sc.nextLine();
+                    enquiryManager.editEnquiry(staff.getCreatedCamps().get(campChoice - 1).getEnquiries().get(enquiryChoice - 1), response);
+                    break;
 
                 default:
-                System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please select an appropriate option next time.");
             }
         } while(choice >= 1 && choice <= 2);
     }
@@ -147,30 +147,105 @@ public class StaffController
             switch(choice)
             {
                 case 1: 
-                suggestionManager.viewSuggestions();
-                break;
+                    suggestionManager.viewSuggestions();
+                    break;
 
                 case 2: 
-                System.out.println("Which camp's suggestions would you like to look at? (1 - " + staff.getCreatedCamps().size() + ")");
-                viewer.viewYourCamps();
-                campChoice = sc.nextInt();
-                System.out.println("Which suggestion would you like to approve? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getSuggestions().size() + ")");
-                suggestionChoice = sc.nextInt();
-                suggestionManager.approveSuggestion(staff.getCreatedCamps().get(campChoice - 1).getSuggestions().get(suggestionChoice - 1));
-                break;
+                    System.out.println("Which camp's suggestions would you like to look at? (1 - " + staff.getCreatedCamps().size() + ")");
+                    viewer.viewYourCamps();
+                    campChoice = sc.nextInt();
+                    System.out.println("Which suggestion would you like to approve? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getSuggestions().size() + ")");
+                    suggestionChoice = sc.nextInt();
+                    suggestionManager.approveSuggestion(staff.getCreatedCamps().get(campChoice - 1).getSuggestions().get(suggestionChoice - 1));
+                    break;
 
                 case 3:
-                suggestionManager.viewApprovedSuggestions();
-                break;
+                    suggestionManager.viewApprovedSuggestions();
+                    break;
 
                 default:
-                System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please select an appropriate option next time.");
             }
         } while(choice >= 1 && choice <= 3);
     }
 
-    public void reportGeneration()
-    {
-        //Still needs to be coded.
+    public void reportGeneration() {
+        Scanner sc = new Scanner(System.in);
+        StaffCampViewer viewer = new StaffCampViewer(staff); // Assuming 'staff' is the current Staff object
+        ReportGenerator reportGenerator = new ReportGenerator(); // Assuming this is how you instantiate ReportGenerator
+        int choice = 3;
+        do {
+            System.out.println("Select the report you want to generate:");
+            System.out.println("1. Generate Camp Report");
+            System.out.println("2. Generate Performance Report for Committee Member");
+            System.out.println("3. Exit");
+            choice = sc.nextInt();
+    
+            switch (choice) {
+                case 1:
+                    // Display the list of camps
+                    System.out.println("Select a camp to generate its report:");
+                    viewer.viewYourCamps();
+                    ArrayList<Camp> createdCamps = staff.getCreatedCamps();
+
+                    // Check if there are any created camps
+                    if (createdCamps.isEmpty()) {
+                        System.out.println("No camps have been created.");
+                        break;
+                    }
+        
+                    // Taking user input for camp selection
+                    int campIndex = sc.nextInt();
+                    // Adjusting campIndex to match array indexing (if necessary)
+                    
+                    // Check if the campIndex is valid
+                    if (campIndex < 1 || campIndex > createdCamps.size()) {
+                        System.out.println("Invalid camp selection.");
+                        break;
+                    }
+        
+                    // Retrieving the selected camp
+                    Camp selectedCamp = createdCamps.get(campIndex - 1);
+
+                    // Generate the camp report
+                    reportGenerator.generateCampReport(selectedCamp);
+                    break;
+
+                case 2:
+                    List<CampCommitteeMember> committeeMembers = Camp.getAllCommitteeMembers();
+                        // Check if there are any committee members
+                    if (committeeMembers.isEmpty()) {
+                        System.out.println("There are no committee members.");
+                        break;
+                    }                    
+                    // Display the list of committee members
+                    for (int i = 0; i < committeeMembers.size(); i++) {
+                        System.out.println((i + 1) + ". " + committeeMembers.get(i).getName());
+                    }
+        
+                    // Taking user input for committee member selection
+                    System.out.println("Select a committee member to generate a report:");
+                    int memberIndex = sc.nextInt();
+                        
+                        // Validate the input
+                    if (memberIndex < 1 || memberIndex > committeeMembers.size()) {
+                        System.out.println("Invalid selection.");
+                        break;
+                    }
+                        // Retrieve the selected member
+                    CampCommitteeMember selectedMember = committeeMembers.get(memberIndex - 1);
+        
+                        // Generate the performance report
+                    reportGenerator.generatePerformanceReport(selectedMember);
+                    break;
+
+                case 3:
+                    System.out.println("Exiting report generation module.");
+                    break;
+
+                default:
+                    System.out.println("Invalid option, please try again.");
+            }
+        } while (choice >= 1 && choice <= 2);
     }
 }
