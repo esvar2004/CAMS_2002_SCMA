@@ -1,4 +1,4 @@
-
+import java.util.*;
 
 public class Filter{
     ArrayList<Camp> sortingList;
@@ -9,9 +9,9 @@ public class Filter{
         this.inputList = inputCampList;
     }
 
-    public ArrayList<Camp> filterByName(inputList){
+    public ArrayList<Camp> filterByName(ArrayList<Camp> inputList){
         for(Camp camp : this.inputList){
-            sortingList.add(camp());
+            sortingList.add(camp);
         }
         // Sort the sortingList based on the camp names
         Collections.sort(sortingList, Comparator.comparing(Camp::getName));
@@ -19,9 +19,9 @@ public class Filter{
         return sortingList;
     }
 
-    public ArrayList<camp> filterByDate(inputList){
+    public ArrayList<Camp> filterByDate(ArrayList<Camp> inputList){
         for(Camp camp : this.inputList){
-            sortingList.add(camp());
+            sortingList.add(camp);
         }
         // Sort the sortingList based on the camp open Dates
         Collections.sort(sortingList, Comparator.comparing(Camp::getOpenDate));
@@ -29,22 +29,22 @@ public class Filter{
         return sortingList;
     }
 
-    public ArrayList<camp> filterByLocation(inputList){
+    public ArrayList<Camp> filterByLocation(ArrayList<Camp> inputList){
         for(Camp camp : this.inputList){
-            sortingList.add(camp());
+            sortingList.add(camp);
         }
         // Sort the sortingList based on the camp Location
-        Collections.sort(sortingList, Comparator.comparing(Camp:getLocation));
+        Collections.sort(sortingList, Comparator.comparing(Camp::getLocation));
 
         return sortingList;
     }
 
-    public ArrayList<camp> filterBySchool(inputList){
+    public ArrayList<Camp> filterBySchool(ArrayList<Camp> inputList){
         for(Camp camp : this.inputList){
-            sortingList.add(camp());
+            sortingList.add(camp);
         }
         // Sort the sortingList based on the camp School
-        Collections.sort(sortingList, Comparator.comparing(Camp:getSchool));
+        Collections.sort(sortingList, Comparator.comparing(Camp::getSchool));
 
         return sortingList;
     }

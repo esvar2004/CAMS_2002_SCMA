@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Password {
+    static Scanner sc = new Scanner(System.in);
     public static boolean inputPassword(){
 
         System.out.println("Input Password: ");
@@ -19,15 +20,15 @@ public class Password {
         return false;
     }
     public static boolean checkDefaultPassword(User user) {
-        // Assuming 'password' is the default password
+
         return user.getPassword().equals("password");
     }
 
     public static void changePassword(User user) {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Please enter your new password:");
 
-        String newPassword = scanner.nextLine();
+        String newPassword = sc.nextLine();
 
         // If new password meets the criteria
         if (isValidPassword(newPassword)) {
@@ -59,8 +60,8 @@ public class Password {
             return false;
         }
         
-        if (!password.matches(".*[!@#$%^&*()].*")) { // Add this line to check for special characters
-            System.out.println("Password must have at least one special character (e.g., !, @, #, $, %, ^, &, *, ()).");
+        if (!password.matches(".*[!@#$%^&*()].*")) { 
+            System.out.println("Password must have at least one special character.");
             return false;
         }
     
