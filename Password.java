@@ -16,4 +16,14 @@ public class Password {
         System.out.println("You have entered an incorrect password 3 times.");
         return false;
     }
+    public static boolean checkDefaultPassword(User user) {
+        // Assuming 'password' is the default password
+        return user.getPassword().equals("password");
+    }
+
+    public static void changePassword(User user) {
+        System.out.println("As a new user, please change your password.");
+        // Add logic to input and validate new password
+        // Update user's password
+    }
 }
