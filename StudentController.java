@@ -101,7 +101,6 @@ public class StudentController
                     campChoice = Input.getInt(viewer.viewAvailableCamps(student.getFaculty()).size());
                     if (campChoice == -1) break;
                     System.out.println("What is your question?");
-                    sc.nextLine();
                     question = sc.nextLine();
                     enquiryManager.submitEnquiry(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), question);
                     break;
@@ -117,7 +116,6 @@ public class StudentController
                     enquiryChoice = Input.getInt(student.getEnquiries().size());
                     if (enquiryChoice == -1) break;
                     System.out.println("What is your updated question?");
-                    sc.nextLine();
                     question = sc.nextLine();
                     enquiryManager.editEnquiry(student.getEnquiries().get(enquiryChoice - 1), question);
                     break;
@@ -209,9 +207,13 @@ public class StudentController
                                 System.out.println("No more slots remaining to become a Camp Committee Member");
                                 break;
                             }
+                            if (student.getVisitedCamps().contains(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1))){
+                                System.out.println("You cannot register for a camp you have withdrawn!");
+                                break;
+                            }
+                            registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
                             role = "committee";
                             student.setCommMember(true);
-                            registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
                             justMadeComm = true;
                             student.setCampCommMemberOf(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1));
                             return;

@@ -28,9 +28,7 @@ public class Main extends Login{
                     System.out.println("Welcome "+ student.getName()+ "!");
                     control.main();
                 }else{
-                    CampCommitteeMember commMember = new CampCommitteeMember(student.getName(), student.getEmail(),
-                        student.getFaculty(), student.getCampCommMemberOf(), student.getRegisteredCamps(), student.getEnquiries(), student.getSuggestions(),
-                        student.getPassword(), student.getVisitedCamps());
+                    CampCommitteeMember commMember = convertToCommitteeMember(student);
                     CampCommControllerSwitch control = new CampCommControllerSwitch(commMember);
                     System.out.println("Welcome "+ commMember.getName() + "!");
                     control.main();
@@ -53,5 +51,10 @@ public class Main extends Login{
             }
             
         }
+    }
+    static CampCommitteeMember convertToCommitteeMember(Student student){
+        return new CampCommitteeMember(student.getName(), student.getEmail(),
+                        student.getFaculty(), student.getCampCommMemberOf(), student.getRegisteredCamps(), student.getEnquiries(), student.getSuggestions(),
+                        student.getPassword(), student.getVisitedCamps(), student.pointsManager);
     }
 }

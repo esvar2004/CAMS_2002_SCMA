@@ -35,7 +35,6 @@ public class CampCommController extends StudentController
                     enquiryChoice = Input.getInt(commMember.getCamp().getEnquiries().size());
                     if (enquiryChoice == -1) break;
                     System.out.println("What is your response?");
-                    sc.nextLine();
                     String response = sc.nextLine();
                     enquiryManager.editEnquiry(commMember.getCamp().getEnquiries().get(enquiryChoice - 1), response);
                     break;
@@ -77,7 +76,6 @@ public class CampCommController extends StudentController
 
                 case 2: 
                     System.out.println("What is the suggestion you would like to make?");
-                    sc.nextLine();
                     suggestion = sc.nextLine();
                     suggestionManager.submitSuggestion(suggestion);
                     break;
@@ -88,7 +86,6 @@ public class CampCommController extends StudentController
                     suggestionChoice = Input.getInt(commMember.getSuggestions().size());
                     if (suggestionChoice == -1) break;
                     System.out.println("What is your updated suggestion?");
-                    sc.nextLine();
                     suggestion = sc.nextLine();
                     suggestionManager.editSuggestion(commMember.getSuggestions().get(suggestionChoice - 1), suggestion);
                     break;
@@ -113,28 +110,30 @@ public class CampCommController extends StudentController
     }
 
     public void reportGeneration() {
-        ReportGenerator reportGenerator = new ReportGenerator();
-        System.out.println("Generate performance report for the committee member?");
-        System.out.println("1. Yes");
-        System.out.println("2. No");
-        int choice = -1;
-        choice = Input.getInt();
 
-        switch (choice) {
-            case 1:
-                // Generate the performance report for commMember
-                reportGenerator.generatePerformanceReport(commMember);
-                System.out.println("Performance report generated for " + commMember.getName());
+        ReportGenerator reportGenerator = new ReportGenerator(); // Assuming this is how you instantiate ReportGenerator
+        int choice = 3;
+        do {
+            System.out.println("\nSelect the report you want to generate:");
+            System.out.println("1. Generate Camp Report");
+            System.out.println("2. Generate Enquiry Report");
+            System.out.println("3. Exit");
+            choice = Input.getInt(3);
+    
+            switch (choice) {
+                case 1:
+                reportGenerator.generateCampReport(commMember.getCamp());
                 break;
 
-            case 2:
-                // Exit without generating the report
+                case 2:
+                reportGenerator.generateEnquiryReport(commMember.getCampCommMemberOf().getEnquiries());
+                break;
+
+                case 3:
                 System.out.println("Exiting report generation module.");
-                Time.pause(1);
                 break;
 
-            default:
-                System.out.println("Invalid option, please try again.");
-        }
+            }
+        } while (choice != 3);
     }
 }

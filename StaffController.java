@@ -86,12 +86,14 @@ public class StaffController
                     viewer.viewCampDetails(staff.getCreatedCamps().get(campChoice - 1));
                     break;
 
-                case 2: 
-                    viewer.viewAllCamps();
+                    case 2: 
+                	filter.filterCamps(Camp.campList, true);
+//                    viewer.viewAllCamps();
                     break;
 
                 case 3:
-                    viewer.viewYourCamps();
+                	filter.filterCamps(staff.getCreatedCamps(), true);
+//                    viewer.viewYourCamps();
                     break;
 
                 case 4:
@@ -146,7 +148,6 @@ public class StaffController
                     enquiryChoice = Input.getInt(staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size());
                     if (enquiryChoice == -1) break;
                     System.out.println("What is your response?");
-                    sc.nextLine();
                     String response = sc.nextLine();
                     enquiryManager.editEnquiry(staff.getCreatedCamps().get(campChoice - 1).getEnquiries().get(enquiryChoice - 1), response);
                     break;
@@ -230,13 +231,15 @@ public class StaffController
 
     public void reportGeneration() {
         StaffCampViewer viewer = new StaffCampViewer(staff); // Assuming 'staff' is the current Staff object
+        StaffEnquiryManager enquiryManager = new StaffEnquiryManager(staff);
         ReportGenerator reportGenerator = new ReportGenerator(); // Assuming this is how you instantiate ReportGenerator
-        int choice = 3;
+        int choice = 4;
         do {
             System.out.println("\nSelect the report you want to generate:");
             System.out.println("1. Generate Camp Report");
             System.out.println("2. Generate Performance Report for Committee Member");
-            System.out.println("3. Exit");
+            System.out.println("3. Generate Enquiry Report");
+            System.out.println("4. Exit");
             choice = Input.getInt();
     
             switch (choice) {
@@ -275,35 +278,28 @@ public class StaffController
                     if (committeeMembers.isEmpty()) {
                         System.out.println("There are no committee members.");
                         break;
-                    }                    
-                    // Display the list of committee members
-                    for (int i = 0; i < committeeMembers.size(); i++) {
-                        System.out.println((i + 1) + ". " + committeeMembers.get(i).getName());
                     }
-        
-                    // Taking user input for committee member selection
-                    System.out.println("Select a committee member to generate a report:");
-                    int memberIndex = Input.getInt();
-                        
-                        // Validate the input
-                    if (memberIndex < 1 || memberIndex > committeeMembers.size()) {
-                        System.out.println("Invalid selection.");
-                        break;
-                    }
-                        // Retrieve the selected member
-                    Student selectedMember = committeeMembers.get(memberIndex - 1);
-        
-                        // Generate the performance report
-                    reportGenerator.generatePerformanceReport(selectedMember);
+                    reportGenerator.generatePerformanceReport(committeeMembers);
                     break;
 
                 case 3:
+                    if (!enquiryManager.hasEnquires()) {
+                        System.out.println("No enquiries have been created.");
+                        break;
+                    }
+                    else
+                    {
+                        reportGenerator.generateEnquiryReport(enquiryManager.getEnquiries());
+                    }
+                    break;
+                    
+                case 4:
                     System.out.println("Exiting report generation module.");
                     break;
 
                 default:
                     System.out.println("Invalid option, please try again.");
             }
-        } while (choice != 3);
+        } while (choice != 4);
     }
 }

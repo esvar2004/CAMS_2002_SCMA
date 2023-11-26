@@ -1,4 +1,4 @@
-
+import java.util.*;
 public class CampCommEnquiryManager implements EnquiryManager {
     private CampCommitteeMember commMember;
 
@@ -23,8 +23,19 @@ public class CampCommEnquiryManager implements EnquiryManager {
         }
     }
 
+    public ArrayList<Enquiry> getEnquiries() //Added this feature.
+    {
+        ArrayList<Enquiry> enquiries = new ArrayList<Enquiry>();
+        for(Enquiry e: commMember.getEnquiries())
+        {
+            enquiries.add(e);
+        }
+        return enquiries;
+    }
+
     public void editEnquiry(Enquiry enquiry, String response)
     {
         enquiry.setResponse(response);
+        commMember.pointsManager.addPoint();
     }
 }

@@ -132,7 +132,6 @@ public class CampManager implements CampManagerInterface, CheckQuit
                 System.out.println("(8) Camp Visibility");
                 System.out.println("(9) Exit");
                 choice = Input.getInt();
-                sc.nextLine();
                 switch(choice)
                 {
                     case 1:

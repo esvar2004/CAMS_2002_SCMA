@@ -21,6 +21,7 @@ public class Student extends User
 		this.enquiries = new ArrayList<Enquiry>();
 		this.suggestions = new ArrayList<Suggestion>();
 		this.visitedCamps = new ArrayList<Camp>();
+		this.pointsManager = new PointsManager();
 	}
 	public ArrayList<Camp> getVisitedCamps(){
 		return this.visitedCamps;
