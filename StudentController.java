@@ -18,6 +18,7 @@ public class StudentController
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
         do
         {
+            Filter filter = new Filter();
             System.out.println("\nSelect from the given list of options.");
             System.out.println("1. View Specific Details of a Camp");
             System.out.println("2. View All Camps");

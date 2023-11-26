@@ -87,14 +87,12 @@ public class StaffController
                     break;
 
                 case 2: 
-                filter.filterCamps(Camp.campList);
-//                    viewer.viewAllCamps();
-                break;
+                    viewer.viewAllCamps();
+                    break;
 
-            case 3:
-                filter.filterCamps(staff.getCreatedCamps());
-//                    viewer.viewYourCamps();
-                break;
+                case 3:
+                    viewer.viewYourCamps();
+                    break;
 
                 case 4:
                     System.out.println("Returning to Menu");
@@ -231,7 +229,6 @@ public class StaffController
     }
 
     public void reportGeneration() {
-
         StaffCampViewer viewer = new StaffCampViewer(staff); // Assuming 'staff' is the current Staff object
         ReportGenerator reportGenerator = new ReportGenerator(); // Assuming this is how you instantiate ReportGenerator
         int choice = 3;
