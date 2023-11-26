@@ -207,11 +207,10 @@ public class StudentController
                                 System.out.println("No more slots remaining to become a Camp Committee Member");
                                 break;
                             }
-                            if (student.getVisitedCamps().contains(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1))){
-                                System.out.println("You cannot register for a camp you have withdrawn!");
+                            registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
+                            if (!viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1).getList().contains(student)){
                                 break;
                             }
-                            registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
                             role = "committee";
                             student.setCommMember(true);
                             justMadeComm = true;

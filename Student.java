@@ -57,21 +57,7 @@ public class Student extends User
 	public void setCampCommMemberOf(Camp camp){
 		this.campCommMemberOf = camp;
 	}
-    
-    //Overriding User Method
-	/*public void viewCamps(ArrayList<Camp> campList)// view the list of camps open to the student and the remaining slots available
-	{
-		for (int i = 0; i < campList.size(); i++) 
-		{
-			if(campList.get(i).getVisibility() //show visible camps
-					&&(campList.get(i).getSchool().equals(this.getFaculty()) //check for matching school
-					|| campList.get(i).getSchool().equals("NTU"))) // check if camp is open to whole school
-			{
-				System.out.print(campList.get(i));
-				// System.out.println("   Remaining Slots: " + campList.get(i).viewRemainingSlots());
-			}
-		}
-	}*/
+
 	
 
 	// Method to manage inquiries related to a camp
@@ -84,23 +70,6 @@ public class Student extends User
 	{
 		return suggestions;
 	}
-    
-    /*public void addEnquiry(Camp camp, String question)
-    {
-		Enquiry e = new Enquiry(question, this, camp.getName());
-    	this.enquiries.add(e);
-    }*/
-    
-    /*public void delEnquiry(Camp camp, String enquiry)
-    {
-    	for (int i = 0; i < this.enquiries.size(); i++)//find the enquiry to delete
-    	{
-    		if (showEnquiries().get(i).getQuestion().equals(enquiry))
-    		{
-    			showEnquiries().remove(i);
-    		}
-    	}
-    }*/
 	
     // Method to register for a camp
     public void registerForCamp(Camp camp, String role) 
@@ -154,7 +123,6 @@ public class Student extends User
     			registeredCamps.add(camp);
     			committeeMember = true;
     			camp.assignRole(this, role);
-    			//insert function for committee member
     		}
     		else
     		{
@@ -190,15 +158,6 @@ public class Student extends User
 	public int getPoints() {
         return this.pointsManager.getPoints();
     }
-
-	/*public void viewRegisteredCamps(Student student) 
-	{
-        System.out.println("Registered Camps:");
-        for (Camp camp : registeredCamps) 
-        {
-            System.out.println(this.getName() + ": " + camp.getName() + " (" + camp.getRoleOfStudent(student) + ")");
-        }
-    }*/
 
 }
 
