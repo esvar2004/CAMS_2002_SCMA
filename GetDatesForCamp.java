@@ -42,6 +42,12 @@ public class GetDatesForCamp implements CheckQuit{
                 String s_openDate = sc.nextLine();
                 if (checkIfQuit(s_openDate)) return;
                 openDate = DateConverter.convertStringToDate(s_openDate);
+                while (closeDate != null && openDate.after(closeDate)){
+                    System.out.println("Opening date cannot be after closing date!");
+                    s_openDate = sc.nextLine();
+                    if (checkIfQuit(s_openDate)) return;
+                    openDate = DateConverter.convertStringToDate(s_openDate);
+                }
                 System.out.println("Opening date: " + openDate);
                 break; // Exit the loop if the date is successfully parsed
             } catch (ParseException e) {

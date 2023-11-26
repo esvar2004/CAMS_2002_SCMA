@@ -171,15 +171,15 @@ public class CampManager implements CampManagerInterface, CheckQuit
 
                     case 3:
                     System.out.println("What should the new closing date of camp be? (Press x to quit and return to menu)");
-                    dateList.setOpenDate();
-                    Date closeDate = dateList.getDates()[0];
+                    dateList.setCloseDate();
+                    Date closeDate = dateList.getDates()[1];
                     camp.setCloseDate(closeDate);
                     break;
 
                     case 4:
                     System.out.println("What should the new closing date of registration be? (Press x to quit and return to menu)");
-                    dateList.setOpenDate();
-                    Date regClose = dateList.getDates()[0];
+                    dateList.setRegCloseDate();
+                    Date regClose = dateList.getDates()[2];
                     camp.setRegDate(regClose);
                     break;
 
