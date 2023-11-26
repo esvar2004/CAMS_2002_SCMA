@@ -1,7 +1,7 @@
-public class UserLoginManager {
+public class UserLoginManager extends Login{
 
     public static void loginUser() {
-        User user = Login.login(); // Handle login and get User object
+        User user = login();
 
         if (user != null) {
             boolean isDefaultPassword = Password.checkDefaultPassword(user);
@@ -9,9 +9,7 @@ public class UserLoginManager {
             if (isDefaultPassword) {
                 // Prompt new user to change password
                 Password.changePassword(user);
-            }
-
-            // Continue with the regular process after password change or if not a new user        
+            }     
         }
     }
 }
