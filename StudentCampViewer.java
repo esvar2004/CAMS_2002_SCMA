@@ -48,9 +48,9 @@ public class StudentCampViewer implements CampViewerInterface{
 
     public void viewYourCamps() {
         System.out.println("Registered Camps:");
-        for (Camp camp : student.getRegisteredCamps())
-        {
-            System.out.println(camp.getName() + " (" + camp.getRoleOfStudent(student) + ")");
+        ArrayList<String> list = Camp.getNameFromCamps(student.getRegisteredCamps(), student);
+        for (String s : list){
+            System.out.println(s);
         }
     }
 }

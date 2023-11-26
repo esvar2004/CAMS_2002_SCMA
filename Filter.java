@@ -67,20 +67,8 @@ public class Filter{
 		System.out.println("(4) By School");
 		System.out.println("Enter your choice: ");
 		
-        int filterOption;
-		while (true){
-            try {
-            filterOption = sc.nextInt();
-            if (filterOption <= 0) {
-                System.out.println("Error: Please enter a positive integer.");
-            } else {
-                break; 
-            }
-            } catch (InputMismatchException e) {
-                System.out.println("Error: Please enter a valid integer.");
-                sc.nextLine(); // clear buffer
-            }
-        }
+        int filterOption = Input.getInt();
+		
         
 		switch(filterOption)
 		{
@@ -115,6 +103,5 @@ public class Filter{
 	        }
 			break;
 		}
-		
 	}
 }

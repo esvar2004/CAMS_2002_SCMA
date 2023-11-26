@@ -12,6 +12,7 @@ public class StudentController
 
     public void viewCamps()
     {
+        Filter filter = new Filter();
         StudentCampViewer viewer = new StudentCampViewer(student);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
@@ -22,19 +23,7 @@ public class StudentController
             System.out.println("2. View All Camps");
             System.out.println("3. View Your Registered Camps");
             System.out.println("4. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = Input.getInt();
             
 
             switch(choice)
@@ -52,34 +41,30 @@ public class StudentController
                     System.out.println("Which camp's details would you like to view? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
                     viewer.viewAllCamps();
                     
-                    while (true) {
-                        try {
-                            campChoice = sc.nextInt();
-                            if (campChoice <= 0) {
-                                System.out.println("Error: Please enter a positive integer.");
-                            } else {
-                                break; 
-                            }
-                        } catch (InputMismatchException e) {
-                            System.out.println("Error: Please enter a valid integer.");
-                            sc.nextLine(); // clear buffer
-                        }
-                    }
+                    campChoice = Input.getInt(viewer.viewAvailableCamps(student.getFaculty()).size());
+                    if (campChoice == -1) break;
                     viewer.viewCampDetails(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1));
                     break;
 
                 case 2: 
-                    viewer.viewAllCamps();
-                    break;
+                filter.filterCamps(viewer.viewAvailableCamps(student.getFaculty()));
+//                    viewer.viewAllCamps();
+                break;
 
                 case 3:
-                    viewer.viewYourCamps();
-                    break;
+                filter.filterCamps(student.getRegisteredCamps());
+//                    viewer.viewYourCamps();
+                break;
+                
+                case 4:
+                System.out.println("Exiting to menu...");
+                Time.pause(1);
+                break;
 
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please input a valid option");
             }
-        } while(choice >= 1 && choice <= 3);
+        } while(choice != 4);
     }
 
     public void manageEnquiries()
@@ -98,19 +83,7 @@ public class StudentController
             System.out.println("3. Edit Enquiries");
             System.out.println("4. Delete Enquiries");
             System.out.println("5. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = Input.getInt();
 
             switch(choice)
             {
@@ -126,7 +99,8 @@ public class StudentController
                     }
                     System.out.println("To which camp would you like to submit an enquiry? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
                     viewer.viewAllCamps();
-                    campChoice = sc.nextInt();
+                    campChoice = Input.getInt(viewer.viewAvailableCamps(student.getFaculty()).size());
+                    if (campChoice == -1) break;
                     System.out.println("What is your question?");
                     sc.nextLine();
                     question = sc.nextLine();
@@ -141,7 +115,8 @@ public class StudentController
                     }
                     System.out.println("Which of your enquiries would you like to edit? (1 - " + student.getEnquiries().size() + ")");
                     enquiryManager.viewEnquiries();
-                    enquiryChoice = sc.nextInt();
+                    enquiryChoice = Input.getInt(student.getEnquiries().size());
+                    if (enquiryChoice == -1) break;
                     System.out.println("What is your updated question?");
                     sc.nextLine();
                     question = sc.nextLine();
@@ -156,7 +131,8 @@ public class StudentController
                     }
                     System.out.println("Which of your enquiries would you like to delete? (1 - " + student.getEnquiries().size() + ")");
                     enquiryManager.viewEnquiries();
-                    enquiryChoice = sc.nextInt();
+                    enquiryChoice = Input.getInt(student.getEnquiries().size());
+                    if (enquiryChoice == -1) break;
                     enquiryManager.deleteEnquiry(student.getEnquiries().get(enquiryChoice - 1));
                     break;
                 
@@ -173,11 +149,8 @@ public class StudentController
 
     public void viewProfile()
     {
-        System.out.println("\nProfile:");
-		System.out.println("Name: " + student.getName());
-		System.out.println("Faculty: " + student.getFaculty());
-        System.out.println("Registered Camps: " + StudentProfile.getNameFromCamps(student.getRegisteredCamps()));
-		System.out.println("End of Profile");
+        StudentProfile sp = new StudentProfile(student);
+        sp.viewProfile();
     }
 
     public void manageRegistration()
@@ -194,7 +167,7 @@ public class StudentController
             System.out.println("2. Register for Camp");
             System.out.println("3. Withdraw from Camp");
             System.out.println("4. Exit");
-            choice = sc.nextInt();
+            choice = Input.getInt();
 
             switch(choice)
             {
@@ -205,7 +178,7 @@ public class StudentController
                 case 2:
                     System.out.println("Which camp would you like to register for? (1 - " + viewer.viewAvailableCamps(student.getFaculty()).size() + ")");
                     viewer.viewAllCamps();
-                    campChoice = sc.nextInt();
+                    campChoice = Input.getInt();
                     if (campChoice <= 0) {
                         System.out.println("Not valid");
                         break;
@@ -220,14 +193,25 @@ public class StudentController
                     System.out.println("What role do you want to register for?");
                     System.out.println("(1) Attendee");
                     System.out.println("(2) Committee Member");
-                    int roleNum = sc.nextInt();
-                    if(roleNum == 1) role = "Attendee";
+                    int roleNum = Input.getInt();
+                    if(roleNum == 1) {
+                        if (viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1).getAvailableSlots() == 0){
+                            System.out.println("No more students can join this camp!");
+                            break;
+                        }
+                        role = "Attendee";
+                    }
                     else if(roleNum == 2) {
                         if (student.getCommMember()) {
                             System.out.println("You are already a Committee member of another Camp!");
                             break;
                         }else{
+                            if (viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1).getAvailableCommitteeSlots() == 0){
+                                System.out.println("No more slots remaining to become a Camp Committee Member");
+                                break;
+                            }
                             role = "committee";
+                            student.setCommMember(true);
                             registrationManager.registerForCamp(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1), this.student, role);
                             justMadeComm = true;
                             student.setCampCommMemberOf(viewer.viewAvailableCamps(student.getFaculty()).get(campChoice - 1));
@@ -248,7 +232,12 @@ public class StudentController
                     }
                     System.out.println("Which camp would you like to Withdraw from? (1 - " + student.getRegisteredCamps().size() + ")");
                     viewer.viewYourCamps();
-                    campChoice = sc.nextInt();
+                    campChoice = Input.getInt(student.getRegisteredCamps().size());
+                    if (campChoice == -1) break;
+                    if (student.getCommMember() && student.getCampCommMemberOf().equals(student.getRegisteredCamps().get(campChoice - 1))){
+                        System.out.println("You cannot withdraw as a Camp Committee member!");
+                        break;
+                    }
                     registrationManager.withdrawFromCamp(student.getRegisteredCamps().get(campChoice - 1), this.student);
                     break;
 

@@ -47,6 +47,18 @@ public class Camp
         this.suggestions = new ArrayList<>();
     }
 
+    public static ArrayList<String> getNameFromCamps(ArrayList<Camp> registeredCamps, Student student){
+		ArrayList<String> stringCampList = new ArrayList<String>();
+
+		for (Camp c : student.getRegisteredCamps()){
+			for (Student s : c.getRolesMap().keySet()){
+                if (student.getName() == s.getName())
+				    stringCampList.add(c.getName() + ": " + c.getRolesMap().get(s));
+			}
+		}
+		return stringCampList;
+	}
+
     public void setName(String name)
     {
         this.name = name;
@@ -155,7 +167,7 @@ public class Camp
         return this.studentList;
     }
 
-    public int getCurrentSlots() //Returns # of occupied slots by regular members.
+    public int getCurrentSlots() //Returns # of occupied slots by all members.
     {
     	return this.currentSlots;
     }
@@ -207,6 +219,10 @@ public class Camp
         return rolesMap.get(student);
     }
 
+    public HashMap<Student, String> getRolesMap(){
+        return rolesMap;
+    }
+
     public boolean hasAvailableSlots() {
         // Check if the current slots filled (including committee members) are less than the total available slots.
         return this.getCurrentSlots() + this.getCommMembers() < this.getTotSlots();
@@ -214,9 +230,8 @@ public class Camp
     
     // Method to add a committee member to the camp
     public void addCommitteeMember(Student committeeMember) {
-        if (this.hasAvailableSlots()) { // Only add if there's an available slot.
+        if (this.getAvailableCommitteeSlots() > 0) { // Only add if there's an available slot.
             this.studentList.add(committeeMember);
-            this.currentSlots++;
             this.numCommitteeMembers++; // Increase the number of committee members.
         } else {
             // Handle the case when there are no available slots.

@@ -103,8 +103,8 @@ public class CampManager implements CampManagerInterface, CheckQuit
         // System.out.println("What's the camp description?");
         // sc.nextLine();
         // String desc = sc.nextLine();
-
-        Camp camp = new Camp("campName", openDate, closeDate, regClose, staff.getFaculty(), "location", 100, 10, "Desc", staff.getName());
+        
+        Camp camp = new Camp("Something", openDate, closeDate, regClose, staff.getFaculty(), "location", 2, 1, "Desc", staff.getName());
         Camp.campList.add(camp);
         staff.getCreatedCamps().add(camp);
     }
@@ -131,19 +131,7 @@ public class CampManager implements CampManagerInterface, CheckQuit
                 System.out.println("(7) Camp Description");
                 System.out.println("(8) Camp Visibility");
                 System.out.println("(9) Exit");
-                while (true){
-                    try {
-                    choice = sc.nextInt();
-                    if (choice <= 0) {
-                        System.out.println("Error: Please enter a positive integer.");
-                    } else {
-                        break; 
-                    }
-                    } catch (InputMismatchException e) {
-                        System.out.println("Error: Please enter a valid integer.");
-                        sc.nextLine(); // clear buffer
-                    }
-                }
+                choice = Input.getInt();
                 sc.nextLine();
                 switch(choice)
                 {
@@ -189,9 +177,10 @@ public class CampManager implements CampManagerInterface, CheckQuit
                         try {
                             System.out.println("How many total slots should there be? (Press -1 to quit and return to menu)");
                             while (true){
-                                totSlots = sc.nextInt();
+                                totSlots = Input.getInt();
                                 if ((totSlots >= 1 && totSlots >= camp.getCommSlots()) || totSlots == -1){
-                                    camp.setTotSlots(totSlots);
+                                    if (totSlots != -1)
+                                        camp.setTotSlots(totSlots);
                                     break;
                                 }
                                 System.out.println("Error: Please enter a positive number. Total number of slots available: ");
@@ -212,7 +201,7 @@ public class CampManager implements CampManagerInterface, CheckQuit
                         try {
                             System.out.println("How many total committee slots should there be? (Press -1 to quit and return to menu)");
                             while (true){
-                                commSlots = sc.nextInt();
+                                commSlots = Input.getInt();
                                 if (commSlots <= camp.getAvailableSlots() && commSlots <= 10 && commSlots >= -1){
                                     if (commSlots != -1)
                                         camp.setCommSlots(commSlots);
@@ -246,7 +235,7 @@ public class CampManager implements CampManagerInterface, CheckQuit
                     while (true) {
                         try {
                             System.out.println("What should the camp's visibility be? (0/1)");
-                            int visibility = sc.nextInt();
+                            int visibility = Input.getInt();
                             if (visibility == 0 || visibility == 1){
                                 camp.setVisibility(visibility);
                                 break; 

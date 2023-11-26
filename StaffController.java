@@ -11,6 +11,7 @@ public class StaffController
 
     public void manageCamps()
     {
+
         CampManager manager = new CampManager(staff);
         StaffCampViewer viewer = new StaffCampViewer(staff);
         int campChoice = 0;
@@ -21,19 +22,7 @@ public class StaffController
             System.out.println("2. Edit Camp");
             System.out.println("3. Delete Camp");
             System.out.println("4. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = Input.getInt();
 
             switch(choice)
             {
@@ -44,18 +33,16 @@ public class StaffController
                 case 2: 
                     System.out.println("Which camp's details would you like to edit? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
-                    campChoice = sc.nextInt();
+                    campChoice = Input.getInt(staff.getCreatedCamps().size());
+                    if (campChoice == -1) break;
                     manager.editCamp(staff.getCreatedCamps().get(campChoice - 1));
                     break;
 
                 case 3:
                     System.out.println("Which camp's details would you like to delete? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
-                    campChoice = sc.nextInt();
-                    if (campChoice > staff.getCreatedCamps().size()) {
-                        System.out.println("Error input");
-                        break;
-                    }
+                    campChoice = Input.getInt(staff.getCreatedCamps().size());
+                    if (campChoice == -1) break;
                     manager.deleteCamp(staff.getCreatedCamps().get(campChoice - 1));
                     break;
                 
@@ -72,7 +59,7 @@ public class StaffController
 
     public void viewCamps()
     {
-
+        Filter filter = new Filter();
         StaffCampViewer viewer = new StaffCampViewer(staff);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
@@ -83,19 +70,7 @@ public class StaffController
             System.out.println("2. View All Camps");
             System.out.println("3. View Your Created Camps");
             System.out.println("4. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = Input.getInt();
 
             switch(choice)
             {
@@ -106,29 +81,20 @@ public class StaffController
                 }
                     System.out.println("Which camp's details would you like to view? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
-                    while (true){
-                        try {
-                        campChoice = sc.nextInt();
-                        if (campChoice <= 0) {
-                            System.out.println("Error: Please enter a positive integer.");
-                        } else {
-                            break; 
-                        }
-                        } catch (InputMismatchException e) {
-                            System.out.println("Error: Please enter a valid integer.");
-                            sc.nextLine(); // clear buffer
-                        }
-                    }
+                    campChoice = Input.getInt(staff.getCreatedCamps().size());
+                    if (campChoice == -1) break;
                     viewer.viewCampDetails(staff.getCreatedCamps().get(campChoice - 1));
                     break;
 
                 case 2: 
-                    viewer.viewAllCamps();
-                    break;
+                filter.filterCamps(Camp.campList);
+//                    viewer.viewAllCamps();
+                break;
 
-                case 3:
-                    viewer.viewYourCamps();
-                    break;
+            case 3:
+                filter.filterCamps(staff.getCreatedCamps());
+//                    viewer.viewYourCamps();
+                break;
 
                 case 4:
                     System.out.println("Returning to Menu");
@@ -155,19 +121,7 @@ public class StaffController
             System.out.println("1. View Enquiries");
             System.out.println("2. Submit Response/Edit Response");
             System.out.println("3. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = Input.getInt();
 
             switch(choice)
             {
@@ -187,15 +141,12 @@ public class StaffController
                     }
                     System.out.println("To which camp would you like to submit an enquiry response? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
-                    campChoice = sc.nextInt();
-                    if (!enquiryManager.hasEnquires(staff.getCreatedCamps().get(campChoice - 1))){
-                        System.out.println("This camp does not have any enquiries!");
-                        break;
-                        
-                    }
+                    campChoice = Input.getInt(staff.getCreatedCamps().size());
+                    if (campChoice == -1) break;
                     System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size() + ")");
                     enquiryManager.viewEnquiries(staff.getCreatedCamps().get(campChoice - 1));
-                    enquiryChoice = sc.nextInt();
+                    enquiryChoice = Input.getInt(staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size());
+                    if (enquiryChoice == -1) break;
                     System.out.println("What is your response?");
                     sc.nextLine();
                     String response = sc.nextLine();
@@ -229,19 +180,7 @@ public class StaffController
             System.out.println("3. View Approved Suggestions");
             //Possible Delete Suggestion Mechanism to be Implemented if they have approved and proceeded with the suggestion.
             System.out.println("4. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = Input.getInt();
 
             switch(choice)
             {
@@ -261,14 +200,12 @@ public class StaffController
                     }
                     System.out.println("Which camp's suggestions would you like to look at? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
-                    campChoice = sc.nextInt();
-                    if (!suggestionManager.hasSuggestions(staff.getCreatedCamps().get(campChoice - 1))){
-                        System.out.println("This camp does not have any suggestions!");
-                        break;   
-                    }
+                    campChoice = Input.getInt(staff.getCreatedCamps().size());
+                    if (campChoice == -1) break;
                     System.out.println("Which suggestion would you like to approve? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getSuggestions().size() + ")");
                     suggestionManager.viewSuggestions(staff.getCreatedCamps().get(campChoice - 1));
-                    suggestionChoice = sc.nextInt();
+                    suggestionChoice = Input.getInt(staff.getCreatedCamps().get(campChoice - 1).getSuggestions().size());
+                    if (suggestionChoice == -1) break;
                     if(suggestionManager.isApproved(staff.getCreatedCamps().get(campChoice - 1).getSuggestions().get(suggestionChoice - 1)))
                     {
                         System.out.println("This suggestion has already been approved.");
@@ -303,19 +240,7 @@ public class StaffController
             System.out.println("1. Generate Camp Report");
             System.out.println("2. Generate Performance Report for Committee Member");
             System.out.println("3. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            choice = Input.getInt();
     
             switch (choice) {
                 case 1:
@@ -331,7 +256,7 @@ public class StaffController
                     }
         
                     // Taking user input for camp selection
-                    int campIndex = sc.nextInt();
+                    int campIndex = Input.getInt();
                     // Adjusting campIndex to match array indexing (if necessary)
                     
                     // Check if the campIndex is valid
@@ -361,7 +286,7 @@ public class StaffController
         
                     // Taking user input for committee member selection
                     System.out.println("Select a committee member to generate a report:");
-                    int memberIndex = sc.nextInt();
+                    int memberIndex = Input.getInt();
                         
                         // Validate the input
                     if (memberIndex < 1 || memberIndex > committeeMembers.size()) {

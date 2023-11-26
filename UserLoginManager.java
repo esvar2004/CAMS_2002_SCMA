@@ -1,12 +1,11 @@
 public class UserLoginManager {
 
-    public static void loginUser() {
-        User user = Login.login(); // Handle login and get User object
+    public static void loginUser(User user) {
 
         if (user != null) {
-            boolean isDefaultPassword = Password.checkDefaultPassword(user);
 
-            if (isDefaultPassword) {
+
+            if (user.getFirstTimeLogin()) {
                 // Prompt new user to change password
                 Password.changePassword(user);
             }

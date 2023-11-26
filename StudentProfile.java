@@ -17,7 +17,7 @@ public class StudentProfile {
 		System.out.println("(3) Update Registered Camps");
 		System.out.println("Enter your options");
 		
-		int choice = sc.nextInt();
+		int choice = Input.getInt();
 		
 		switch(choice)
 		{
@@ -46,19 +46,17 @@ public class StudentProfile {
 			}
 		}
 				
-	static ArrayList<String> getNameFromCamps(ArrayList<Camp> registeredCamps){
-		ArrayList<String> stringCampList = new ArrayList<String>();
-		for (int i = 0; i < registeredCamps.size(); i++){
-			stringCampList.add(registeredCamps.get(i).getName());
-		}
-		return stringCampList;
-	}
+	
 	
 	void viewProfile() {
+		
 		System.out.println("\nProfile:");
+		if (student.getCommMember()){
+			System.out.println("Camp Committee Member of " + student.getCampCommMemberOf().getName());
+		}
 		System.out.println("Name: " + student.getName());
 		System.out.println("Faculty: " + student.getFaculty());
-		System.out.println("Registered Camps: " + getNameFromCamps(student.getRegisteredCamps()));
+		System.out.println("Registered Camps: " + Camp.getNameFromCamps(student.getRegisteredCamps(), student));
 		System.out.println("End of Profile");
 	}
 }

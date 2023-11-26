@@ -4,14 +4,14 @@ public class Main extends Login{
     public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
 
-        createAllData(); //Uses the function in Initialize.java to invoke everything within the function
+        Login.createAllData(); //Uses the function in Initialize.java to invoke everything within the function
         boolean systemRunning = true;
 
         while(systemRunning)
         {
             if (!StudentController.justMadeComm){
-                login();
-                while (!Password.inputPassword()){
+                User user = login();
+                while (!Password.inputPassword(user)){
                     login();
                 }
             }else{
@@ -23,12 +23,14 @@ public class Main extends Login{
             {     
                 Student student = (Student) LoginSuccess();
                 if (!student.getCommMember()){
+                    UserLoginManager.loginUser((User)student);
                     StudentControllerSwitch control = new StudentControllerSwitch(student);
                     System.out.println("Welcome "+ student.getName()+ "!");
                     control.main();
                 }else{
                     CampCommitteeMember commMember = new CampCommitteeMember(student.getName(), student.getEmail(),
-                        student.getFaculty(), student.getCampCommMemberOf(), student.getRegisteredCamps(), student.getEnquiries(), student.getSuggestions());
+                        student.getFaculty(), student.getCampCommMemberOf(), student.getRegisteredCamps(), student.getEnquiries(), student.getSuggestions(),
+                        student.getPassword(), student.getVisitedCamps());
                     CampCommControllerSwitch control = new CampCommControllerSwitch(commMember);
                     System.out.println("Welcome "+ commMember.getName() + "!");
                     control.main();
@@ -38,6 +40,7 @@ public class Main extends Login{
             else if(getType() == "staff")
             {
                 Staff staff = (Staff) LoginSuccess();
+                UserLoginManager.loginUser((User)staff);
                 StaffControllerSwitch control = new StaffControllerSwitch(staff);
                 System.out.println("Welcome "+ staff.getName()+ "!");
                 control.main();

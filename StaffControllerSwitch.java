@@ -1,7 +1,6 @@
-import java.util.*;
+
 public class StaffControllerSwitch
 {
-    public static Scanner sc = new Scanner(System.in);
     private Staff staff;
     public StaffControllerSwitch(Staff staff)
     {
@@ -12,7 +11,7 @@ public class StaffControllerSwitch
     {
 
         StaffController control = new StaffController(staff);
-        int choice = 6; //Initializing Choice to Exit to Enter the do-while loop
+        int choice = 7; //Initializing Choice to Exit to Enter the do-while loop
         do{
             System.out.println("\nSelect from the given list of options.");
             System.out.println("1. Manage Camps");
@@ -20,20 +19,9 @@ public class StaffControllerSwitch
             System.out.println("3. Manage Enquiries");
             System.out.println("4. Manage Suggestions");
             System.out.println("5. Report Generation");
-            System.out.println("6. Exit");
-            while (true){
-                try {
-                choice = sc.nextInt();
-                if (choice <= 0) {
-                    System.out.println("Error: Please enter a positive integer.");
-                } else {
-                    break; 
-                }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Please enter a valid integer.");
-                    sc.nextLine(); // clear buffer
-                }
-            }
+            System.out.println("6. Change Your Password");
+            System.out.println("7. Exit");
+            choice = Input.getInt();
 
             switch(choice)
             {
@@ -58,6 +46,10 @@ public class StaffControllerSwitch
                 break;
                 
                 case 6:
+                Password.changePassword(staff);
+                break;
+
+                case 7:
                 System.out.println("You have exited the Staff Interface.");
                 Time.pause(1);
                 break;
@@ -65,6 +57,6 @@ public class StaffControllerSwitch
                 default:
                 System.out.println("Please enter a valid input.");
             }
-        } while(choice != 6);
+        } while(choice != 7);
     }
 }

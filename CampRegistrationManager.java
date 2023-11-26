@@ -10,14 +10,9 @@ public class CampRegistrationManager {
 	}
 	
     public void viewRegisteredCamps(){
-		if (student.getRegisteredCamps().size() > 0)
-			for(Camp camp : student.getRegisteredCamps())
-			{
-				System.out.println("Camp Name: " + camp.getName() + " (" + camp.getRoleOfStudent(student) + ")");
-			}
-		else{
-			System.out.println("You have not registered for any camps yet!");
-		}
+
+		System.out.println(Camp.getNameFromCamps(student.getRegisteredCamps(), student)); 
+		
     }
 
 	public void registerForCamp(Camp camp, Student student, String role) {
@@ -33,7 +28,7 @@ public class CampRegistrationManager {
             return;
     	}
     	
-    	if ((camp.getList()).contains(student)) //check for previous registration
+    	if (student.getVisitedCamps().contains(camp)) //check for previous registration
     	{
     		System.out.println("Unable to register for a camp you have withdrawn");
     		return;
@@ -61,14 +56,18 @@ public class CampRegistrationManager {
     	
         if (role.equals("Attendee")) 
     	{
+			student.getVisitedCamps().add(camp);
     		student.getRegisteredCamps().add(camp);
     		camp.assignRole(student, role);
+			camp.addAttendee(student);
     	}
     	else if (role.equals("committee"))
     	{
+			student.getVisitedCamps().add(camp);
 			student.getRegisteredCamps().add(camp);
 			student.setCommMember(true);
 			camp.assignRole(student, role);
+			camp.addCommitteeMember(student);
     	}
     	else // check for invalid roles
     	{
@@ -77,7 +76,7 @@ public class CampRegistrationManager {
     	}
 
         //student.getRegisteredCamps().add(camp);
-		camp.addAttendee(student);
+		
         System.out.println("Successfully registered for the '" + camp.getName() + "' camp.");
 	}
 	
