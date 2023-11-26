@@ -25,10 +25,10 @@ public class ReportGenerator {
         }
     }
 
-    public void generatePerformanceReport(CampCommitteeMember member) {
-        try (FileWriter writer = new FileWriter(member.getUserID() + "_performance_report.txt")) {
-            writer.write("Performance Report for: " + member.getUserID() + "\n");
-            writer.write("Committee Member of camp: " + member.getCamp().getName() + "\n");
+    public void generatePerformanceReport(Student member) {
+        try (FileWriter writer = new FileWriter(member.getName() + "_performance_report.txt")) {
+            writer.write("Performance Report for: " + member.getName() + "\n");
+            writer.write("Committee Member of Camp: " + member.getCampCommMemberOf().getName() + "\n");
             writer.write("Points: " + member.getPoints() + "\n");
 
         } catch (IOException e) {

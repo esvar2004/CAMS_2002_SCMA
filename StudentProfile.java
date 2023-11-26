@@ -46,14 +46,14 @@ public class StudentProfile {
 			}
 		}
 				
-			
-	ArrayList<String> getNameFromCamps(ArrayList<Camp> registeredCamps){
+	static ArrayList<String> getNameFromCamps(ArrayList<Camp> registeredCamps){
 		ArrayList<String> stringCampList = new ArrayList<String>();
 		for (int i = 0; i < registeredCamps.size(); i++){
 			stringCampList.add(registeredCamps.get(i).getName());
 		}
 		return stringCampList;
 	}
+	
 	void viewProfile() {
 		System.out.println("\nProfile:");
 		System.out.println("Name: " + student.getName());

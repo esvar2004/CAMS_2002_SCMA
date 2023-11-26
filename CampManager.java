@@ -119,18 +119,19 @@ public class CampManager implements CampManagerInterface, CheckQuit
         else
         {
             int choice = 1;
-            do
+            while(choice >= 1 && choice <= 9)
             {
                 System.out.println("What characteristic of the camp would you like to edit?");
                 System.out.println("(1) Camp Name");
                 System.out.println("(2) Opening Date of Camp");
                 System.out.println("(3) Closing Date of Camp");
                 System.out.println("(4) Closing Date for Registration");
-                System.out.println("(5) Number of Slots");
-                System.out.println("(6) Number of Committee Slots");
-                System.out.println("(7) Camp Description");
-                System.out.println("(8) Camp Visibility");
-                System.out.println("(9) Exit");
+                System.out.println("(5) Faculty");
+                System.out.println("(6) Number of Slots");
+                System.out.println("(7) Number of Committee Slots");
+                System.out.println("(8) Camp Description");
+                System.out.println("(9) Camp Visibility");
+                System.out.println("(10) Exit");
                 while (true){
                     try {
                     choice = sc.nextInt();
@@ -183,6 +184,20 @@ public class CampManager implements CampManagerInterface, CheckQuit
                     break;
 
                     case 5:
+                    System.out.println("What should the faculty of the camp be? (Press x to quit and return to menu)");
+                    String facName;
+                    while (true){
+                        facName = sc.nextLine();
+                        if (checkIfQuit(facName)) return;
+                        if (!Checker.numChecker(facName) && !Checker.specialCharChecker(facName)) {
+                            camp.setSchool(facName);
+                            break;
+                        }
+                        System.out.println("Kindly input a valid faculty name: ");
+                    }
+                    break;
+
+                    case 6:
                     
                     int totSlots;
                     while (true) {
@@ -205,7 +220,7 @@ public class CampManager implements CampManagerInterface, CheckQuit
                     }
                     break;
 
-                    case 6:
+                    case 7:
                     
                     int commSlots;
                     while (true) {
@@ -234,14 +249,14 @@ public class CampManager implements CampManagerInterface, CheckQuit
                     }
                     break;
 
-                    case 7:
+                    case 8:
                     System.out.println("What should the new camp description be? (Press x to quit and return to menu)");
                     String desc = sc.nextLine();
                     if (checkIfQuit(desc)) return;
                     camp.setDesc(desc);
                     break;
 
-                    case 8:
+                    case 9:
                     
                     while (true) {
                         try {
@@ -260,14 +275,14 @@ public class CampManager implements CampManagerInterface, CheckQuit
                         }
                     }
 
-                    case 9:
+                    case 10:
                         System.out.println("Returning to menu...");
                         break;
 
                     default:
                     System.out.println("Please select a valid option next time.");
                 }
-            }while(choice != 9);
+            }
         }
     }
 

@@ -11,6 +11,11 @@ public class StaffCampViewer implements CampViewerInterface
         System.out.println("Camp Details for: " + camp.getName());
         System.out.println("Open Date: " + camp.getOpenDate());
         System.out.println("Close Date: " + camp.getCloseDate());
+        System.out.println("Faculty: " + camp.getSchool());
+        System.out.println("Location " + camp.getLocation());
+        System.out.println("Total Slots: " + camp.getTotalSlots());
+        System.out.println("Remaining Slots: " + camp.getAvailableSlots());
+        System.out.println("Name of Staff: " + camp.getStaffName());
         System.out.println("Description: " + camp.getDesc());
         // More details can be added as needed
     }

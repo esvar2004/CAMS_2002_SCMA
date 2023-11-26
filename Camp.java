@@ -261,18 +261,21 @@ public class Camp
 	}
 
     // Method to get all committee members from all camps
-    public static List<CampCommitteeMember> getAllCommitteeMembers() {
-        List<CampCommitteeMember> committeeMembers = new ArrayList<>();
+    public static List<Student> getAllCommitteeMembers() {
+        List<Student> committeeMembers = new ArrayList<>();
 
         for (Camp camp : Camp.campList) {
             for (Student student : camp.getList()) {
-                String role = camp.getRoleOfStudent(student);
+                if(student.getCommMember() && student.getCampCommMemberOf().getName() == camp.getName())
+                {
+                    committeeMembers.add(student);
+                }
+                /*String role = camp.getRoleOfStudent(student);
                 if (role.equals("committee") && student instanceof CampCommitteeMember) {
                     committeeMembers.add((CampCommitteeMember) student);
-                }
+                }*/
             }
         }
-
         return committeeMembers;
     }
 }

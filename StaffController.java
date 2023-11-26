@@ -72,7 +72,7 @@ public class StaffController
 
     public void viewCamps()
     {
-    	Filter filter = new Filter();
+
         StaffCampViewer viewer = new StaffCampViewer(staff);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
@@ -123,13 +123,11 @@ public class StaffController
                     break;
 
                 case 2: 
-                	filter.filterCamps(Camp.campList);
-//                    viewer.viewAllCamps();
+                    viewer.viewAllCamps();
                     break;
 
                 case 3:
-                	filter.filterCamps(staff.getCreatedCamps());
-//                    viewer.viewYourCamps();
+                    viewer.viewYourCamps();
                     break;
 
                 case 4:
@@ -195,7 +193,6 @@ public class StaffController
                         break;
                         
                     }
-                    
                     System.out.println("Which enquiry would you like to respond to? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getEnquiries().size() + ")");
                     enquiryManager.viewEnquiries(staff.getCreatedCamps().get(campChoice - 1));
                     enquiryChoice = sc.nextInt();
@@ -258,12 +255,25 @@ public class StaffController
                         System.out.println("There aren't any camps under your purview.");
                         break;
                     }
+                    if (!suggestionManager.hasSuggestions()){
+                        System.out.println("None of your camps have any suggestions!");
+                        break;
+                    }
                     System.out.println("Which camp's suggestions would you like to look at? (1 - " + staff.getCreatedCamps().size() + ")");
                     viewer.viewYourCamps();
                     campChoice = sc.nextInt();
+                    if (!suggestionManager.hasSuggestions(staff.getCreatedCamps().get(campChoice - 1))){
+                        System.out.println("This camp does not have any suggestions!");
+                        break;   
+                    }
                     System.out.println("Which suggestion would you like to approve? (1 - " + staff.getCreatedCamps().get(campChoice - 1).getSuggestions().size() + ")");
                     suggestionManager.viewSuggestions(staff.getCreatedCamps().get(campChoice - 1));
                     suggestionChoice = sc.nextInt();
+                    if(suggestionManager.isApproved(staff.getCreatedCamps().get(campChoice - 1).getSuggestions().get(suggestionChoice - 1)))
+                    {
+                        System.out.println("This suggestion has already been approved.");
+                        break;
+                    }
                     suggestionManager.approveSuggestion(staff.getCreatedCamps().get(campChoice - 1).getSuggestions().get(suggestionChoice - 1));
                     break;
 
@@ -338,7 +348,7 @@ public class StaffController
                     break;
 
                 case 2:
-                    List<CampCommitteeMember> committeeMembers = Camp.getAllCommitteeMembers();
+                    List<Student> committeeMembers = Camp.getAllCommitteeMembers();
                         // Check if there are any committee members
                     if (committeeMembers.isEmpty()) {
                         System.out.println("There are no committee members.");
@@ -359,7 +369,7 @@ public class StaffController
                         break;
                     }
                         // Retrieve the selected member
-                    CampCommitteeMember selectedMember = committeeMembers.get(memberIndex - 1);
+                    Student selectedMember = committeeMembers.get(memberIndex - 1);
         
                         // Generate the performance report
                     reportGenerator.generatePerformanceReport(selectedMember);
