@@ -1,11 +1,12 @@
 Camp Report for: campName
-Open Date: Fri Dec 22 00:00:00 SGT 2023
-Close Date: Fri Dec 22 00:00:00 SGT 2023
+Open Date: Thu Dec 21 00:00:00 SGT 2023
+Close Date: Sat Dec 23 00:00:00 SGT 2023
 Faculty: SCSE
 Location location
 Total Slots: 100
-Remaining Slots: 99
+Remaining Slots: 98
 Committee Slots: 10
 Description: Desc
 
 Student 0: CHERN , Role: Attendee
+Student 1: DENISE, Role: committee

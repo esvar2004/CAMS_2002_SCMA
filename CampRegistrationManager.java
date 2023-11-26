@@ -69,6 +69,7 @@ public class CampRegistrationManager {
 			student.getRegisteredCamps().add(camp);
 			student.setCommMember(true);
 			camp.assignRole(student, role);
+			student.setRole("committee");
     	}
     	else // check for invalid roles
     	{

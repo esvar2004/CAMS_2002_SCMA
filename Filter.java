@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class Filter{
-    static Scanner sc = new Scanner(System.in);
     ArrayList<Camp> sortingList;
     ArrayList<Camp> inputList;
     
@@ -14,10 +13,17 @@ public class Filter{
         this.inputList = inputCampList;
     }
 
-    public ArrayList<Camp> filterByName(ArrayList<Camp> inputList){
+    public ArrayList<Camp> filterByName(ArrayList<Camp> inputList, boolean isStaff){
         for(Camp camp : this.inputList){
-            if (camp.getVisibility())
+            if(!isStaff)
+            {
+                if(camp.getVisibility())
+                    sortingList.add(camp);
+            }
+            else
+            {
                 sortingList.add(camp);
+            }
         }
         // Sort the sortingList based on the camp names
         Collections.sort(sortingList, Comparator.comparing(Camp::getName));
@@ -25,10 +31,17 @@ public class Filter{
         return sortingList;
     }
 
-    public ArrayList<Camp> filterByDate(ArrayList<Camp> inputList){
+    public ArrayList<Camp> filterByDate(ArrayList<Camp> inputList, boolean isStaff){
         for(Camp camp : this.inputList){
-            if (camp.getVisibility())
+            if(!isStaff)
+            {
+                if(camp.getVisibility())
+                    sortingList.add(camp);
+            }
+            else
+            {
                 sortingList.add(camp);
+            }
         }
         // Sort the sortingList based on the camp open Dates
         Collections.sort(sortingList, Comparator.comparing(Camp::getOpenDate));
@@ -36,10 +49,17 @@ public class Filter{
         return sortingList;
     }
 
-    public ArrayList<Camp> filterByLocation(ArrayList<Camp> inputList){
+    public ArrayList<Camp> filterByLocation(ArrayList<Camp> inputList, boolean isStaff){
         for(Camp camp : this.inputList){
-            if (camp.getVisibility())
+            if(!isStaff)
+            {
+                if(camp.getVisibility())
+                    sortingList.add(camp);
+            }
+            else
+            {
                 sortingList.add(camp);
+            }
         }
         // Sort the sortingList based on the camp Location
         Collections.sort(sortingList, Comparator.comparing(Camp::getLocation));
@@ -47,10 +67,17 @@ public class Filter{
         return sortingList;
     }
 
-    public ArrayList<Camp> filterBySchool(ArrayList<Camp> inputList){
+    public ArrayList<Camp> filterBySchool(ArrayList<Camp> inputList, boolean isStaff){
         for(Camp camp : this.inputList){
-            if (camp.getVisibility())
+            if(!isStaff)
+            {
+                if(camp.getVisibility())
+                    sortingList.add(camp);
+            }
+            else
+            {
                 sortingList.add(camp);
+            }
         }
         // Sort the sortingList based on the camp School
         Collections.sort(sortingList, Comparator.comparing(Camp::getSchool));
@@ -58,15 +85,15 @@ public class Filter{
         return sortingList;
     }
     
-    public void filterCamps(ArrayList<Camp> toBeSortedCamp) {
+    public void filterCamps(ArrayList<Camp> toBeSortedCamp, boolean isStaff) {
 		Filter filter = new Filter(toBeSortedCamp);
 		System.out.println("How would you view your camps? Select from the following options");
-		System.out.println("(1) By name");
+		System.out.println("(1) By Name");
 		System.out.println("(2) By Date");
 		System.out.println("(3) By Location");
 		System.out.println("(4) By School");
 		System.out.println("Enter your choice: ");
-		
+		Scanner sc = new Scanner(System.in);
         int filterOption;
 		while (true){
             try {
@@ -87,21 +114,21 @@ public class Filter{
 			
 		case 2:
 			System.out.println("Sorting by date...");
-			for(Camp camp: filter.filterByDate(toBeSortedCamp))
+			for(Camp camp: filter.filterByDate(toBeSortedCamp, isStaff))
 	        {
 	            System.out.println("Camp Name: " + camp.getName());
 	        }			
 			break;
 		case 3:
 			System.out.println("Sorting by location...");
-			for(Camp camp: filter.filterByLocation(toBeSortedCamp))
+			for(Camp camp: filter.filterByLocation(toBeSortedCamp, isStaff))
 	        {
 	            System.out.println("Camp Name: " + camp.getName());
 	        }			
 			break;
 		case 4:
 			System.out.println("Sorting by school...");
-			for(Camp camp: filter.filterBySchool(toBeSortedCamp))
+			for(Camp camp: filter.filterBySchool(toBeSortedCamp, isStaff))
 	        {
 	            System.out.println("Camp Name: " + camp.getName());
 	        }			
@@ -109,7 +136,7 @@ public class Filter{
         default:
             if (filterOption != 1) System.out.println("Invalid option, default sorting (Alphabetical):");
             System.out.println("Sorting by name...");
-			for(Camp camp: filter.filterByName(toBeSortedCamp))
+			for(Camp camp: filter.filterByName(toBeSortedCamp, isStaff))
 	        {
 	            System.out.println("Camp Name: " + camp.getName());
 	        }
