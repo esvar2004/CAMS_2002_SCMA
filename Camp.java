@@ -285,10 +285,6 @@ public class Camp
                 {
                     committeeMembers.add(student);
                 }
-                /*String role = camp.getRoleOfStudent(student);
-                if (role.equals("committee") && student instanceof CampCommitteeMember) {
-                    committeeMembers.add((CampCommitteeMember) student);
-                }*/
             }
         }
         return committeeMembers;

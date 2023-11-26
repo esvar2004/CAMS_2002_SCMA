@@ -51,13 +51,14 @@ public class CampManager implements CampManagerInterface, CheckQuit
         int facCheck;
         String facName = staff.getFaculty();
 
-        facCheck = Input.getInt(1);
+        facCheck = sc.nextInt();
         if (facCheck == 0) 
-            facName = "NTU";
+            facName = "NTU";            
 
         System.out.println("Where is the camp being held? (Press x to quit and return to menu)");
         String location;
         while (true){
+            sc.nextLine();
             location = sc.nextLine();
             if (checkIfQuit(location)) return;
             if (!Checker.specialCharChecker(location)) break;
@@ -111,7 +112,7 @@ public class CampManager implements CampManagerInterface, CheckQuit
         sc.nextLine();
         String desc = sc.nextLine();
         
-        Camp camp = new Camp("Something", openDate, closeDate, regClose, facName, "location", 2, 1, "Desc", staff.getName());
+        Camp camp = new Camp(campName, openDate, closeDate, regClose, facName, location, totSlots, commSlots, desc, staff.getName());
         Camp.campList.add(camp);
         staff.getCreatedCamps().add(camp);
     }
