@@ -17,11 +17,10 @@ public class Main extends Login{
             }else{
                 System.out.println("You have been promoted to a Camp Committee Member!");
                 StudentController.justMadeComm = false;
-            }         
+            }
 
             if(getType() == "student")
-            {
-                
+            {     
                 Student student = (Student) LoginSuccess();
                 if (!student.getCommMember()){
                     StudentControllerSwitch control = new StudentControllerSwitch(student);
@@ -29,9 +28,9 @@ public class Main extends Login{
                     control.main();
                 }else{
                     CampCommitteeMember commMember = new CampCommitteeMember(student.getName(), student.getEmail(),
-                        student.getFaculty(), student.getCampCommMemberOf());
+                        student.getFaculty(), student.getCampCommMemberOf(), student.getRegisteredCamps(), student.getEnquiries(), student.getSuggestions());
                     CampCommControllerSwitch control = new CampCommControllerSwitch(commMember);
-                    System.out.println("Welcome "+ commMember.getName()+ "!");
+                    System.out.println("Welcome "+ commMember.getName() + "!");
                     control.main();
                 }
                 

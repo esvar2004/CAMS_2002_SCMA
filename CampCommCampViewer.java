@@ -2,11 +2,11 @@
 
 import java.util.*;
 
-public class StudentCampViewer implements CampViewerInterface{
-    private Student student;
+public class CampCommCampViewer implements CampViewerInterface{
+    private CampCommitteeMember commMember;
 
-    public StudentCampViewer(Student student) {
-        this.student = student;
+    public CampCommCampViewer(CampCommitteeMember commMember) {
+        this.commMember = commMember;
     }
 
     public void viewCampDetails(Camp camp) {
@@ -27,7 +27,7 @@ public class StudentCampViewer implements CampViewerInterface{
         for(Camp camp: Camp.campList)
         {
             //If the student is under that particular school and visibility is on.
-            if((camp.getSchool().equals(student.getFaculty()) || camp.getSchool().equals("NTU")) && camp.getVisibility() == true)
+            if((camp.getSchool().equals(commMember.getFaculty()) || camp.getSchool().equals("NTU")) && camp.getVisibility() == true)
             {
                 System.out.println("Camp Name: " + camp.getName());
                 System.out.println("Remaining Slots: " + camp.getAvailableSlots());
@@ -48,9 +48,10 @@ public class StudentCampViewer implements CampViewerInterface{
 
     public void viewYourCamps() {
         System.out.println("Registered Camps:");
-        for (Camp camp : student.getRegisteredCamps())
+        for (Camp camp : commMember.getRegisteredCamps())
         {
-            System.out.println(camp.getName() + " (" + camp.getRoleOfStudent(student) + ")");
+            System.out.println(camp.getName() + " (" + camp.getRoleOfStudent(commMember) + ")");
         }
     }
 }
+

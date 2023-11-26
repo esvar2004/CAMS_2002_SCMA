@@ -23,12 +23,12 @@ abstract public class User {
         this.name = name;
     }
     
-    protected String getPassword()
+    public String getPassword()
     {
     	return this.password;
     }
     
-    protected void setPassword(String password)
+    public void setPassword(String password)
     {
     	this.password = password;
     }

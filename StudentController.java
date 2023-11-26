@@ -12,7 +12,6 @@ public class StudentController
 
     public void viewCamps()
     {
-    	Filter filter = new Filter();
         StudentCampViewer viewer = new StudentCampViewer(student);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
@@ -70,28 +69,21 @@ public class StudentController
                     break;
 
                 case 2: 
-                	filter.filterCamps(viewer.viewAvailableCamps(student.getFaculty()));
-//                    viewer.viewAllCamps();
+                    viewer.viewAllCamps();
                     break;
 
                 case 3:
-                	filter.filterCamps(student.getRegisteredCamps());
-//                    viewer.viewYourCamps();
+                    viewer.viewYourCamps();
                     break;
 
-                case 4:
-                    System.out.println("Exiting to Menu...");
-                    Time.pause(1);
-                    break;
                 default:
-                    System.out.println("Please input a valid option");
+                    System.out.println("Please select an appropriate option next time.");
             }
-        } while(choice != 4);
+        } while(choice >= 1 && choice <= 3);
     }
 
     public void manageEnquiries()
     {
-
         StudentCampViewer viewer = new StudentCampViewer(student);
         StudentEnquiryManager enquiryManager = new StudentEnquiryManager(student);
         int campChoice = 0;
@@ -162,7 +154,7 @@ public class StudentController
                         System.out.println("There aren't any enquiries to delete.");
                         break;
                     }
-                    System.out.println("Which of your enquiries would you like to delete?");
+                    System.out.println("Which of your enquiries would you like to delete? (1 - " + student.getEnquiries().size() + ")");
                     enquiryManager.viewEnquiries();
                     enquiryChoice = sc.nextInt();
                     enquiryManager.deleteEnquiry(student.getEnquiries().get(enquiryChoice - 1));
@@ -184,7 +176,7 @@ public class StudentController
         System.out.println("\nProfile:");
 		System.out.println("Name: " + student.getName());
 		System.out.println("Faculty: " + student.getFaculty());
-		System.out.println("Registered Camps: " + student.getRegisteredCamps());
+        System.out.println("Registered Camps: " + StudentProfile.getNameFromCamps(student.getRegisteredCamps()));
 		System.out.println("End of Profile");
     }
 

@@ -26,10 +26,36 @@ public class StaffSuggestionManager implements SuggestionManager {
         }
     }
 
+    public boolean hasSuggestions(){
+
+        for (int i = 0; i < staff.getCreatedCamps().size(); i++){
+            if (staff.getCreatedCamps().get(i).getSuggestions().size() > 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasSuggestions(Camp camp){
+
+        if (camp.getSuggestions().size() > 0){
+                return true;
+            }
+        return false;
+    }
+
     public void approveSuggestion(Suggestion s)
     {
         s.setApproval(1);
         staff.getApprovedSuggestions().add(s);
+    }
+
+    public boolean isApproved(Suggestion s)
+    {
+        if(s.getApproval())
+            return true;
+        else
+            return false;
     }
 
     public void viewApprovedSuggestions()

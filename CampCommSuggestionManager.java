@@ -28,5 +28,6 @@ public class CampCommSuggestionManager implements SuggestionManager {
     public void deleteSuggestion(Suggestion suggestion)
     {
         commMember.getSuggestions().remove(suggestion);
+        commMember.getCamp().getSuggestions().remove(suggestion);
     }
 }

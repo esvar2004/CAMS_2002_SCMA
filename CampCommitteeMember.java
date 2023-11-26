@@ -2,18 +2,18 @@ import java.util.ArrayList;
 
 public class CampCommitteeMember extends Student {
     private Camp camp;
-    private ArrayList<Suggestion> suggestions;
-    private PointsManager pointsManager;
-    private ArrayList<Camp> registeredCamps;
-    private ArrayList<Enquiry> enquiries;
+    //private ArrayList<Suggestion> suggestions;
+    //private PointsManager pointsManager;
+    //private ArrayList<Camp> registeredCamps;
+    //private ArrayList<Enquiry> enquiries;
 
-    public CampCommitteeMember(String name, String email, String faculty, Camp camp) {
+    public CampCommitteeMember(String name, String email, String faculty, Camp camp, ArrayList<Camp> registeredCamps, ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions) {
         super(name, email, faculty);
         this.pointsManager = new PointsManager();
         this.camp = camp;
-        this.registeredCamps = super.getRegisteredCamps();
-        this.enquiries = super.getEnquiries();
-        
+        this.registeredCamps = registeredCamps;
+        this.enquiries = enquiries;
+        this.suggestions = suggestions;
     }
 
     //Shouldn't this function be in Student?
@@ -41,14 +41,10 @@ public class CampCommitteeMember extends Student {
         return Getter.getusername(super.getEmail());
     }
 
-    public int getPoints() {
-        return this.pointsManager.getPoints();
-    }
-
-    public ArrayList<Suggestion> getSuggestions()
+    /*public ArrayList<Suggestion> getSuggestions()
     {
         return this.suggestions;
-    }
+    }*/
 
     public Camp getCamp()
     {

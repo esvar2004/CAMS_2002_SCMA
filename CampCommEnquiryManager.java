@@ -9,14 +9,17 @@ public class CampCommEnquiryManager implements EnquiryManager {
     public void viewEnquiries()
     {
         if (commMember.getCamp().getEnquiries().size() == 0){
-            System.out.println("No enquires!");
+            System.out.println("No enquiries!");
             return;
         }
         for(Enquiry e: commMember.getCamp().getEnquiries())
         {
-            System.out.println("\nQuestion: " + e.getQuestion());
-            System.out.println("Response: " + e.getResponse());
-            System.out.println("Student: " + e.getPostedBy().getName());
+            if(!e.getPostedBy().getName().equals(commMember.getName()))
+            {
+                System.out.println("\nQuestion: " + e.getQuestion());
+                System.out.println("Response: " + e.getResponse());
+                System.out.println("Student: " + e.getPostedBy().getName());
+            }
         }
     }
 

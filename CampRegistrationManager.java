@@ -13,7 +13,7 @@ public class CampRegistrationManager {
 		if (student.getRegisteredCamps().size() > 0)
 			for(Camp camp : student.getRegisteredCamps())
 			{
-				System.out.println("Camp Name: " + camp.getName());
+				System.out.println("Camp Name: " + camp.getName() + " (" + camp.getRoleOfStudent(student) + ")");
 			}
 		else{
 			System.out.println("You have not registered for any camps yet!");
@@ -66,11 +66,9 @@ public class CampRegistrationManager {
     	}
     	else if (role.equals("committee"))
     	{
-    		
 			student.getRegisteredCamps().add(camp);
 			student.setCommMember(true);
 			camp.assignRole(student, role);
-
     	}
     	else // check for invalid roles
     	{
