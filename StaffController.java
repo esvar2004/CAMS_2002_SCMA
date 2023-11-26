@@ -72,7 +72,7 @@ public class StaffController
 
     public void viewCamps()
     {
-
+    	Filter filter = new Filter();
         StaffCampViewer viewer = new StaffCampViewer(staff);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
@@ -123,11 +123,13 @@ public class StaffController
                     break;
 
                 case 2: 
-                    viewer.viewAllCamps();
+                	filter.filterCamps(Camp.campList);
+//                    viewer.viewAllCamps();
                     break;
 
                 case 3:
-                    viewer.viewYourCamps();
+                	filter.filterCamps(staff.getCreatedCamps());
+//                    viewer.viewYourCamps();
                     break;
 
                 case 4:

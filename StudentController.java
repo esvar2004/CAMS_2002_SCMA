@@ -12,6 +12,7 @@ public class StudentController
 
     public void viewCamps()
     {
+    	Filter filter = new Filter();
         StudentCampViewer viewer = new StudentCampViewer(student);
         int campChoice = 0;
         int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
@@ -69,17 +70,23 @@ public class StudentController
                     break;
 
                 case 2: 
-                    viewer.viewAllCamps();
+                	filter.filterCamps(viewer.viewAvailableCamps(student.getFaculty()));
+//                    viewer.viewAllCamps();
                     break;
 
                 case 3:
-                    viewer.viewYourCamps();
+                	filter.filterCamps(student.getRegisteredCamps());
+//                    viewer.viewYourCamps();
                     break;
 
+                case 4:
+                    System.out.println("Exiting to Menu...");
+                    Time.pause(1);
+                    break;
                 default:
-                    System.out.println("Please select an appropriate option next time.");
+                    System.out.println("Please input a valid option");
             }
-        } while(choice >= 1 && choice <= 3);
+        } while(choice != 4);
     }
 
     public void manageEnquiries()
