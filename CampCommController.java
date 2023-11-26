@@ -10,6 +10,79 @@ public class CampCommController extends StudentController
         this.commMember = commMember;
     }
 
+    public void viewCamps()
+    {
+        super.viewCamps();
+        /*CampCommCampViewer viewer = new CampCommCampViewer(commMember);
+        int campChoice = 0;
+        int choice = 4; //Initializing Choice to Exit to Enter the do-while loop
+        do
+        {
+            System.out.println("\nSelect from the given list of options.");
+            System.out.println("1. View Specific Details of a Camp");
+            System.out.println("2. View All Camps");
+            System.out.println("3. View Your Registered Camps");
+            System.out.println("4. Exit");
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
+            
+
+            switch(choice)
+            {
+                case 1: 
+                    if (viewer.viewAvailableCamps(commMember.getFaculty()).size() == 0) {
+                        System.out.println("There are no camps you can view!");
+                        break;
+                    }else if(viewer.viewAvailableCamps(commMember.getFaculty()).size() == 1){
+                        System.out.println("You can only view one camp:");
+                        Time.pause(1);
+                        viewer.viewCampDetails(viewer.viewAvailableCamps(commMember.getFaculty()).get(0));
+                        break;
+                    }
+                    System.out.println("Which camp's details would you like to view? (1 - " + viewer.viewAvailableCamps(commMember.getFaculty()).size() + ")");
+                    viewer.viewAllCamps();
+                    
+                    while (true) {
+                        try {
+                            campChoice = sc.nextInt();
+                            if (campChoice <= 0) {
+                                System.out.println("Error: Please enter a positive integer.");
+                            } else {
+                                break; 
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error: Please enter a valid integer.");
+                            sc.nextLine(); // clear buffer
+                        }
+                    }
+                    viewer.viewCampDetails(viewer.viewAvailableCamps(commMember.getFaculty()).get(campChoice - 1));
+                    break;
+
+                case 2: 
+                    viewer.viewAllCamps();
+                    break;
+
+                case 3:
+                    viewer.viewYourCamps();
+                    break;
+
+                default:
+                    System.out.println("Please select an appropriate option next time.");
+            }
+        } while(choice >= 1 && choice <= 3);*/
+    }
+
     public void manageCampCommEnquiries()
     {
         CampCommEnquiryManager enquiryManager = new CampCommEnquiryManager(commMember);
@@ -21,7 +94,19 @@ public class CampCommController extends StudentController
             System.out.println("1. View Enquiries");
             System.out.println("2. Submit Response/Edit Response");
             System.out.println("3. Exit");
-            choice = Input.getInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -32,8 +117,7 @@ public class CampCommController extends StudentController
                 case 2: 
                     System.out.println("Which enquiry would you like to respond to? (1 - " + commMember.getCamp().getEnquiries().size() + ")");
                     enquiryManager.viewEnquiries();
-                    enquiryChoice = Input.getInt(commMember.getCamp().getEnquiries().size());
-                    if (enquiryChoice == -1) break;
+                    enquiryChoice = sc.nextInt();
                     System.out.println("What is your response?");
                     sc.nextLine();
                     String response = sc.nextLine();
@@ -67,7 +151,19 @@ public class CampCommController extends StudentController
             System.out.println("4. Delete Suggestion");
             System.out.println("5. Exit");
             
-            choice = Input.getInt();
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
 
             switch(choice)
             {
@@ -85,8 +181,7 @@ public class CampCommController extends StudentController
                 case 3:
                     System.out.println("Which of your suggestions would you like to edit? (1 - " + commMember.getSuggestions().size() + ")");
                     suggestionManager.viewSuggestions();
-                    suggestionChoice = Input.getInt(commMember.getSuggestions().size());
-                    if (suggestionChoice == -1) break;
+                    suggestionChoice = sc.nextInt();
                     System.out.println("What is your updated suggestion?");
                     sc.nextLine();
                     suggestion = sc.nextLine();
@@ -96,8 +191,7 @@ public class CampCommController extends StudentController
                 case 4:
                     System.out.println("Which of your suggestions would you like to delete? (1 - " + commMember.getSuggestions().size() + ")");
                     suggestionManager.viewSuggestions();
-                    suggestionChoice = Input.getInt(commMember.getSuggestions().size());
-                    if (suggestionChoice == -1) break;
+                    suggestionChoice = sc.nextInt();
                     suggestionManager.deleteSuggestion(commMember.getSuggestions().get(suggestionChoice - 1));
                     break;
 
@@ -113,28 +207,41 @@ public class CampCommController extends StudentController
     }
 
     public void reportGeneration() {
-        ReportGenerator reportGenerator = new ReportGenerator();
-        System.out.println("Generate performance report for the committee member?");
-        System.out.println("1. Yes");
-        System.out.println("2. No");
-        int choice = -1;
-        choice = Input.getInt();
+        CampCommCampViewer viewer = new CampCommCampViewer(commMember); // Assuming 'staff' is the current Staff object
+        CampCommEnquiryManager enquiryManager = new CampCommEnquiryManager(commMember);
+        ReportGenerator reportGenerator = new ReportGenerator(); // Assuming this is how you instantiate ReportGenerator
+        int choice = 3;
+        do {
+            System.out.println("\nSelect the report you want to generate:");
+            System.out.println("1. Generate Camp Report");
+            System.out.println("2. Generate Enquiry Report");
+            System.out.println("3. Exit");
+            while (true){
+                try {
+                choice = sc.nextInt();
+                if (choice <= 0) {
+                    System.out.println("Error: Please enter a positive integer.");
+                } else {
+                    break; 
+                }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid integer.");
+                    sc.nextLine(); // clear buffer
+                }
+            }
+    
+            switch (choice) {
+                case 1:
+                reportGenerator.generateCampReport(commMember.getCamp());
 
-        switch (choice) {
-            case 1:
-                // Generate the performance report for commMember
-                reportGenerator.generatePerformanceReport(commMember);
-                System.out.println("Performance report generated for " + commMember.getName());
-                break;
+                case 2:
+                reportGenerator.generateEnquiryReport(commMember.getEnquiries());
 
-            case 2:
-                // Exit without generating the report
+                case 3:
                 System.out.println("Exiting report generation module.");
-                Time.pause(1);
                 break;
-
-            default:
-                System.out.println("Invalid option, please try again.");
-        }
+            }
+        } while (choice != 3);
+    }
     }
 }

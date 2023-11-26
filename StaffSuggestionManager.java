@@ -48,6 +48,7 @@ public class StaffSuggestionManager implements SuggestionManager {
     {
         s.setApproval(1);
         staff.getApprovedSuggestions().add(s);
+        s.getPostedBy().pointsManager.addPoint();
     }
 
     public boolean isApproved(Suggestion s)

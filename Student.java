@@ -4,13 +4,12 @@ import java.util.ArrayList;
 public class Student extends User
 {
     private String role;
-    protected boolean committeeMember;
+    private boolean committeeMember;
     protected ArrayList<Camp> registeredCamps;
     protected ArrayList<Enquiry> enquiries;
 	protected ArrayList<Suggestion> suggestions;
 	protected PointsManager pointsManager;
-	protected Camp campCommMemberOf = null;
-	protected ArrayList<Camp> visitedCamps;
+	private Camp campCommMemberOf = null;
 
 	public Student(String name, String email, String faculty) 
 	{
@@ -20,12 +19,9 @@ public class Student extends User
 		this.registeredCamps = new ArrayList<Camp>();
 		this.enquiries = new ArrayList<Enquiry>();
 		this.suggestions = new ArrayList<Suggestion>();
-		this.visitedCamps = new ArrayList<Camp>();
+		this.pointsManager = new PointsManager();
 	}
-	public ArrayList<Camp> getVisitedCamps(){
-		return this.visitedCamps;
-	}
-	
+
     public String getRole() 
     {
         return this.role;

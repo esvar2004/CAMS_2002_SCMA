@@ -10,6 +10,7 @@ public class CampCommSuggestionManager implements SuggestionManager {
         Suggestion s = new Suggestion(suggestion, commMember, commMember.getCamp());
         commMember.getSuggestions().add(s);
         commMember.getCamp().getSuggestions().add(s);
+        commMember.pointsManager.addPoint(); //Added this feature.
     }
 
     public void viewSuggestions()

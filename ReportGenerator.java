@@ -2,6 +2,7 @@
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.*;
 
 public class ReportGenerator {
     public void generateCampReport(Camp camp) {
@@ -25,12 +26,28 @@ public class ReportGenerator {
         }
     }
 
-    public void generatePerformanceReport(Student member) {
-        try (FileWriter writer = new FileWriter(member.getName() + "_performance_report.txt")) {
-            writer.write("Performance Report for: " + member.getName() + "\n");
-            writer.write("Committee Member of Camp: " + member.getCampCommMemberOf().getName() + "\n");
-            writer.write("Points: " + member.getPoints() + "\n");
+    public void generatePerformanceReport(List<Student> members) {
+        try (FileWriter writer = new FileWriter("Camp_Committee_Performance_Report.txt")) {
+            for(int i = 0; i < members.size(); i++)
+            {
+                writer.write("Performance Report for: " + members.get(i).getName() + "\n");
+                writer.write("Committee Member of Camp: " + members.get(i).getCampCommMemberOf().getName() + "\n");
+                writer.write("Points: " + members.get(i).getPoints() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void generateEnquiryReport(ArrayList<Enquiry> enquiries) //Added this feature.
+    {
+        try (FileWriter writer = new FileWriter("Enquiry_Report.txt")) {
+            for(Enquiry e: enquiries)
+            {
+                writer.write("Question: " + e.getQuestion() + "\n");
+                writer.write("Response: " + e.getResponse() + "\n");
+                writer.write("Student: " + e.getPostedBy().getName() + "\n");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

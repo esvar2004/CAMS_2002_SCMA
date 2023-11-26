@@ -1,4 +1,4 @@
-
+import java.util.*;
 public class StaffEnquiryManager implements EnquiryManager {
     private Staff staff;
 
@@ -27,6 +27,19 @@ public class StaffEnquiryManager implements EnquiryManager {
             System.out.println("Response: " + e.getResponse());
             System.out.println("Student: " + e.getPostedBy().getName());
         }
+    }
+
+    public ArrayList<Enquiry> getEnquiries()
+    {
+        ArrayList<Enquiry> enquiries = new ArrayList<Enquiry>();
+        for(Camp camp: staff.getCreatedCamps())
+        {
+            for(Enquiry e: camp.getEnquiries())
+            {
+                enquiries.add(e);
+            }
+        }
+        return enquiries;
     }
 
     public boolean hasEnquires(){
